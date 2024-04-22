@@ -6,10 +6,10 @@ Ponez is An online classifieds and marketplace app for buying and selling new an
 
 ## Technology
 
--Ponez is a mern application
--Use of React for Frontend Technology
--Use of Node and Express.js for Backend Technology
--Use of Monogo for DataBase Technology
+- Ponez is a mern application
+- Use of React for Frontend Technology
+- Use of Node and Express.js for Backend Technology
+- Use of Monogo for DataBase Technology
 
 ## Installation
 
