@@ -1,13 +1,44 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  @font-face {
+    font-family: "Vazir";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("./../public/font/Vazir.ttf") format("woff2");
+  }
+}
+.vazir {
+  font-family: "Vazir";
+}
+.Fanum {
+  font-family: "Fanum" !important;
+}
+@font-face {
+  font-family: "Vazir";
+  src: url("./../public/font/Vazir.ttf");
+}
+@font-face {
+  font-family: "Fanum";
+  src: url("./../public/font/IRANSans-fanum.woff");
+}
+@font-face {
+  font-family: "IRANSans";
+  src: url("./../public/font/IRANSansWeb.cdb118d6.woff2");
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: "Vazir", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  direction: rtl;
 }
-
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
