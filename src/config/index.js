@@ -10,3 +10,7 @@ export const API_POST_URL = API_URL + "post";
 export const API_STATE_URL = API_URL + "state";
 export const API_CITY_URL = API_URL + "city";
 export const API_UPLOADED_IMAGES_URL = API_URL + "uploads/";
+
+//map
+export const MAP_API_URL = process.env.REACT_APP_MAP_API_URL;
+export const MAP_SEARCH_API_URL = MAP_API_URL + "search/v2";
