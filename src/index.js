@@ -6,18 +6,20 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { CityProvider } from "./context/CityContext";
+import ThemeProvider from "./context/MuiContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <CityProvider>
+    <ThemeProvider><CityProvider>
       <AuthProvider>
         {" "}
         <BrowserRouter>
           <App />
         </BrowserRouter>
       </AuthProvider>
-    </CityProvider>
+    </CityProvider></ThemeProvider>
+    
   </React.StrictMode>
 );
 reportWebVitals();
