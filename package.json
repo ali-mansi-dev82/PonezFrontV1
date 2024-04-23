@@ -14,6 +14,7 @@
     "autoprefixer": "^10.4.19",
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",
+    "jalali-moment": "^3.3.11",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.372.0",
     "mapir-react-component": "^2.0.7",
