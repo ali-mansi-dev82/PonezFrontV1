@@ -1,5 +1,5 @@
 import React from "react";
-import { objectConvert } from "../../utils/functions";
+import { objectConvert } from "../../util/functions";
 // import Spinner from "../spiner";
 import { Link } from "react-router-dom";
 
