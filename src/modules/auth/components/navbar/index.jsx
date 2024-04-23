@@ -1,21 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import MainContainer from "../../../../shared/components/container";
 import logo from "./logo.svg";
-// import AuthModal from "../modal/index";
+import AuthModal from "../modal/index";
 import { MessageCircle, MapPinIcon } from "lucide-react";
-// import Search from "./search";
-// import UserDropDown from "./user_drop_down";
+import Search from "./search";
+import UserDropDown from "./user_drop_down";
 import { Link } from "react-router-dom";
-// import SelectCity from "./select_city";
-// import Categories from "./categories";
+import SelectCity from "./select_city";
+import Categories from "./categories";
 import Button from "../../../../shared/components/button";
-// import { useCity } from "../../../../context/CityContext";
+import { useCity } from "../../../../context/CityContext";
 import MuiButton from "@mui/material/Button";
 
-const Navbar = () => {
-  //   const [showModal, setShowModal] = useState(false);
-  //   const { city } = useCity();
-  //   const [selectCity, setSelectCity] = useState(false);
+const Navbar = ({ userData, isAuthenticated }) => {
+  const [showModal, setShowModal] = useState(false);
+  const { city } = useCity();
+  const [selectCity, setSelectCity] = useState(false);
 
   return (
     <>
@@ -31,21 +31,21 @@ const Navbar = () => {
               size="small"
               styleVariant="textonly"
               leftIcon={<MapPinIcon size={"16px"} />}
-              //   onClick={() => setSelectCity(true)}
+              onClick={() => setSelectCity(true)}
             >
-              {/* {city && city !== "" ? city : "شهر"} */}
+              {city && city !== "" ? city : "شهر"}
             </Button>
-            {/* {selectCity && <SelectCity onClose={() => setSelectCity(false)} />} */}
-            {/* <Categories /> */}
-            {/* <Search /> */}
+            {selectCity && <SelectCity onClose={() => setSelectCity(false)} />}
+            <Categories />
+            <Search />
           </div>
           <div className="flex gap-4">
-            {/* <UserDropDown
+            <UserDropDown
               isAuth={isAuthenticated}
               mobile={userData?.mobile}
               loginFn={() => setShowModal(true)}
-            /> */}
-            {/* {showModal && <AuthModal closeModal={() => setShowModal(false)} />} */}
+            />
+            {showModal && <AuthModal closeModal={() => setShowModal(false)} />}
             <Button
               size="small"
               styleVariant="textonly"
@@ -63,9 +63,17 @@ const Navbar = () => {
             >
               پشتیبانی
             </Button>
-            <MuiButton variant="contained" size="small">
-              ثبت آگهی
-            </MuiButton>
+            {!isAuthenticated ? (
+              <MuiButton  variant="contained" size="small" onClick={() => setShowModal(true)}>
+                ثبت آگهی
+              </MuiButton>
+            ) : (
+              <Link to={"/new"}>
+                <MuiButton variant="contained" >
+                  ثبت آگهی
+                </MuiButton>
+              </Link>
+            )}
           </div>
         </MainContainer>
       </div>
