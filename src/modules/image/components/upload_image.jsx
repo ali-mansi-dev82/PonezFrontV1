@@ -69,7 +69,7 @@ const UploadImages = ({ images, setImages, uploadImageFn: noname }) => {
   }
 
   return (
-    <section className="form-control w-full">
+    <section className="flex flex-col gap-4 w-full">
       <div className="label">
         <span className="label-text text-gray-800 text-base pb-1">
           عکس آگهی
@@ -109,7 +109,7 @@ const UploadImages = ({ images, setImages, uploadImageFn: noname }) => {
       </div>
 
       <div className="label">
-        <span className="label-text-alt">
+        <span className="text-gray-400 text-xs">
           تعداد عکس‌های انتخاب شده نباید بیشتر از ۲۰ باشد.
         </span>
       </div>

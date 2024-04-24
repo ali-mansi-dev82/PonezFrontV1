@@ -16,19 +16,23 @@ const TextInput = ({
   // InputProps = null,
   value = "",
   prefix = undefined,
+  fullWidth = true,
+  autoFocus = false,
 }) => {
   return (
-    <label className="form-control w-full">
+    <label className="flex flex-col gap-3 w-full">
       {label && (
         <div className="label">
-          <span className="label-text text-gray-800 text-base mb-2">
+          <span className="label-text text-gray-800 text-base py-10">
             {label}
           </span>
         </div>
       )}
       {helperText && (
         <div className="label p-0">
-          <span className="label-text-alt pb-2 leading-6">{helperText}</span>
+          <span className="label-text-alt pb-4 leading-6 text-xs text-gray-400">
+            {helperText}
+          </span>
         </div>
       )}
       <TextField
@@ -43,6 +47,10 @@ const TextInput = ({
         rows={multiline && 5}
         required={required}
         select={select}
+        fullWidth={fullWidth}
+        autoFocus={autoFocus}
+        className="Fanum"
+        dir="rtl"
         InputProps={
           prefix
             ? {
@@ -58,12 +66,17 @@ const TextInput = ({
       >
         {select &&
           children.map((value, index) => (
-            <MenuItem key={index} value={value.name}>
+            <MenuItem
+              dir="rtl"
+              className="Fanum"
+              key={index}
+              value={value.name}
+            >
               {value.name}
             </MenuItem>
           ))}
       </TextField>
-      <div className="text-xs text-red-600 py-2">{errorMessage ?? ""}</div>
+      <div className="text-xs text-red-600 ">{errorMessage ?? ""}</div>
     </label>
   );
 };

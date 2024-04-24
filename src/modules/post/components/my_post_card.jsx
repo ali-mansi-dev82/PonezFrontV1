@@ -121,7 +121,7 @@ function MyPostCard({
           id="alert-dialog-title"
           sx={{ paddingX: 8, paddingTop: 4 }}
         >
-          <p className="text-base">از حذف نشان آگهی مطمئنید؟</p>
+          <p className="text-base">از حذف آگهی مطمئنید؟</p>
         </DialogTitle>
         <DialogActions
           sx={{ justifyContent: "center", gap: "0.5rem", padding: "1rem" }}
