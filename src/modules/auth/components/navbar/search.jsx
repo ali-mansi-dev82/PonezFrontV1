@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import PopularSearch from "./popular_search";
 import Spinner from "../../../../shared/components/spiner";
 import { SearchCategoryFn } from "../../../category/query";
+import { InputAdornment, TextField } from "@mui/material";
 
 const Search = () => {
   const [open, setOpen] = useState(false);
@@ -16,16 +17,30 @@ const Search = () => {
   return (
     <>
       <div className="relative w-max">
-        <label className="input input-bordered flex w-[440px] items-center py-2 h-10 gap-2 text-gray-400 bg-gray-100 border-none">
-          <SearchIcon size={14} />
-          <input
-            type="text"
-            className="grow text-xs"
+        <div className="w-[400px]">
+          <TextField
+            variant="outlined"
+            fullWidth
+            size="small"
             placeholder="جستجو در همه آگهی ها"
+            className="!bg-gray-100"
+            sx={{
+              "& fieldset": { border: 'none' },
+              borderRadius:'0.3rem'
+            }}
+            id="fullWidth"
             onFocus={() => setOpen(true)}
             onChange={(e) => searchMutation.mutateAsync(e.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon size={14} />
+                </InputAdornment>
+              ),
+            }}
           />
-        </label>
+        </div>
+
         {open && (
           <>
             <div
@@ -56,7 +71,9 @@ const Search = () => {
                           </Link>
                         ))
                       ) : (
-                        <div className="flex flex-col gap-2 p-4 hover:bg-gray-100 w-full border-b">نتیجه ای یافت نشد !!</div>
+                        <div className="flex flex-col gap-2 p-4 hover:bg-gray-100 w-full border-b">
+                          نتیجه ای یافت نشد !!
+                        </div>
                       )}
                     </div>
                   ) : (

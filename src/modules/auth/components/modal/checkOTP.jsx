@@ -84,7 +84,7 @@ const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
   return (
     <>
       <h3 className="font-bold text-base text-gray-700">تایید کد</h3>
-      <p className="py-4 text-sm">
+      <p className="pt-2 pb-6 text-sm">
         کد ارسال شده به شماره {mobile} را وارد کنید
       </p>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -99,8 +99,9 @@ const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
               </InputAdornment>
             ),
           }}
+          fullWidth
         />
-        <div className="w-full justify-end flex gap-3 pt-6">
+        <div className="w-full justify-end flex gap-3 pt-2">
           <Button className="w-max" disabled styleVariant="secondary">
             {second > 0 ? secontTommss(second) : ""}
           </Button>

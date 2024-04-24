@@ -3,9 +3,19 @@ import Button from "../../../../shared/components/button";
 import { User } from "lucide-react";
 import { useAuth } from "../../../../context/AuthContext";
 import { Link } from "react-router-dom";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
 const UserDropDown = ({ isAuth, mobile, loginFn }) => {
   const { logout } = useAuth();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleLogout = () => {
     logout();
@@ -18,22 +28,22 @@ const UserDropDown = ({ isAuth, mobile, loginFn }) => {
       return;
     },
   }) => {
+    const onClickHandle = () => {
+      handleClose();
+      onClick();
+    };
     return (
       <>
         {link && link !== "" ? (
-          <Link
-            className="text-xs hover:bg-gray-50 p-3 px-5 cursor-pointer border-b text-gray-500 border-b-gray-100 last:border-b-0 Fanum "
-            to={link}
-          >
-            {title}
-          </Link>
+          <MenuItem sx={{ fontSize: 12 }} dir="rtl" onClick={onClickHandle}>
+            <Link className="Fanum" to={link}>
+              {title}
+            </Link>
+          </MenuItem>
         ) : (
-          <li
-            onClick={onClick}
-            className="text-xs hover:bg-gray-50 p-3 px-5 cursor-pointer border-b text-gray-500 border-b-gray-100 last:border-b-0"
-          >
+          <MenuItem sx={{ fontSize: 12 }} className="Fanum" dir="rtl" onClick={onClickHandle}>
             {title}
-          </li>
+          </MenuItem>
         )}
       </>
     );
@@ -59,21 +69,40 @@ const UserDropDown = ({ isAuth, mobile, loginFn }) => {
 
   return (
     <>
-      <div className="dropdown dropdown-bottom">
+      <div>
         <Button
           size="small"
           styleVariant="textonly"
           leftIcon={<User size={"16px"} />}
+          id="basic-button"
+          aria-controls={open ? "basic-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClick}
         >
           پنل من
         </Button>
-        <ul
-          tabIndex={0}
-          className="dropdown-content bg-white z-[1] menu p-0  rounded-md w-52 drop-shadow-modal"
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+          }}
         >
-          {isAuth ? (
-            <>
-              {authDropDownItems.map((value, index) => {
+          {isAuth
+            ? authDropDownItems.map((value, index) => {
+                return (
+                  <DropItemComponent
+                    key={index}
+                    link={value.link}
+                    title={value.title}
+                    onClick={value.onClick}
+                  />
+                );
+              })
+            : noAuthDropDownItems.map((value, index) => {
                 return (
                   <DropItemComponent
                     key={index}
@@ -83,22 +112,7 @@ const UserDropDown = ({ isAuth, mobile, loginFn }) => {
                   />
                 );
               })}
-            </>
-          ) : (
-            <>
-              {noAuthDropDownItems.map((value, index) => {
-                return (
-                  <DropItemComponent
-                    key={index}
-                    link={value.link}
-                    title={value.title}
-                    onClick={value.onClick}
-                  />
-                );
-              })}
-            </>
-          )}
-        </ul>
+        </Menu>
       </div>
     </>
   );

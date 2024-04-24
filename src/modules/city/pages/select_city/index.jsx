@@ -1,35 +1,51 @@
 import React from "react";
 import SelectCity from "../../components/select_city";
-import { Button } from "@mui/material";
+import { Autocomplete, Button, TextField } from "@mui/material";
 import { useCity } from "../../../../context/CityContext";
+import { useQuery } from "@tanstack/react-query";
+import { FindCityFn } from "../../query";
 
 const SelectPage = () => {
   const { setCity } = useCity();
+
+  const searchCityQuery = useQuery({
+    queryKey: ["find_cities"],
+    queryFn: FindCityFn.bind(this),
+  });
 
   return (
     <>
       <h6 className="w-full text-lg text-gray-800 mb-3">
         در چه شهری زندگی میکنید ؟
       </h6>
-      <p className="w-full text-sm text-gray-400 mb-4">
+      <p className="w-full text-xs text-gray-400 mb-4">
         با جستجو در کادر زیر، شهر خودتان را انتخاب کنید.
       </p>
-      {/* <input
-              type="text"
-              onChange={searchInputHandler}
-              placeholder="مثلا: تهران، اصفهان، مشهد ..."
-              className="w-full input input-bordered focus:border-red-700 bg-white border-gray-300 mb-3 focus:outline-none"
-            /> */}
-      <SelectCity
+      {/* <SelectCity
         onChange={(city) => {
           setCity(city);
         }}
         placeholder="مثلا: تهران، اصفهان، مشهد ..."
-      />
-
-      <Button onClick={() => setCity("اصفهان")}>اصفهان</Button>
-      <Button onClick={() => setCity("تهران")}>تهران</Button>
-      <Button onClick={() => setCity("مشهد")}>مشهد</Button>
+      /> */}
+      <Autocomplete
+      disablePortal
+      fullWidth
+      options={["اصفهان"]}
+      // onChange={(e, value) => {
+      //   onChange(value.label);
+      // }}
+      sx={{ width: 300 }}
+      renderInput={(params) => (
+        <TextField size="small" fullWidth {...params} />
+      )}
+    />
+      <TextField id="outlined-basic" dir="rtl" size="small" placeholder="شهر خود را انتخاب کنید..." variant="outlined" />
+      <div className="grid grid-cols-4 gap-2 pt-8">
+        <Button onClick={() => setCity("اصفهان")}>اصفهان</Button>
+        <Button onClick={() => setCity("تهران")}>تهران</Button>
+        <Button onClick={() => setCity("مشهد")}>مشهد</Button>
+        <Button onClick={() => setCity("تبریز")}>تبریز</Button>
+      </div>
     </>
   );
 };
