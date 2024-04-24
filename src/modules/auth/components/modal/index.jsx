@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import CheckOTP from "./checkOTP";
 import SendOTP from "./sendOTP";
 import { useAuth } from "../../../../context/AuthContext";
+import { Dialog } from "@mui/material";
 
-const AuthModal = ({ closeModal }) => {
+const AuthModal = ({ open, closeModal }) => {
   const [mobile, setMobile] = useState("");
   const [expireCode, setExpireCode] = useState(0);
   const [isSendOtpLevel, setIsSendOtpLevel] = useState(true);
@@ -13,17 +14,16 @@ const AuthModal = ({ closeModal }) => {
     login();
   };
 
-  useEffect(() => {
-    document.getElementById("auth_modal").showModal();
-  }, []);
-
   return (
     <>
-      <dialog id="auth_modal" className="modal" onClick={closeModal}>
-        <div
-          className="modal-box rounded-md bg-white"
-          onClick={(e) => e.stopPropagation()}
-        >
+      <Dialog
+        open={open}
+        onClose={closeModal}
+        keepMounted
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <div className="flex flex-col w-[400px] py-6 px-6">
           {isSendOtpLevel ? (
             <SendOTP
               setMobile={setMobile}
@@ -41,9 +41,17 @@ const AuthModal = ({ closeModal }) => {
                 handleLogin();
               }}
             />
-          )}
+          )}{" "}
         </div>
-      </dialog>
+      </Dialog>
+      {/* <dialog id="auth_modal" className="modal" onClick={closeModal}>
+        <div
+          className="modal-box rounded-md bg-white"
+          onClick={(e) => e.stopPropagation()}
+        >
+          
+        </div>
+      </dialog> */}
     </>
   );
 };

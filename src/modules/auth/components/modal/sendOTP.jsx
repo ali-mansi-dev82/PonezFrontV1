@@ -6,7 +6,7 @@ import { sendOtpSchema } from "./schemas";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import TextInput from "../../../../shared/components/input/textInput";
-import { Button, Chip, InputAdornment } from "@mui/material";
+import { Button } from "@mui/material";
 
 const SendOTP = ({ setMobile, nextLevel, setExpireCode }) => {
   const [loading, setLoading] = useState(false);
@@ -62,21 +62,25 @@ const SendOTP = ({ setMobile, nextLevel, setExpireCode }) => {
   return (
     <>
       <h3 className="font-bold text-base text-gray-700">ورود به حساب کاربری</h3>
-      <p className="py-4 text-sm">شماره موبایل خود را وارد کنید.</p>
+      <p className="pt-2 pb-6 text-sm text-gray-500">
+        شماره موبایل خود را وارد کنید.
+      </p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextInput
           register={register("mobile")}
           placeholder="شماره موبایل"
           errorMessage={errors?.mobile?.message || errore || undefined}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="start">
-                <Chip label="۹۸+" size="small" sx={{ marginLeft: 1 }} />
-              </InputAdornment>
-            ),
-          }}
+          prefix={"۹۸+"}
+          fullWidth
+          autoFocus
         />
-        <div className="w-full justify-end flex gap-3 pt-6">
+        <div className="text-xs pb-4">
+          <span className="text-primary-default">شرایط استفاده از خدمات</span>
+          {"  و  "}
+          <span className="text-primary-default"> حریم خصوصی</span> پونز را
+          می‌پذیرم.
+        </div>
+        <div className="w-full justify-end flex gap-3 pt-2">
           <Button
             variant="contained"
             disabled={loading}
