@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from "react";
-import MainContainer from "../../../shared/components/container";
+import MainContainer from "../../../../shared/components/container";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { FindPostbySlugFn } from "../../post/query";
-import { useAuth } from "../../../context/AuthContext";
+import { FindPostbySlugFn } from "../../query";
+import { useAuth } from "../../../../context/AuthContext";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { CreatePostSchema } from "../../post/schema";
-import TextInput from "../../../shared/components/input/textInput";
-import { Alert, Button, CircularProgress, Snackbar } from "@mui/material";
-import UploadImages from "../../image/components/upload_image";
-import { uploadImageFn } from "../../image/mutation";
-import { FindOptionbyCategoryIdFn } from "../../option/query";
-import OptionComponent from "../../post/components/option";
-import { API_UPLOADED_IMAGES_URL } from "../../../config";
-import { UpdatePostFn } from "../../post/mutation";
+import { CreatePostSchema } from "../../schema";
+import TextInput from "../../../../shared/components/input/textInput";
+import { Button, CircularProgress, Snackbar } from "@mui/material";
+import UploadImages from "../../../image/components/upload_image";
+import { uploadImageFn } from "../../../image/mutation";
+import { FindOptionbyCategoryIdFn } from "../../../option/query";
+import OptionComponent from "../../components/option";
+import { API_UPLOADED_IMAGES_URL } from "../../../../config";
+import { UpdatePostFn } from "../../mutation";
 
 const EditPost = () => {
   const { slug } = useParams();
   const [loading, setLoading] = useState(true);
-  const [errore, setErrore] = useState(undefined);
   const [images, setImages] = useState([]);
   const { user } = useAuth();
   const [open, setOpen] = useState(false);
@@ -72,7 +71,7 @@ const EditPost = () => {
   };
 
   const onErorrMutation = (data) => {
-    console.log(data);
+    console.error(data);
   };
 
   const onSubmit = async (data) => {
@@ -115,7 +114,6 @@ const EditPost = () => {
       });
     }
     formData.options = options;
-    console.log(formData);
     try {
       updatePostQuery.mutateAsync(
         { id: postInfoQuery?.data?.data?._id, body: formData },
@@ -125,7 +123,7 @@ const EditPost = () => {
         }
       );
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -141,7 +139,6 @@ const EditPost = () => {
     <MainContainer
       className={`w-full flex justify-center gap-8 py-12  h-full min-h-[calc(100vh-65px)]`}
     >
-      {errore}
       <div className="flex flex-col w-[600px] gap-0">
         {loading ? (
           <div className="w-full h-full flex justify-center items-center">
@@ -216,7 +213,7 @@ const EditPost = () => {
                 <div className="w-full flex justify-between">
                   <div className="w-44"></div>
                   <Button
-                    onClick={() => navigate("/")}
+                    onClick={() => navigate("/my-panel/my-post")}
                     variant="text"
                     size="small"
                     className="!text-primary-default"

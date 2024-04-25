@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { limitString } from "../../../shared/util/string";
 import { API_UPLOADED_IMAGES_URL } from "../../../config";
 import { dateFormate } from "../../../shared/util/dateFormat";
+import { IconButton } from "@mui/material";
 
 function MyRecentPostCard({ title, images, district, slug, createdAt }) {
   return (
@@ -13,10 +14,10 @@ function MyRecentPostCard({ title, images, district, slug, createdAt }) {
         className="flex flex-row justify-start gap-3 p-3 border border-gray-200 rounded-md  cursor-pointer"
       >
         <div className="relative w-[80px] h-[80px] pb-2/3  rounded-md">
-          {images[0] ? (
+          {images && images[0] ? (
             <img
               className="absolute w-[80px] h-full inset-0 object-cover object-top rounded-md"
-              src={`${API_UPLOADED_IMAGES_URL}${images[0]}`}
+              src={`${API_UPLOADED_IMAGES_URL}${images && images[0]}`}
               alt={title}
             />
           ) : (
@@ -27,15 +28,15 @@ function MyRecentPostCard({ title, images, district, slug, createdAt }) {
         </div>
         <div className="flex flex-col justify-start h-full gap-1 w-[calc(100%-70px)]">
           <h1 className="text-gray-700 text-sm h-[30px] font-semibold w-full leading-7">
-            {limitString(title, 30)}
+            {title && limitString(title, 30)}
           </h1>
           <span className="text-gray-400 text-xs Fanum">
             {dateFormate(createdAt)} در {district}
           </span>
           <div className="w-full flex justify-end gap-2">
-            <button className="btn btn-sm btn-circle bg-transparent border-none hover:bg-gray-100">
+            <IconButton >
               <Share2Icon size={12} />
-            </button>
+            </IconButton>
           </div>
         </div>
       </Link>

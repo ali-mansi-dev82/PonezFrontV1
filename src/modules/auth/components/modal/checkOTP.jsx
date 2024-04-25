@@ -71,7 +71,7 @@ const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
         }
       );
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 

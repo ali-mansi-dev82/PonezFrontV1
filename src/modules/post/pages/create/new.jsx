@@ -9,14 +9,13 @@ import { CreatePostSchema } from "../../schema";
 import { FindOptionbyCategorySlugFn } from "../../../option/query";
 import { CreatePostFn } from "../../mutation";
 import { uploadImageFn } from "../../../image/mutation";
-import { Button, Chip, InputAdornment, Snackbar } from "@mui/material";
+import { Button, Snackbar } from "@mui/material";
 import TextInput from "../../../../shared/components/input/textInput";
 
 const New = ({ name, id, slug }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const [images, setImages] = useState([]);
-  // const [coord, setCoord] = useState([51.41, 35.72]);
 
   const optionQuery = useQuery({
     queryKey: ["category_options"],
@@ -37,7 +36,7 @@ const New = ({ name, id, slug }) => {
   };
 
   const onErorrMutation = (data) => {
-    console.log(data);
+    console.error(data);
   };
 
   const onSubmit = async (data) => {
@@ -87,7 +86,7 @@ const New = ({ name, id, slug }) => {
         onError: onErorrMutation,
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
