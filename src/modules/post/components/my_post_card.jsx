@@ -81,7 +81,7 @@ function MyPostCard({
           <div className="w-full flex flex-row gap-2 ">
             <Button
               onClick={deleteHandle}
-              styleVariant="secondary"
+              variant="secondary"
               size="small"
               className="!w-1/3"
               leftIcon={<Share2Icon size={12} />}
@@ -90,7 +90,7 @@ function MyPostCard({
             </Button>
             <Button
               onClick={deleteHandle}
-              styleVariant="secondary"
+              variant="secondary"
               size="small"
               className="!w-1/3"
               leftIcon={<Edit2Icon size={12} />}
@@ -101,7 +101,7 @@ function MyPostCard({
             </Button>
             <Button
               onClick={deleteHandle}
-              styleVariant="secondary"
+              variant="secondary"
               size="small"
               className="!w-1/3"
               leftIcon={<TrashIcon size={12} />}
@@ -126,10 +126,10 @@ function MyPostCard({
         <DialogActions
           sx={{ justifyContent: "center", gap: "0.5rem", padding: "1rem" }}
         >
-          <Button onClick={handleClose} styleVariant="secondary" size="small">
+          <Button onClick={handleClose} variant="secondary" size="small">
             انصراف
           </Button>
-          <Button onClick={handleDelete} styleVariant="secondary" size="small">
+          <Button onClick={handleDelete} variant="secondary" size="small">
             بله حذف کن
           </Button>
         </DialogActions>

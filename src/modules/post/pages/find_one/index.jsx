@@ -131,7 +131,7 @@ const Index = () => {
                       اطلاعات تماس
                     </Button>
                     <Button
-                      styleVariant="secondary"
+                      variant="secondary"
                       variant="outlined"
                       sx={{ paddingX: 5 }}
                     >
@@ -172,19 +172,15 @@ const Index = () => {
               )}
               <hr className="w-full" />
               {postInfoQuery?.data?.data?.options &&
-                Object.keys(postInfoQuery?.data?.data?.options).map(
-                  (key, index) => (
-                    <div
-                      key={index}
-                      className="w-full flex justify-between items-center border-b border-gray-200 pb-4"
-                    >
-                      <div className="text-gray-400 text-md">{key}</div>
-                      <div className="Fanum text-md">
-                        {postInfoQuery?.data?.data?.options[key]}
-                      </div>
-                    </div>
-                  )
-                )}
+                postInfoQuery?.data?.data?.options?.map((key, index) => (
+                  <div
+                    key={index}
+                    className="w-full flex justify-between items-center border-b border-gray-200 pb-4"
+                  >
+                    <div className="text-gray-400 text-md">{key.title}</div>
+                    <div className="Fanum text-md">{key.value}</div>
+                  </div>
+                ))}
               <div className="w-full flex justify-between items-center border-b border-gray-200 pb-4">
                 <div className="text-gray-400 text-md">قیمت</div>
                 <div className="Fanum text-md">

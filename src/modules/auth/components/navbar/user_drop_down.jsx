@@ -72,7 +72,7 @@ const UserDropDown = ({ isAuth, mobile, loginFn }) => {
       <div>
         <Button
           size="small"
-          styleVariant="textonly"
+          variant="textonly"
           leftIcon={<User size={"16px"} />}
           id="basic-button"
           aria-controls={open ? "basic-menu" : undefined}

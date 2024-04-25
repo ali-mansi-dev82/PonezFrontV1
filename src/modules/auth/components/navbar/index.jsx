@@ -35,7 +35,7 @@ const Navbar = ({ userData, isAuthenticated }) => {
             <div className="flex w-[3px] h-[30px] border-r border-r-gray-300"></div>
             <Button
               size="small"
-              styleVariant="textonly"
+              variant="textonly"
               className="w-max"
               leftIcon={<MapPinIcon size={"16px"} />}
               onClick={() => setSelectCity(true)}
@@ -54,7 +54,7 @@ const Navbar = ({ userData, isAuthenticated }) => {
             />
             <Button
               size="small"
-              styleVariant="textonly"
+              variant="textonly"
               type="link"
               link="/chat"
               leftIcon={<MessageCircle size={"15px"} />}
@@ -63,7 +63,7 @@ const Navbar = ({ userData, isAuthenticated }) => {
             </Button>
             <Button
               size="small"
-              styleVariant="textonly"
+              variant="textonly"
               type="link"
               link="/support"
             >
@@ -110,7 +110,7 @@ const Navbar = ({ userData, isAuthenticated }) => {
             <div className="flex w-[3px] h-[30px] border-r border-r-gray-300"></div>
             <Button
               size="small"
-              styleVariant="textonly"
+              variant="textonly"
               leftIcon={<MapPinIcon size={"16px"} />}
               onClick={() => setSelectCity(true)}
             >

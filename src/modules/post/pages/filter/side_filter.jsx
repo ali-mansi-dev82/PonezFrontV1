@@ -25,7 +25,7 @@ const SideFilter = () => {
               <h3 className="font-bold text-base text-gray-700">تعیین محل</h3>
               <p className="py-4 text-sm">حداقل یک محله انتخاب کنید.</p>
               <div className="w-full flex gap-3">
-                <Button className="w-[100%]" styleVariant="secondary">
+                <Button className="w-[100%]" variant="secondary">
                   انصراف
                 </Button>
                 <Button className="w-[100%] !bg-[#2F80C0]">تایید</Button>

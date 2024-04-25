@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MainContainer from "../../../shared/components/container";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { FindPostbySlugFn } from "../../post/query";
 import { useAuth } from "../../../context/AuthContext";
@@ -8,25 +8,34 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CreatePostSchema } from "../../post/schema";
 import TextInput from "../../../shared/components/input/textInput";
-import { Alert, Button, Chip, InputAdornment } from "@mui/material";
-import Spinner from "../../../shared/components/spiner";
+import { Alert, Button, CircularProgress, Snackbar } from "@mui/material";
 import UploadImages from "../../image/components/upload_image";
 import { uploadImageFn } from "../../image/mutation";
+import { FindOptionbyCategoryIdFn } from "../../option/query";
+import OptionComponent from "../../post/components/option";
+import { API_UPLOADED_IMAGES_URL } from "../../../config";
+import { UpdatePostFn } from "../../post/mutation";
 
 const EditPost = () => {
   const { slug } = useParams();
   const [loading, setLoading] = useState(true);
-  // const [errore, setErrore] = useState(undefined);
+  const [errore, setErrore] = useState(undefined);
   const [images, setImages] = useState([]);
   const { user } = useAuth();
-  //     const [open, setOpen] = useState(false);
-  //   const navigate = useNavigate();
-  //   const [images, setImages] = useState([]);
-  //   // const [coord, setCoord] = useState([51.41, 35.72]);
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const optionQuery = useMutation({
+    mutationKey: ["category_options"],
+    mutationFn: FindOptionbyCategoryIdFn,
+  });
 
   const postInfoQuery = useMutation({
     mutationKey: ["post_info"],
     mutationFn: FindPostbySlugFn,
+  });
+
+  const updatePostQuery = useMutation({
+    mutationFn: UpdatePostFn,
   });
 
   useEffect(() => {
@@ -34,8 +43,18 @@ const EditPost = () => {
     if (slug) {
       postInfoQuery.mutateAsync(slug, {
         onSuccess: (data) => {
-          //   setLoading(false);
-          console.log(data?.data?.images);
+          optionQuery.mutateAsync(data?.data?.category?._id);
+          setImages(
+            data?.data?.images?.map((value) => {
+              return {
+                name: value,
+                blob: `${API_UPLOADED_IMAGES_URL}${value}`,
+                uploaded: true,
+                id: value,
+                percent: 100,
+              };
+            })
+          );
         },
       });
     }
@@ -43,44 +62,29 @@ const EditPost = () => {
 
   useEffect(() => {
     const postUserId = postInfoQuery?.data?.data?.user?._id;
-    if (user?._id && postUserId && user?._id === postUserId)
-      return setLoading(false);
-    // setErrore("شما دسترسی تغییر این اگهی را ندارید");
+    if (user?._id && postUserId) {
+      setLoading(user?._id !== postUserId);
+    }
   }, [user, postInfoQuery?.data]);
 
-  //   const optionQuery = useQuery({
-  //     queryKey: ["category_options"],
-  //     queryFn: FindOptionbyCategorySlugFn.bind(this, slug),
-  //     enabled: false,
-  //   });
+  const onSuccessMutation = (data) => {
+    setOpen(true);
+  };
 
-  //   const UploadImageMutation = useMutation({
-  //     mutationFn: CreatePostFn.bind(this),
-  //   });
-
-  //   useEffect(() => {
-  //     if (slug) optionQuery.refetch();
-  //   }, [slug]);
-
-  //   const onSuccessMutation = (data) => {
-  //     setOpen(true);
-  //   };
-
-  //   const onErorrMutation = (data) => {
-  //     console.log(data);
-  //   };
+  const onErorrMutation = (data) => {
+    console.log(data);
+  };
 
   const onSubmit = async (data) => {
-    //   const postImages = await images
-    //     .filter((value) => value.id !== "")
-    //     .map((value) => value.id);
+    const postImages = await images
+      .filter((value) => value.id !== "")
+      .map((value) => value.id);
 
     const formData = {
-      // category: id,
       title: data?.title,
       content: data?.content,
       amount: data?.amount,
-      // images: postImages,
+      images: postImages,
       province: "اصفهان",
       city: "اصفهان",
       district: "اصفهان",
@@ -97,12 +101,29 @@ const EditPost = () => {
         delete data[key];
       }
     }
-    formData.options = data;
+    const options = [];
+    for (let key in data) {
+      const option = optionQuery?.data?.data?.filter(
+        (value) => value._id === key
+      )[0];
+      options.push({
+        _id: option._id,
+        title: option.title,
+        type: option.type,
+        prefix: option.prefix,
+        value: data[key],
+      });
+    }
+    formData.options = options;
+    console.log(formData);
     try {
-      // UploadImageMutation.mutateAsync(formData, {
-      //   onSuccess: onSuccessMutation,
-      //   onError: onErorrMutation,
-      // });
+      updatePostQuery.mutateAsync(
+        { id: postInfoQuery?.data?.data?._id, body: formData },
+        {
+          onSuccess: onSuccessMutation,
+          onError: onErorrMutation,
+        }
+      );
     } catch (error) {
       console.log(error);
     }
@@ -120,15 +141,12 @@ const EditPost = () => {
     <MainContainer
       className={`w-full flex justify-center gap-8 py-12  h-full min-h-[calc(100vh-65px)]`}
     >
+      {errore}
       <div className="flex flex-col w-[600px] gap-0">
-        {/* {errore && (
-          <Alert icon={<></>} severity="error">
-            {errore}
-          </Alert>
-        )} */}
-
         {loading ? (
-          <Spinner />
+          <div className="w-full h-full flex justify-center items-center">
+            <CircularProgress />
+          </div>
         ) : (
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -166,14 +184,23 @@ const EditPost = () => {
               multiline
               value={postInfoQuery?.data?.data?.content}
             />
-            {/* <div className="flex flex-col gap-2">
-          {optionQuery?.data?.data?.length > 0 &&
-            optionQuery?.data?.data?.map((value, index) => {
-              return (
-                <OptionComponent register={register} {...value} key={index} />
-              );
-            })}
-        </div> */}
+            <div className="flex flex-col gap-2">
+              {optionQuery?.data?.data?.length > 0 &&
+                optionQuery?.data?.data?.map((value, index) => {
+                  return (
+                    <OptionComponent
+                      register={register}
+                      defaultValue={
+                        postInfoQuery?.data?.data?.options?.filter(
+                          (item) => item._id === value._id
+                        )[0]?.value || ""
+                      }
+                      {...value}
+                      key={index}
+                    />
+                  );
+                })}
+            </div>
             <div className="flex flex-row gap-3 justify-end pt-4">
               <Link to={`/my-panel/my-post`}>
                 <Button variant="outlined">انصراف</Button>
@@ -182,23 +209,23 @@ const EditPost = () => {
                 ارسال اگهی
               </Button>
             </div>
-            {/* <Snackbar
-          open={open}
-          message="آگهی شما ثبت شد"
-          action={
-            <div className="w-full flex justify-between">
-              <div className="w-44"></div>
-              <Button
-                onClick={() => navigate("/")}
-                variant="text"
-                size="small"
-                className="!text-primary-default"
-              >
-                تایید
-              </Button>
-            </div>
-          }
-        /> */}
+            <Snackbar
+              open={open}
+              message="آگهی شما ثبت شد"
+              action={
+                <div className="w-full flex justify-between">
+                  <div className="w-44"></div>
+                  <Button
+                    onClick={() => navigate("/")}
+                    variant="text"
+                    size="small"
+                    className="!text-primary-default"
+                  >
+                    تایید
+                  </Button>
+                </div>
+              }
+            />
           </form>
         )}
       </div>

@@ -25,7 +25,7 @@ const Categories = () => {
       <section className="relative">
         <Button
           size="small"
-          styleVariant="textonly"
+          variant="textonly"
           className={open && `!bg-gray-100`}
           rightIcon={
             <ChevronDownIcon className={open && `rotate-180`} size={"12px"} />

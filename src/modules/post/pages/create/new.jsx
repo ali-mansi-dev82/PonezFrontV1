@@ -67,7 +67,20 @@ const New = ({ name, id, slug }) => {
         delete data[key];
       }
     }
-    formData.options = data;
+    const options = [];
+    for (let key in data) {
+      const option = optionQuery?.data?.data?.filter(
+        (value) => value._id === key
+      )[0];
+      options.push({
+        _id: option._id,
+        title: option.title,
+        type: option.type,
+        prefix: option.prefix,
+        value: data[key],
+      });
+    }
+    formData.options = options;
     try {
       UploadImageMutation.mutateAsync(formData, {
         onSuccess: onSuccessMutation,
@@ -113,7 +126,7 @@ const New = ({ name, id, slug }) => {
         register={register("amount")}
         errorMessage={errors?.amount?.message}
         type="number"
-        prefix={'تومان'}
+        prefix={"تومان"}
       />
       <TextInput
         label={"توضیحات آگهی"}

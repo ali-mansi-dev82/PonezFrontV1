@@ -102,7 +102,7 @@ const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
           fullWidth
         />
         <div className="w-full justify-end flex gap-3 pt-2">
-          <Button className="w-max" disabled styleVariant="secondary">
+          <Button className="w-max" disabled>
             {second > 0 ? secontTommss(second) : ""}
           </Button>
           <Button
