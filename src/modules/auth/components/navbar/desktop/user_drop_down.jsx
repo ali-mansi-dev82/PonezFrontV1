@@ -1,7 +1,7 @@
 import React from "react";
-import Button from "../../../../shared/components/button";
+import Button from "../../../../../shared/components/button";
 import { User } from "lucide-react";
-import { useAuth } from "../../../../context/AuthContext";
+import { useAuth } from "../../../../../context/AuthContext";
 import { Link } from "react-router-dom";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";

@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider value={{ isAuthenticated, login, logout, user }}>
       <>
         <Navbar userData={user} isAuthenticated={isAuthenticated} />
-        {children}
+        {/* {children} */}
       </>
     </AuthContext.Provider>
   );

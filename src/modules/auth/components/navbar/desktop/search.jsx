@@ -3,8 +3,8 @@ import { SearchIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import PopularSearch from "./popular_search";
-import Spinner from "../../../../shared/components/spiner";
-import { SearchCategoryFn } from "../../../category/query";
+import Spinner from "../../../../../shared/components/spiner";
+import { SearchCategoryFn } from "../../../../category/query";
 import { InputAdornment, TextField } from "@mui/material";
 
 const Search = () => {

@@ -10,9 +10,9 @@ import {
 } from "@mui/material";
 import { ArrowRight, ChevronLeft, Search } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { useCity } from "../../../../context/CityContext";
-import { FindStateFn } from "../../../state/query";
-import Spinner from "../../../../shared/components/spiner";
+import { useCity } from "../../../../../context/CityContext";
+import { FindStateFn } from "../../../../state/query";
+import Spinner from "../../../../../shared/components/spiner";
 
 const SelectCity = ({ onClose }) => {
   const { city, setCity } = useCity();
