@@ -4,8 +4,13 @@ import { Link } from "react-router-dom";
 import { limitString } from "../../../shared/util/string";
 import { API_UPLOADED_IMAGES_URL } from "../../../config";
 import { dateFormate } from "../../../shared/util/dateFormat";
+import { IconButton, Tooltip } from "@mui/material";
+import { useMutation } from "@tanstack/react-query";
+import { DeleteNoteFn } from "../mutation";
 
 function MyNotePostCard({
+  onDelete,
+  _id,
   savedContent,
   title,
   images,
@@ -13,11 +18,21 @@ function MyNotePostCard({
   slug,
   createdAt,
 }) {
+  const deletePostMutation = useMutation({
+    mutationFn: DeleteNoteFn,
+  });
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    if (_id) {
+      await deletePostMutation.mutateAsync(_id);
+      onDelete();
+    }
+  };
   return (
     <>
       <Link
         to={`/v/${slug}`}
-        className="flex flex-row gap-4 p-3 border border-gray-200 rounded-md  cursor-pointer"
+        className="flex flex-row gap-4 p-3 border border-gray-200 rounded-md  cursor-pointer relative"
       >
         <div className="relative w-[80px] h-[80px] pb-2/3  rounded-md">
           {images[0] ? (
@@ -39,11 +54,15 @@ function MyNotePostCard({
           <span className="text-gray-400 text-xs Fanum">
             {dateFormate(createdAt)} در {district}
           </span>
-          <span className="text-gray-500 text-xs pt-5">{limitString(savedContent, 20)}</span>
-          <div className="w-full flex justify-end">
-            <button className="btn btn-sm btn-circle bg-transparent border-none hover:bg-gray-100">
-              <TrashIcon size={12} />
-            </button>
+          <span className="text-gray-500 text-xs pt-5">
+            {limitString(savedContent, 20)}
+          </span>
+          <div className=" absolute bottom-2 left-2">
+            <Tooltip title={`حذف یادداشت`} arrow>
+              <IconButton size="medium" onClick={handleDelete}>
+                <TrashIcon size={12} />
+              </IconButton>
+            </Tooltip>
           </div>
         </div>
       </Link>

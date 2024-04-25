@@ -58,7 +58,7 @@ const iconSizes = {
 function Button({
   type = "button",
   size = "medium",
-  styleVariant = "primary",
+  variant = "primary",
   onClick = () => {
     return;
   },
@@ -83,7 +83,7 @@ function Button({
           )} ${
             disabled
               ? ` !bg-gray-300`
-              : objectConvert(buttonStyles[styleVariant])
+              : objectConvert(buttonStyles[variant])
           } ${loading ? "!text-transparent" : ""} ${className}`}
           to={link}
           target={target}
@@ -104,7 +104,7 @@ function Button({
           } ${objectConvert(buttonSizes[size])} ${
             disabled
               ? ` !bg-gray-300 !text-white`
-              : objectConvert(buttonStyles[styleVariant])
+              : objectConvert(buttonStyles[variant])
           } ${loading ? "!text-transparent" : ""} ${className} ${
             iconOnly ? `!px-0 w-[42px]` : ``
           }`}

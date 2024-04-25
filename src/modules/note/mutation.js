@@ -14,3 +14,12 @@ export const SaveNoteFn = async ({ id, content }) => {
     )
   ).data;
 };
+
+export const DeleteNoteFn = async (id) => {
+  const token = await getAccessTokenCookies();
+  return (
+    await axios.delete(`${API_NOTE_URL}/delete/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+  ).data;
+};

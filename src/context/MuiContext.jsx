@@ -12,17 +12,30 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiIconButton: {
+      styleOverrides: {
+        sizeMedium: { width: "40px", height: "40px" },
+      },
+    },
     MuiButtonBase: {
       defaultProps: {
         disableRipple: true,
         dir: "ltr",
-        // sx: { boxShadow: "", borderRadius: "2rem" },
       },
-      // styleOverrides:{}
     },
     MuiButton: {
       defaultProps: {
-        sx: { boxShadow: "", borderRadius: "0.4rem" },
+        sx: {
+          boxShadow: "",
+          borderRadius: "0.4rem",
+          fontWeight: 500,
+          paddingY: "0.5rem",
+        },
+      },
+      styleOverrides: {
+        contained: {
+          fontWeight: 500,
+        },
       },
     },
   },

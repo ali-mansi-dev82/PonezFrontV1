@@ -39,7 +39,6 @@ function Map() {
   useEffect(() => {
     if (stateCordinateQuery?.data) {
       const center = stateCordinateQuery?.data?.value[0]?.geom?.coordinates;
-      console.log(center);
       setCenter(center);
     }
   }, [stateCordinateQuery?.data]);

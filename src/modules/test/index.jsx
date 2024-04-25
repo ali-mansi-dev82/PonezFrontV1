@@ -5,7 +5,6 @@ import { uploadImageFn } from "../image/mutation";
 
 const Index = () => {
   const [images, setImages] = useState([]);
-  // useEffect(() => console.log(images), [images]);
   return (
     <MainContainer className={`w-full flex justify-center gap-5 py-12`}>
       <UploadImages

@@ -13,6 +13,10 @@ const Index = () => {
     queryFn: UserNoteFn.bind(this),
   });
 
+  const onDelete = () => {
+    myNotesQuery.refetch();
+  };
+
   return (
     <MainContainer
       className={`w-full flex justify-between gap-8 py-12  h-full min-h-[calc(100vh-65px)]`}
@@ -24,6 +28,7 @@ const Index = () => {
             {myNotesQuery?.data?.length > 0 ? (
               myNotesQuery?.data?.map((value, index) => (
                 <MyNotePostCard
+                  onDelete={onDelete}
                   savedContent={value.content}
                   key={index}
                   {...value.post}

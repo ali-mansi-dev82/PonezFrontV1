@@ -11,7 +11,7 @@ import MyPost from "./modules/my_panel/pages/my_post";
 import MySaved from "./modules/my_panel/pages/my_saved";
 import MyNotes from "./modules/my_panel/pages/my_notes";
 import MyRecent from "./modules/my_panel/pages/recent";
-import EditPost from "./modules/my_panel/pages/edit_post";
+import EditPost from "./modules/post/pages/edit";
 //errors
 import NotFound from "./modules/error/pages/not_found";
 

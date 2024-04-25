@@ -19,6 +19,10 @@ export const DeletePostFn = async (id) => {
   });
   return result.data;
 };
-export const UpdatePostFn = async (id, body) => {
-  return (await axios.post(`${API_POST_URL}/update/${id ?? ``}`, body))?.data;
+export const UpdatePostFn = async ({ id, body }) => {
+  const token = await getAccessTokenCookies();
+  const result = await axios.put(`${API_POST_URL}/update/${id ?? ``}`, body, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return result?.data;
 };

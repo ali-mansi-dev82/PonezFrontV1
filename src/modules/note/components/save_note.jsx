@@ -11,7 +11,6 @@ const SaveNote = ({ id }) => {
       getNoteQuery.mutateAsync(id, {
         onSuccess: (data) => {
           if (data?.content) setContent(data.content);
-          console.log(data);
         },
       });
   }, [id]);
@@ -26,7 +25,7 @@ const SaveNote = ({ id }) => {
 
   const handleChange = (e) => {
     const content = e.target.value;
-    
+
     saveNoteMutation.mutateAsync(
       { id, content },
       { onSuccess: (data) => setContent(data.content) }
@@ -34,14 +33,13 @@ const SaveNote = ({ id }) => {
   };
   return (
     <TextField
-    id="outlined-multiline-static"
-    placeholder="یادداشت"
-    multiline
-    rows={4}
-    onChange={handleChange}
-    sx={{ width: "100%" }}
-    defaultValue={content}
-  />
+      placeholder="یادداشت"
+      multiline
+      rows={4}
+      onChange={handleChange}
+      sx={{ width: "100%" }}
+      defaultValue={content}
+    />
   );
 };
 
