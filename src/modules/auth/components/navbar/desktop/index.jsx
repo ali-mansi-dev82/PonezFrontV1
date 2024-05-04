@@ -55,7 +55,7 @@ const NavbarDektop = ({ isAuthenticated, userData }) => {
         )}
         <AuthModal open={showModal} onClose={() => setShowModal(false)} />
         {isCityOpen && (
-          <SelectCity onClose={closeCity} isTabletOrMobile={false} />
+          <SelectCity onClose={closeCity} isMobile={false} />
         )}
       </div>
     </>

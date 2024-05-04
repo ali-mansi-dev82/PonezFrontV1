@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useResponsive } from "../../../../context/ResponsiveContext";
 import PostDesktop from "./desktop";
 import PostMobile from "./mobile";
 import { useParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { FindPostbySlugFn } from "../../query";
 
-const Index = () => {
-  const { isTabletOrMobile } = useResponsive();
+const Index = ({isMobile}) => {
   const { slug } = useParams();
   const [loading, setLoading] = useState(true);
 
@@ -27,7 +25,7 @@ const Index = () => {
     }
   }, []);
 
-  return isTabletOrMobile ? (
+  return isMobile ? (
     <PostMobile data={postInfoQuery?.data} loading={loading} />
   ) : (
     <PostDesktop data={postInfoQuery?.data} loading={loading} />

@@ -24,7 +24,7 @@ const NavbarMobile = () => {
         )}
         <Search openCity={openCity} />
       </div>
-      {isCityOpen && <SelectCity onClose={closeCity} isTabletOrMobile={true} />}
+      {isCityOpen && <SelectCity onClose={closeCity} isMobile={true} />}
       <ButtonNavigation />
     </>
   );

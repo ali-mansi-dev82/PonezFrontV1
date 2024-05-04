@@ -18,7 +18,7 @@ const AuthModal = ({
   const [expireCode, setExpireCode] = useState(0);
   const [isSendOtpLevel, setIsSendOtpLevel] = useState(true);
   const { login } = useAuth();
-  const { isTabletOrMobile } = useResponsive();
+  const { isMobile } = useResponsive();
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -32,7 +32,7 @@ const AuthModal = ({
   return (
     <>
       <Dialog
-        fullScreen={isTabletOrMobile}
+        fullScreen={isMobile}
         open={open}
         onClose={handleClose}
         keepMounted

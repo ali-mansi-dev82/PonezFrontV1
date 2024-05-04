@@ -8,7 +8,7 @@ import { TextField } from "@mui/material";
 import Button from "../../../../../shared/components/button";
 import { MapPinIcon } from "lucide-react";
 
-const Search = ({ open, onOpen, onClose, isTabletOrMobile, openCity }) => {
+const Search = ({ open, onOpen, onClose, isMobile, openCity }) => {
   const { city } = useCity();
   const searchMutation = useMutation({
     mutationFn: SearchCategoryFn,
@@ -48,7 +48,7 @@ const Search = ({ open, onOpen, onClose, isTabletOrMobile, openCity }) => {
         }}
       />
       {/*  */}
-      {/* {isTabletOrMobile ? (
+      {/* {isMobile ? (
         <SearchMobile
           open={open}
           onOpen={onOpen}

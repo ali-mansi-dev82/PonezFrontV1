@@ -4,14 +4,12 @@ import { useParams } from "react-router-dom";
 import { useCity } from "../../../../context/CityContext";
 import { FindPostFn } from "../../mutation";
 import { FindChildrenCategorybySlugFn } from "../../../category/query";
-import { useResponsive } from "../../../../context/ResponsiveContext";
 import FilterPostDesktop from "./desktop";
 import FilterPostMobile from "./mobile";
 
-function NewPost() {
+function NewPost({ isMobile }) {
   const { city } = useCity();
   const { slug } = useParams();
-  const { isTabletOrMobile } = useResponsive();
 
   const categoryQuery = useMutation({
     mutationFn: FindChildrenCategorybySlugFn.bind(this),
@@ -38,22 +36,18 @@ function NewPost() {
     }
   }, [slug, city]);
 
-  return isTabletOrMobile ? (
-    <FilterPostMobile
-      city={city}
-      slug={slug}
-      data={postsQuery?.data}
-      isPending={postsQuery?.isPending}
-      categoryData={categoryQuery?.data}
-    />
+  const props = {
+    city: city,
+    slug: slug,
+    data: postsQuery?.data,
+    isPending: postsQuery?.isPending,
+    categoryData: categoryQuery?.data,
+  };
+
+  return isMobile ? (
+    <FilterPostMobile {...props} />
   ) : (
-    <FilterPostDesktop
-      city={city}
-      slug={slug}
-      data={postsQuery?.data}
-      isPending={postsQuery?.isPending}
-      categoryData={categoryQuery?.data}
-    />
+    <FilterPostDesktop {...props} />
   );
 }
 

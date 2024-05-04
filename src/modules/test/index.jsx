@@ -3,7 +3,7 @@ import MainContainer from "../../shared/components/container";
 import { useResponsive } from "../../context/ResponsiveContext";
 
 const Index = () => {
-  const { isTabletOrMobile } = useResponsive();
+  const { isMobile } = useResponsive();
   // const isBigScreen = useMediaQuery({ query: "(min-width: 1824px)" });
 
   // const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
@@ -14,7 +14,7 @@ const Index = () => {
         <h1>Device Test!</h1>
         {/* {isDesktopOrLaptop && <p>You are a desktop or laptop</p>} */}
         {/* {isBigScreen && <p>You have a huge screen</p>} */}
-        {isTabletOrMobile ? (
+        {isMobile ? (
           <p>You are a tablet or mobile phone</p>
         ) : (
           <p>You are a desktop or laptop</p>

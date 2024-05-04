@@ -18,7 +18,7 @@ import { useCity } from "../../../../context/CityContext";
 import { FindStateFn } from "../../../state/query";
 import Spinner from "../../../../shared/components/spiner";
 
-const SelectCity = ({ onClose, isTabletOrMobile }) => {
+const SelectCity = ({ onClose, isMobile }) => {
   const { city, setCity } = useCity();
   const [state, setState] = useState({});
   const [localCity, setLocalCity] = useState("");
@@ -36,7 +36,7 @@ const SelectCity = ({ onClose, isTabletOrMobile }) => {
 
   return (
     <Dialog
-      fullScreen={isTabletOrMobile}
+      fullScreen={isMobile}
       open={true}
       onClose={onClose}
       keepMounted

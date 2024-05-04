@@ -6,7 +6,7 @@ import NavbarDektop from "./desktop";
 import { useResponsive } from "../../../../context/ResponsiveContext";
 
 const Navbar = ({ userData, isAuthenticated, navbar, bottomNavigation }) => {
-  const { isTabletOrMobile } = useResponsive();
+  const { isMobile } = useResponsive();
 
   return (
     <AppBar
@@ -14,7 +14,7 @@ const Navbar = ({ userData, isAuthenticated, navbar, bottomNavigation }) => {
       position="fixed"
     >
       <MainContainer className={`flex flex-row justify-between items-center`}>
-        {isTabletOrMobile ? (
+        {isMobile ? (
           <NavbarMobile navbar={navbar} bottomNavigation={bottomNavigation} />
         ) : (
           <NavbarDektop isAuthenticated={isAuthenticated} userData={userData} />

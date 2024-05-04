@@ -4,10 +4,10 @@ import React, { createContext, useContext } from "react";
 const ResponsiveContext = createContext();
 
 export const ResponsiveProvider = ({ children }) => {
-  const isTabletOrMobile = useMediaQuery("(max-width: 1224px)");
+  const isMobile = useMediaQuery("(max-width: 1224px)");
 
   return (
-    <ResponsiveContext.Provider value={{ isTabletOrMobile }}>
+    <ResponsiveContext.Provider value={{ isMobile }}>
       {children}
     </ResponsiveContext.Provider>
   );

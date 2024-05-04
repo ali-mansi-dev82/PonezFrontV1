@@ -15,25 +15,46 @@ import EditPost from "./modules/post/pages/edit";
 //errors
 import NotFound from "./modules/error/pages/not_found";
 import MyPanel from "./modules/my_panel/pages";
+import { useResponsive } from "./context/ResponsiveContext";
 
 const App = () => {
+  const { isMobile } = useResponsive();
+
   return (
     <Routes>
-      <Route path="/" element={<Index />} />
-      <Route path="/s/" element={<Posts />} />
-      <Route path="/s/:slug" element={<Posts />} />
-      <Route path="/v/:slug" element={<Post />} />
-      <Route path="/new" element={<AuthGuard component={<NewPost />} />} />
+      <Route path="/" element={<Index isMobile={isMobile} />} />
+      <Route path="/s/" element={<Posts isMobile={isMobile} />} />
+      <Route path="/s/:slug" element={<Posts isMobile={isMobile} />} />
+      <Route path="/v/:slug" element={<Post isMobile={isMobile} />} />
+      <Route
+        path="/new"
+        element={<AuthGuard component={<NewPost isMobile={isMobile} />} />}
+      />
       <Route path="/my-panel">
-        <Route path="" element={<AuthGuard component={<MyPanel />} />} />
-        <Route path="my-post" element={<AuthGuard component={<MyPost />} />} />
+        <Route
+          path=""
+          element={<AuthGuard component={<MyPanel isMobile={isMobile} />} />}
+        />
+        <Route
+          path="my-post"
+          element={<AuthGuard component={<MyPost isMobile={isMobile} />} />}
+        />
         <Route
           path="my-post/edit/:slug"
-          element={<AuthGuard component={<EditPost />} />}
+          element={<AuthGuard component={<EditPost isMobile={isMobile} />} />}
         />
-        <Route path="saved" element={<AuthGuard component={<MySaved />} />} />
-        <Route path="notes" element={<AuthGuard component={<MyNotes />} />} />
-        <Route path="recent" element={<AuthGuard component={<MyRecent />} />} />
+        <Route
+          path="saved"
+          element={<AuthGuard component={<MySaved isMobile={isMobile} />} />}
+        />
+        <Route
+          path="notes"
+          element={<AuthGuard component={<MyNotes isMobile={isMobile} />} />}
+        />
+        <Route
+          path="recent"
+          element={<AuthGuard component={<MyRecent isMobile={isMobile} />} />}
+        />
       </Route>
       <Route path="/test" element={<TestMui />} />
       <Route path="*" element={<NotFound />} />

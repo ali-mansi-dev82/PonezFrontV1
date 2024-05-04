@@ -9,11 +9,10 @@ import { CreatePostSchema } from "../../schema";
 import { FindOptionbyCategoryIdFn } from "../../../option/query";
 import { API_UPLOADED_IMAGES_URL } from "../../../../config";
 import { UpdatePostFn } from "../../mutation";
-import { useResponsive } from "../../../../context/ResponsiveContext";
 import EditPostMobile from "./mobile";
 import EditPostDesktop from "./desktop";
 
-const EditPost = () => {
+const EditPost = ({ isMobile }) => {
   const { slug } = useParams();
   const [loading, setLoading] = useState(true);
   const [images, setImages] = useState([]);
@@ -131,32 +130,23 @@ const EditPost = () => {
   } = useForm({
     resolver: yupResolver(CreatePostSchema),
   });
+  
+  const props = {
+    loading: loading,
+    onSubmit: handleSubmit(onSubmit),
+    images: images,
+    setImages: setImages,
+    register: register,
+    errors: errors,
+    data: postInfoQuery?.data,
+    optionData: optionQuery?.data,
+    snackbarOpen: open,
+  };
 
-  const { isTabletOrMobile } = useResponsive();
-  return isTabletOrMobile ? (
-    <EditPostMobile
-      loading={loading}
-      onSubmit={handleSubmit(onSubmit)}
-      images={images}
-      setImages={setImages}
-      register={register}
-      errors={errors}
-      data={postInfoQuery?.data}
-      optionData={optionQuery?.data}
-      snackbarOpen={open}
-    />
+  return isMobile ? (
+    <EditPostMobile {...props} />
   ) : (
-    <EditPostDesktop
-      loading={loading}
-      onSubmit={handleSubmit(onSubmit)}
-      images={images}
-      setImages={setImages}
-      register={register}
-      errors={errors}
-      data={postInfoQuery?.data}
-      optionData={optionQuery?.data}
-      snackbarOpen={open}
-    />
+    <EditPostDesktop {...props} />
   );
 };
 
