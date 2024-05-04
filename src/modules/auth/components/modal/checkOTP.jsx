@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { checkOtpSchema } from "./schemas";
@@ -9,13 +9,22 @@ import { API_AUTH_URL } from "../../../../config";
 import { secontTommss } from "../../../../shared/util/functions";
 import { useAuth } from "../../../../context/AuthContext";
 import TextInput from "../../../../shared/components/input/textInput";
-import { Button, Chip, InputAdornment } from "@mui/material";
+import {
+  Button,
+  Chip,
+  DialogActions,
+  DialogContent,
+  InputAdornment,
+} from "@mui/material";
 
 const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
   const [loading, setLoading] = useState(false);
   const [second, setSeconds] = useState(0);
   const [errore, setErrore] = useState("");
   const { login } = useAuth();
+  const inputRef = useRef(null);
+
+  useEffect(() => inputRef.current?.focus(), []);
 
   const {
     register,
@@ -83,24 +92,45 @@ const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
 
   return (
     <>
-      <h3 className="font-bold text-base text-gray-700">تایید کد</h3>
-      <p className="pt-2 pb-6 text-sm">
-        کد ارسال شده به شماره {mobile} را وارد کنید
-      </p>
+      <form onSubmit={handleSubmit(onSubmit)} className="h-full">
+        <DialogContent className="w-auto lg:!w-[430px] h-[calc(100%-65px)] lg:!max-h-[50vh] !py-14">
+          <h3 className="font-bold text-base text-gray-700 mb-6">تایید کد</h3>
+          <p className="pt-2 pb-6 text-sm text-gray-400 leading-7 Fanum">
+            کد ارسال شده به شماره {mobile} را وارد کنید
+          </p>
+          <TextInput
+            inputRef={inputRef}
+            register={register("code")}
+            type="number"
+            placeholder="کد ورود"
+            errorMessage={errors?.mobile?.message || errore || undefined}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="start">
+                  <Chip label="کد ورود" size="small" sx={{ marginLeft: 1 }} />
+                </InputAdornment>
+              ),
+            }}
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions className="gap-2 border-t border-gray-300 !p-3">
+          <Button className="w-max" disabled>
+            {second > 0 ? secontTommss(second) : ""}
+          </Button>
+          <Button
+            fullWidth
+            variant="contained"
+            disabled={loading}
+            loading={loading}
+            type="submit"
+          >
+            ورود
+          </Button>
+        </DialogActions>
+      </form>
+      {/* <p className="pt-2 pb-6 text-sm"></p>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <TextInput
-          register={register("code")}
-          placeholder="کد ورود"
-          errorMessage={errors?.mobile?.message || errore || undefined}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="start">
-                <Chip label="کد ورود" size="small" sx={{ marginLeft: 1 }} />
-              </InputAdornment>
-            ),
-          }}
-          fullWidth
-        />
         <div className="w-full justify-end flex gap-3 pt-2">
           <Button className="w-max" disabled>
             {second > 0 ? secontTommss(second) : ""}
@@ -114,7 +144,7 @@ const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
             ورود
           </Button>
         </div>
-      </form>
+      </form> */}
     </>
   );
 };

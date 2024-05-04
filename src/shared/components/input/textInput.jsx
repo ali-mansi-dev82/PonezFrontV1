@@ -2,6 +2,7 @@ import { Chip, InputAdornment, MenuItem, TextField } from "@mui/material";
 import React from "react";
 
 const TextInput = ({
+  inputRef,
   children,
   register,
   label,
@@ -13,12 +14,16 @@ const TextInput = ({
   multiline = false,
   required = false,
   select = false,
-  // InputProps = null,
   value = "",
   prefix = undefined,
   fullWidth = true,
   autoFocus = false,
 }) => {
+  // const inputElem = useRef();
+  const handleOnWheel = (e) => {
+    e.preventDefault();
+    // inputElem.current.blur();
+  };
   return (
     <label className="flex flex-col gap-3 w-full">
       {label && (
@@ -37,6 +42,7 @@ const TextInput = ({
       )}
       <TextField
         {...register}
+        inputRef={inputRef}
         error={errorMessage}
         variant="outlined"
         autoComplete="off"
@@ -49,7 +55,8 @@ const TextInput = ({
         select={select}
         fullWidth={fullWidth}
         autoFocus={autoFocus}
-        className="Fanum"
+        className="!Fanum"
+        onWheel={handleOnWheel}
         dir="rtl"
         InputProps={
           prefix

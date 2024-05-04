@@ -1,93 +1,55 @@
-import React, { useState } from "react";
-import { SearchIcon } from "lucide-react";
-import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import PopularSearch from "./popular_search";
-import Spinner from "../../../../../shared/components/spiner";
+import React from "react";
 import { SearchCategoryFn } from "../../../../category/query";
-import { InputAdornment, TextField } from "@mui/material";
+import { useCity } from "../../../../../context/CityContext";
+import { TextField } from "@mui/material";
+import Button from "../../../../../shared/components/button";
+import { MapPinIcon } from "lucide-react";
+import SearchResult from "./search_result";
 
-const Search = () => {
-  const [open, setOpen] = useState(false);
-
+const Search = ({ open, onOpen, onClose, openCity }) => {
+  const { city } = useCity();
   const searchMutation = useMutation({
     mutationFn: SearchCategoryFn,
   });
+  const searchFn = (query) => searchMutation.mutateAsync(query);
 
   return (
-    <>
-      <div className="relative w-max">
-        <div className="w-[400px]">
-          <TextField
-            variant="outlined"
-            fullWidth
-            size="small"
-            placeholder="جستجو در همه آگهی ها"
-            className="!bg-gray-100"
-            sx={{
-              "& fieldset": { border: 'none' },
-              borderRadius:'0.3rem'
-            }}
-            id="fullWidth"
-            onFocus={() => setOpen(true)}
-            onChange={(e) => searchMutation.mutateAsync(e.target.value)}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon size={14} />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </div>
-
-        {open && (
-          <>
-            <div
-              onClick={() => setOpen(false)}
-              className="fixed top-[64px] left-0 right-0 bottom-0 bg-black bg-opacity-25 z-0"
-            ></div>
-            <div className="absolute left-0 top-[130%] max-h-[60vh] overflow-y-auto flex gap-4 right-0 bg-white z-30 rounded-md drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)]">
-              {searchMutation?.data ? (
-                <>
-                  {searchMutation?.isSuccess ? (
-                    <div className="w-full flex flex-col gap-0">
-                      {searchMutation?.data?.length ? (
-                        searchMutation?.data?.map((value, index) => (
-                          <Link
-                            className="flex flex-col gap-2 p-4 hover:bg-gray-100 w-full border-b"
-                            to={`/s/${value.slug}`}
-                            onClick={() => setOpen(false)}
-                            key={index}
-                          >
-                            <span className="text-gray-800 text-sm">
-                              {value.name}
-                            </span>
-                            {value.parent && (
-                              <span className="text-gray-400 text-xs">
-                                در {value.parent.name}
-                              </span>
-                            )}
-                          </Link>
-                        ))
-                      ) : (
-                        <div className="flex flex-col gap-2 p-4 hover:bg-gray-100 w-full border-b">
-                          نتیجه ای یافت نشد !!
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <Spinner />
-                  )}
-                </>
-              ) : (
-                <PopularSearch />
-              )}
+    <div className="w-[400px] relative">
+      <TextField
+        variant="outlined"
+        fullWidth
+        size="small"
+        placeholder="جستجو در همه آگهی ها"
+        className="!bg-gray-100"
+        sx={{
+          "& fieldset": { border: "none" },
+          borderRadius: "0.3rem",
+        }}
+        onFocus={onOpen}
+        autoComplete="off"
+        onChange={(e) => searchFn(e.target.value)}
+        InputProps={{
+          endAdornment: (
+            <div className="flex flex-row  items-center">
+              <div className="h-[20px] w-1 border-r border-gray-300"></div>
+              <Button
+                size="small"
+                variant="textonly"
+                className="w-max"
+                leftIcon={<MapPinIcon size={"16px"} />}
+                onClick={openCity}
+              >
+                {city && city !== "" ? city : "شهر"}
+              </Button>
             </div>
-          </>
-        )}
-      </div>
-    </>
+          ),
+        }}
+      />
+      {open && (
+        <SearchResult searchMutation={searchMutation} onClose={onClose} />
+      )}
+    </div>
   );
 };
 export default Search;

@@ -14,6 +14,7 @@ import MyRecent from "./modules/my_panel/pages/recent";
 import EditPost from "./modules/post/pages/edit";
 //errors
 import NotFound from "./modules/error/pages/not_found";
+import MyPanel from "./modules/my_panel/pages";
 
 const App = () => {
   return (
@@ -24,8 +25,12 @@ const App = () => {
       <Route path="/v/:slug" element={<Post />} />
       <Route path="/new" element={<AuthGuard component={<NewPost />} />} />
       <Route path="/my-panel">
+        <Route path="" element={<AuthGuard component={<MyPanel />} />} />
         <Route path="my-post" element={<AuthGuard component={<MyPost />} />} />
-        <Route path="my-post/edit/:slug" element={<AuthGuard component={<EditPost />} />} />
+        <Route
+          path="my-post/edit/:slug"
+          element={<AuthGuard component={<EditPost />} />}
+        />
         <Route path="saved" element={<AuthGuard component={<MySaved />} />} />
         <Route path="notes" element={<AuthGuard component={<MyNotes />} />} />
         <Route path="recent" element={<AuthGuard component={<MyRecent />} />} />

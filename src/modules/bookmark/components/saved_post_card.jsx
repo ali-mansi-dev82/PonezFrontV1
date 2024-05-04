@@ -44,7 +44,7 @@ function MyPostCard({
     <>
       <Link
         to={`/v/${slug}`}
-        className="flex flex-col gap-4 p-4 border border-gray-200 rounded-md  cursor-pointer"
+        className="flex flex-col gap-4 p-4 border border-gray-200 rounded-md  cursor-pointer h-max"
       >
         <div className="flex flex-row gap-2 justify-between">
           <div className="flex flex-col justify-between w-max h-full max-w-[50%]">
@@ -66,6 +66,7 @@ function MyPostCard({
                 className="absolute w-[130px] h-full inset-0 object-cover object-top rounded-md"
                 src={`${API_UPLOADED_IMAGES_URL}${images[0]}`}
                 alt={title}
+                loading="lazy"
               />
             ) : (
               <div className="w-full h-full bg-gray-100 rounded-md flex justify-center items-center text-gray-400">

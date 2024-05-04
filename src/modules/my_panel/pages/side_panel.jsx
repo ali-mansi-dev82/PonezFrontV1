@@ -5,17 +5,21 @@ import {
   LogOutIcon,
   ScrollIcon,
   ScrollTextIcon,
-  ShieldCheckIcon,
   UserIcon,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 
 const SidePanel = ({ selected = "" }) => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    await logout();
+    navigate(`/s/`);
+  };
   return (
-    <div className="flex flex-col gap-6 h-full w-1/5 sticky top-24">
-      <ul className="w-full flex flex-col gap-8 text-gray-500">
+    <div className="flex flex-col gap-6 h-full w-full lg:w-1/5 sticky top-24">
+      <ul className="w-full flex flex-col gap-8 text-gray-500 select-none">
         <li className="text-sm flex flex-col gap-2 pb-0">
           <div className="w-full flex flex-row items-center justify-start gap-2 cursor-pointer">
             <UserIcon size={16} />
@@ -25,6 +29,7 @@ const SidePanel = ({ selected = "" }) => {
             تلفن {user?.mobile}
           </span>
         </li>
+        <hr />
         <li className="text-sm">
           <Link
             to={"/my-panel/my-post"}
@@ -71,12 +76,13 @@ const SidePanel = ({ selected = "" }) => {
         </li>
         <hr />
         <li className="text-sm">
-          <Link
+          <div
+            onClick={handleLogout}
             className={`w-full flex flex-row items-center justify-start gap-2`}
           >
             <LogOutIcon size={16} />
             <span>خروج</span>
-          </Link>
+          </div>
         </li>
       </ul>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { API_AUTH_URL } from "../../../../config";
@@ -6,11 +6,14 @@ import { sendOtpSchema } from "./schemas";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import TextInput from "../../../../shared/components/input/textInput";
-import { Button } from "@mui/material";
+import { Button, DialogActions, DialogContent } from "@mui/material";
 
 const SendOTP = ({ setMobile, nextLevel, setExpireCode }) => {
   const [loading, setLoading] = useState(false);
   const [errore, setErrore] = useState("");
+  const inputRef = useRef(null);
+
+  useEffect(() => inputRef.current?.focus(), []);
 
   const {
     register,
@@ -60,13 +63,19 @@ const SendOTP = ({ setMobile, nextLevel, setExpireCode }) => {
   });
 
   return (
-    <>
-      <h3 className="font-bold text-base text-gray-700">ورود به حساب کاربری</h3>
-      <p className="pt-2 pb-6 text-sm text-gray-500">
-        شماره موبایل خود را وارد کنید.
-      </p>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="h-full">
+      <DialogContent className="w-auto lg:!w-[430px] h-[calc(100%-65px)] lg:!max-h-[50vh] !py-14">
+        <h3 className="font-bold text-base text-gray-700 mb-6">
+          شماره موبایل خود را وارد کنید
+        </h3>
+        <p className="pt-2 pb-6 text-sm text-gray-400 leading-7">
+          قبل از ثبت آگهی، لطفاً وارد حساب خود شوید. کد تأیید به این شماره پیامک
+          می‌شود.
+        </p>
+
         <TextInput
+          inputRef={inputRef}
+          type="number"
           register={register("mobile")}
           placeholder="شماره موبایل"
           errorMessage={errors?.mobile?.message || errore || undefined}
@@ -74,24 +83,25 @@ const SendOTP = ({ setMobile, nextLevel, setExpireCode }) => {
           fullWidth
           autoFocus
         />
-        <div className="text-xs pb-4">
+        <div className="text-sm pb-4">
           <span className="text-primary-default">شرایط استفاده از خدمات</span>
           {"  و  "}
           <span className="text-primary-default"> حریم خصوصی</span> پونز را
           می‌پذیرم.
         </div>
-        <div className="w-full justify-end flex gap-3 pt-2">
-          <Button
-            variant="contained"
-            disabled={loading}
-            loading={loading}
-            type="submit"
-          >
-            تایید
-          </Button>
-        </div>
-      </form>
-    </>
+      </DialogContent>
+      <DialogActions className="gap-2 border-t border-gray-300 !p-3">
+        <Button
+          fullWidth
+          variant="contained"
+          disabled={loading}
+          loading={loading}
+          type="submit"
+        >
+          تایید
+        </Button>
+      </DialogActions>
+    </form>
   );
 };
 export default SendOTP;

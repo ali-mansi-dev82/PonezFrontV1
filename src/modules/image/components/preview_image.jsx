@@ -30,7 +30,8 @@ const PreviewImage = ({
       <img
         className={`w-${width} h-${height} border rounded-md object-cover`}
         src={blob}
-        alt=""
+        alt={blob}
+        loading="lazy"
       />
       {uploaded !== false && (
         <div className="absolute w-max h-max p-1 rounded-md bg-gray-300 top-2 left-2 cursor-pointer opacity-40 hover:opacity-95">

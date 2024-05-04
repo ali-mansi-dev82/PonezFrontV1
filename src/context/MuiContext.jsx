@@ -14,7 +14,7 @@ const theme = createTheme({
   components: {
     MuiIconButton: {
       styleOverrides: {
-        sizeMedium: { width: "40px", height: "40px" },
+        // sizeMedium: { width: "40px", height: "40px" },
       },
     },
     MuiButtonBase: {
@@ -26,10 +26,11 @@ const theme = createTheme({
     MuiButton: {
       defaultProps: {
         sx: {
-          boxShadow: "",
-          borderRadius: "0.4rem",
-          fontWeight: 500,
-          paddingY: "0.5rem",
+          // boxShadow: "",
+          // borderRadius: "0.4rem",
+          // fontWeight: 500,
+          // padding: "0.5rem 1.1rem",
+          // fontSize: '0.9rem',
         },
       },
       styleOverrides: {

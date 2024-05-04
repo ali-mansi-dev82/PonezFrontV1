@@ -1,5 +1,4 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-import Navbar from "../modules/auth/components/navbar/index";
 import { useMutation } from "@tanstack/react-query";
 import {
   getAccessTokenCookies,
@@ -61,10 +60,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, logout, user }}>
-      <>
-        <Navbar userData={user} isAuthenticated={isAuthenticated} />
-        {/* {children} */}
-      </>
+      {children}
     </AuthContext.Provider>
   );
 };
