@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import MainContainer from "../../../../../shared/components/container";
 import New from "../new";
 import SearchItemComponent from "../../../components/search_item";
 import {
@@ -57,120 +56,118 @@ const CreatePostDesktop = () => {
 
   return (
     <BasicLayoutDesktop>
-      <MainContainer className={`w-full flex justify-center gap-5 py-12 px-6`}>
-        <div className="flex flex-col w-full lg:w-[600px] gap-0">
-          {/* we have 4 Senario */}
-          {/* Search */}
-          {!(senario === 2 && categoryQuery?.data?.children?.length <= 0) && (
-            <>
-              <h6 className="w-full text-lg text-gray-800 mb-3">
-                چه چیزی آگهی می‌کنید؟
-              </h6>
-              <p className="w-full text-sm text-gray-400 mb-4">
-                با جستجو در کادر زیر، دستهٔ آگهی را انتخاب کنید.
-              </p>
-              <TextField
-                inputRef={inputRef}
-                variant="outlined"
-                size="small"
-                focused
-                autoComplete="off"
-                sx={{ marginBottom: "1rem" }}
-                placeholder="مثلا: اجاره مسکونی، ماشین، لباس، کفش ..."
-                onChange={searchInputHandler}
-              />
-            </>
-          )}
+      <div className="flex flex-col w-full lg:w-[600px] gap-0">
+        {/* we have 4 Senario */}
+        {/* Search */}
+        {!(senario === 2 && categoryQuery?.data?.children?.length <= 0) && (
+          <>
+            <h6 className="w-full text-lg text-gray-800 mb-3">
+              چه چیزی آگهی می‌کنید؟
+            </h6>
+            <p className="w-full text-sm text-gray-400 mb-4">
+              با جستجو در کادر زیر، دستهٔ آگهی را انتخاب کنید.
+            </p>
+            <TextField
+              inputRef={inputRef}
+              variant="outlined"
+              size="small"
+              focused
+              autoComplete="off"
+              sx={{ marginBottom: "1rem" }}
+              placeholder="مثلا: اجاره مسکونی، ماشین، لباس، کفش ..."
+              onChange={searchInputHandler}
+            />
+          </>
+        )}
 
-          {senario === -1 && (
-            <>
-              {searchCategoryQuery?.data && searchCategoryQuery?.data.length > 0
-                ? searchCategoryQuery?.data?.map((value, index) => {
-                    return (
-                      <SearchItemComponent
-                        key={index}
-                        id={value?._id}
-                        icon={value?.icon}
-                        name={value?.name}
-                        slug={value?.slug}
-                      />
-                    );
-                  })
-                : "دسته بندی پیدا نشد!!"}
-            </>
-          )}
-          {/* No Slug */}
-          {senario === 0 && (
-            <>
-              <SearchItemComponent
-                id={"root"}
-                name={"دیدن تمام دسته بندی های پونز"}
-                slug={"root"}
-              />
-            </>
-          )}
-          {/* Root Slug */}
-          {senario === 1 && (
-            <>
-              {categoryQuery?.data &&
-                categoryQuery?.data.length > 0 &&
-                categoryQuery?.data?.map((value, index) => {
+        {senario === -1 && (
+          <>
+            {searchCategoryQuery?.data && searchCategoryQuery?.data.length > 0
+              ? searchCategoryQuery?.data?.map((value, index) => {
                   return (
-                    <>
-                      <SearchItemComponent
-                        key={index}
-                        id={value?._id}
-                        icon={value?.icon}
-                        name={value?.name}
-                        slug={value?.slug}
-                      />
-                    </>
+                    <SearchItemComponent
+                      key={index}
+                      id={value?._id}
+                      icon={value?.icon}
+                      name={value?.name}
+                      slug={value?.slug}
+                    />
+                  );
+                })
+              : "دسته بندی پیدا نشد!!"}
+          </>
+        )}
+        {/* No Slug */}
+        {senario === 0 && (
+          <>
+            <SearchItemComponent
+              id={"root"}
+              name={"دیدن تمام دسته بندی های پونز"}
+              slug={"root"}
+            />
+          </>
+        )}
+        {/* Root Slug */}
+        {senario === 1 && (
+          <>
+            {categoryQuery?.data &&
+              categoryQuery?.data.length > 0 &&
+              categoryQuery?.data?.map((value, index) => {
+                return (
+                  <>
+                    <SearchItemComponent
+                      key={index}
+                      id={value?._id}
+                      icon={value?.icon}
+                      name={value?.name}
+                      slug={value?.slug}
+                    />
+                  </>
+                );
+              })}
+          </>
+        )}
+        {/* Any Slug */}
+        {senario === 2 && (
+          <>
+            {categoryQuery?.data?.children &&
+            categoryQuery?.data?.children?.length > 0 ? (
+              <>
+                <SearchItemComponent
+                  id={categoryQuery?.data?.slug}
+                  isBack
+                  name={
+                    categoryQuery?.data?.parent === null
+                      ? "بازگشت به همه دسته بندی ها"
+                      : "بازگشت به " + categoryQuery?.data?.parent?.name
+                  }
+                  slug={
+                    categoryQuery?.data?.parent === null
+                      ? "root"
+                      : categoryQuery?.data?.parent?.slug
+                  }
+                />
+                {categoryQuery?.data?.children?.map((value, index) => {
+                  return (
+                    <SearchItemComponent
+                      key={index}
+                      id={value?._id}
+                      name={value?.name}
+                      slug={value?.slug}
+                    />
                   );
                 })}
-            </>
-          )}
-          {/* Any Slug */}
-          {senario === 2 && (
-            <>
-              {categoryQuery?.data?.children &&
-              categoryQuery?.data?.children?.length > 0 ? (
-                <>
-                  <SearchItemComponent
-                    id={categoryQuery?.data?.slug}
-                    isBack
-                    name={
-                      categoryQuery?.data?.parent === null
-                        ? "بازگشت به همه دسته بندی ها"
-                        : "بازگشت به " + categoryQuery?.data?.parent?.name
-                    }
-                    slug={
-                      categoryQuery?.data?.parent === null
-                        ? "root"
-                        : categoryQuery?.data?.parent?.slug
-                    }
-                  />
-                  {categoryQuery?.data?.children?.map((value, index) => {
-                    return (
-                      <SearchItemComponent
-                        key={index}
-                        id={value?._id}
-                        name={value?.name}
-                        slug={value?.slug}
-                      />
-                    );
-                  })}
-                </>
-              ) : (
-                <New
-                  id={categoryQuery?.data?._id}
-                  name={categoryQuery?.data?.name}
-                  slug={categoryQuery?.data?.slug}
-                />
-              )}
-            </>
-          )}
-        </div>
-      </MainContainer>
+              </>
+            ) : (
+              <New
+                id={categoryQuery?.data?._id}
+                name={categoryQuery?.data?.name}
+                slug={categoryQuery?.data?.slug}
+              />
+            )}
+          </>
+        )}
+      </div>
     </BasicLayoutDesktop>
   );
 };

@@ -1,5 +1,4 @@
 import React from "react";
-import MainContainer from "../../../../shared/components/container";
 import SavedPostCard from "../../../bookmark/components/saved_post_card";
 import SidePanel from "../side_panel";
 import BasicLayoutDesktop from "../../../../layouts/desktop/basic_layout";
@@ -7,9 +6,6 @@ import BasicLayoutDesktop from "../../../../layouts/desktop/basic_layout";
 const MySavedDesktop = ({ isPending, data, handleOnDelete }) => {
   return (
     <BasicLayoutDesktop>
-      <MainContainer
-        className={`w-full flex justify-between gap-8 py-12 h-max min-h-[calc(100vh-65px)]`}
-      >
         <SidePanel selected="saved" />
         <div className="grid grid-cols-2 h-max w-4/5 gap-5">
           {!isPending ? (
@@ -36,7 +32,6 @@ const MySavedDesktop = ({ isPending, data, handleOnDelete }) => {
             </div>
           )}
         </div>
-      </MainContainer>
     </BasicLayoutDesktop>
   );
 };
