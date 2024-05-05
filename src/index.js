@@ -8,22 +8,25 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "./context/AuthContext";
 import { CityProvider } from "./context/CityContext";
 import ThemeProvider from "./context/MuiContext";
+import { ResponsiveProvider } from "./context/ResponsiveContext";
 
 const queryClient = new QueryClient({});
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
-          <CityProvider>
-            <AuthProvider>
-              <App />
-            </AuthProvider>
-          </CityProvider>
-        </ThemeProvider>
-      </QueryClientProvider>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <ResponsiveProvider>
+          <QueryClientProvider client={queryClient}>
+            <CityProvider>
+              <AuthProvider>
+                <App />
+              </AuthProvider>
+            </CityProvider>
+          </QueryClientProvider>
+        </ResponsiveProvider>
+      </BrowserRouter>
+    </ThemeProvider>
   </React.StrictMode>
 );
 

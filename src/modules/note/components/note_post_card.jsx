@@ -32,7 +32,7 @@ function MyNotePostCard({
     <>
       <Link
         to={`/v/${slug}`}
-        className="flex flex-row gap-4 p-3 border border-gray-200 rounded-md  cursor-pointer relative"
+        className="flex flex-row gap-4 p-3 border border-gray-200 rounded-md  cursor-pointer relative h-max"
       >
         <div className="relative w-[80px] h-[80px] pb-2/3  rounded-md">
           {images[0] ? (

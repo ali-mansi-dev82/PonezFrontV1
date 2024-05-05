@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { ChevronDownIcon, ChevronLeftIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { FindCategoryFn } from "../../../category/query";
+import { FindCategoryFn } from "../../../../category/query";
 import { Link } from "react-router-dom";
-import { CategoryIconsSm } from "../../../category/category_icons";
-import Button from "../../../../shared/components/button";
-import Spinner from "../../../../shared/components/spiner";
+import { CategoryIconsSm } from "../../../../category/category_icons";
+import Button from "../../../../../shared/components/button";
+import Spinner from "../../../../../shared/components/spiner";
 
 const Categories = () => {
   const [open, setOpen] = useState(false);

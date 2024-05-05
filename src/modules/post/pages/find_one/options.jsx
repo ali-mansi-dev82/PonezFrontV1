@@ -10,8 +10,8 @@ const PostOptions = ({ options, amount }) => {
             key={index}
             className="w-full flex justify-between items-center border-b border-gray-200 pb-4"
           >
-            <div className="text-gray-400 text-md">{key.title}</div>
-            <div className="Fanum text-md">
+            <div className="text-gray-400 text-sm lg:text-md w-1/3">{key.title}</div>
+            <div className="Fanum text-sm lg:text-md text-left w-2/3">
               {key.type === "currency"
                 ? tomanCurrencyFormat(key.value)
                 : key.value}
@@ -19,8 +19,8 @@ const PostOptions = ({ options, amount }) => {
           </div>
         ))}
       <div className="w-full flex justify-between items-center border-b border-gray-200 pb-4">
-        <div className="text-gray-400 text-md">قیمت</div>
-        <div className="Fanum text-md">
+        <div className="text-gray-400 text-sm lg:text-md w-1/3">قیمت</div>
+        <div className="Fanum text-sm lg:text-md text-left w-2/3">
           {amount && amount > 0 ? tomanCurrencyFormat(amount) : "توافقی"}
         </div>
       </div>

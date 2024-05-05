@@ -11,7 +11,7 @@ function MyRecentPostCard({ title, images, district, slug, createdAt }) {
     <>
       <Link
         to={`/v/${slug}`}
-        className="flex flex-row justify-start gap-3 p-3 border border-gray-200 rounded-md  cursor-pointer"
+        className="flex flex-row justify-start gap-3 p-3 border border-gray-200 rounded-md  cursor-pointer h-max"
       >
         <div className="relative w-[80px] h-[80px] pb-2/3  rounded-md">
           {images && images[0] ? (
@@ -19,6 +19,7 @@ function MyRecentPostCard({ title, images, district, slug, createdAt }) {
               className="absolute w-[80px] h-full inset-0 object-cover object-top rounded-md"
               src={`${API_UPLOADED_IMAGES_URL}${images && images[0]}`}
               alt={title}
+              loading="lazy"
             />
           ) : (
             <div className="w-full h-full bg-gray-100 rounded-md flex justify-center items-center text-gray-400">

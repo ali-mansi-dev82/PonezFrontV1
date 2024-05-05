@@ -1,10 +1,11 @@
 import React from "react";
-import Button from "../../../../shared/components/button";
+// import Button from "../../../../../shared/components/button";
 import { User } from "lucide-react";
-import { useAuth } from "../../../../context/AuthContext";
+import { useAuth } from "../../../../../context/AuthContext";
 import { Link } from "react-router-dom";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { Button } from "@mui/material";
 
 const UserDropDown = ({ isAuth, mobile, loginFn }) => {
   const { logout } = useAuth();
@@ -73,7 +74,7 @@ const UserDropDown = ({ isAuth, mobile, loginFn }) => {
         <Button
           size="small"
           variant="textonly"
-          leftIcon={<User size={"16px"} />}
+          endIcon={<User size={"16px"} />}
           id="basic-button"
           aria-controls={open ? "basic-menu" : undefined}
           aria-haspopup="true"

@@ -1,28 +1,24 @@
 import React, { useEffect, useState } from "react";
-import MainContainer from "../../../../shared/components/container";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { FindPostbySlugFn } from "../../query";
 import { useAuth } from "../../../../context/AuthContext";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CreatePostSchema } from "../../schema";
-import TextInput from "../../../../shared/components/input/textInput";
-import { Button, CircularProgress, Snackbar } from "@mui/material";
-import UploadImages from "../../../image/components/upload_image";
-import { uploadImageFn } from "../../../image/mutation";
 import { FindOptionbyCategoryIdFn } from "../../../option/query";
-import OptionComponent from "../../components/option";
 import { API_UPLOADED_IMAGES_URL } from "../../../../config";
 import { UpdatePostFn } from "../../mutation";
+import EditPostMobile from "./mobile";
+import EditPostDesktop from "./desktop";
 
-const EditPost = () => {
+const EditPost = ({ isMobile }) => {
   const { slug } = useParams();
   const [loading, setLoading] = useState(true);
   const [images, setImages] = useState([]);
   const { user } = useAuth();
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
+
   const optionQuery = useMutation({
     mutationKey: ["category_options"],
     mutationFn: FindOptionbyCategoryIdFn,
@@ -134,99 +130,23 @@ const EditPost = () => {
   } = useForm({
     resolver: yupResolver(CreatePostSchema),
   });
+  
+  const props = {
+    loading: loading,
+    onSubmit: handleSubmit(onSubmit),
+    images: images,
+    setImages: setImages,
+    register: register,
+    errors: errors,
+    data: postInfoQuery?.data,
+    optionData: optionQuery?.data,
+    snackbarOpen: open,
+  };
 
-  return (
-    <MainContainer
-      className={`w-full flex justify-center gap-8 py-12  h-full min-h-[calc(100vh-65px)]`}
-    >
-      <div className="flex flex-col w-[600px] gap-0">
-        {loading ? (
-          <div className="w-full h-full flex justify-center items-center">
-            <CircularProgress />
-          </div>
-        ) : (
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-5"
-          >
-            <div className="text-xl text-gray-800">ثبت آگهی</div>
-            <UploadImages
-              images={images}
-              setImages={setImages}
-              uploadImageFn={uploadImageFn}
-            />
-            <TextInput
-              label={"عنوان آگهی"}
-              placeholder="عنوان آگهی"
-              register={register("title")}
-              helperText={`در عنوان آگهی به موارد مهمی مانند نوع ملک، متراژ و محله اشاره کنید.`}
-              errorMessage={errors?.title?.message}
-              value={postInfoQuery?.data?.data?.title}
-            />
-            <TextInput
-              label={"قیمت آگهی"}
-              placeholder="قیمت آگهی"
-              register={register("amount")}
-              errorMessage={errors?.amount?.message}
-              type="number"
-              value={postInfoQuery?.data?.data?.amount}
-              prefix={"تومان"}
-            />
-            <TextInput
-              label={"توضیحات آگهی"}
-              placeholder="توضیحات آگهی"
-              register={register("content")}
-              errorMessage={errors?.content?.message}
-              helperText={`در توضیحات آگهی به مواردی مانند شرایط اجاره، جزئیات و ویژگی‌های قابل توجه، دسترسی‌های محلی و موقعیت قرارگیری ملک اشاره کنید.`}
-              multiline
-              value={postInfoQuery?.data?.data?.content}
-            />
-            <div className="flex flex-col gap-2">
-              {optionQuery?.data?.data?.length > 0 &&
-                optionQuery?.data?.data?.map((value, index) => {
-                  return (
-                    <OptionComponent
-                      register={register}
-                      defaultValue={
-                        postInfoQuery?.data?.data?.options?.filter(
-                          (item) => item._id === value._id
-                        )[0]?.value || ""
-                      }
-                      {...value}
-                      key={index}
-                    />
-                  );
-                })}
-            </div>
-            <div className="flex flex-row gap-3 justify-end pt-4">
-              <Link to={`/my-panel/my-post`}>
-                <Button variant="outlined">انصراف</Button>
-              </Link>
-              <Button variant="contained" type="submit">
-                ارسال اگهی
-              </Button>
-            </div>
-            <Snackbar
-              open={open}
-              message="آگهی شما ثبت شد"
-              action={
-                <div className="w-full flex justify-between">
-                  <div className="w-44"></div>
-                  <Button
-                    onClick={() => navigate("/my-panel/my-post")}
-                    variant="text"
-                    size="small"
-                    className="!text-primary-default"
-                  >
-                    تایید
-                  </Button>
-                </div>
-              }
-            />
-          </form>
-        )}
-      </div>
-    </MainContainer>
+  return isMobile ? (
+    <EditPostMobile {...props} />
+  ) : (
+    <EditPostDesktop {...props} />
   );
 };
 

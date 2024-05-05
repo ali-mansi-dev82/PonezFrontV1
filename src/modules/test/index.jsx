@@ -1,17 +1,19 @@
-import React, {  useState } from "react";
+import React from "react";
 import MainContainer from "../../shared/components/container";
-import UploadImages from "../image/components/upload_image";
-import { uploadImageFn } from "../image/mutation";
+import { useResponsive } from "../../context/ResponsiveContext";
 
 const Index = () => {
-  const [images, setImages] = useState([]);
+  const { isMobile } = useResponsive();
   return (
     <MainContainer className={`w-full flex justify-center gap-5 py-12`}>
-      <UploadImages
-        images={images}
-        setImages={setImages}
-        uploadImageFn={uploadImageFn}
-      />
+      <div>
+        <h1>Device Test!</h1>
+        {isMobile ? (
+          <p>You are a tablet or mobile phone</p>
+        ) : (
+          <p>You are a desktop or laptop</p>
+        )}
+      </div>
     </MainContainer>
   );
 };
