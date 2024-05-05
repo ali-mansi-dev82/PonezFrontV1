@@ -12,7 +12,7 @@ const BasicLayoutMobile = ({ children }) => {
       <main className="py-[64px] ">
         {" "}
         <MainContainer
-          className={`w-full flex flex-col justify-center gap-5 py-12 px-6`}
+          className={`w-full flex flex-col justify-center gap-8 py-8 px-6`}
         >
           {children}
         </MainContainer>

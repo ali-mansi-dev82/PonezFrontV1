@@ -16,6 +16,7 @@ import EditPost from "./modules/post/pages/edit";
 import NotFound from "./modules/error/pages/not_found";
 import MyPanel from "./modules/my_panel/pages";
 import { useResponsive } from "./context/ResponsiveContext";
+import ShowCategory from "./modules/category/pages/show";
 
 const App = () => {
   const { isMobile } = useResponsive();
@@ -29,6 +30,10 @@ const App = () => {
       <Route
         path="/new"
         element={<AuthGuard component={<NewPost isMobile={isMobile} />} />}
+      />
+      <Route
+        path="/category"
+        element={<AuthGuard component={<ShowCategory isMobile={isMobile} />} />}
       />
       <Route path="/my-panel">
         <Route
