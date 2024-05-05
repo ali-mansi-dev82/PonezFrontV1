@@ -23,7 +23,7 @@ const PostMobile = ({ loading, data }) => {
   return (
     <SingleLayoutMobile
       navbarActions={
-        <div className="flex flex-row gap-3 pl-3">
+        <div className="flex flex-row gap-3 ">
           <Tooltip title={`اشتراک گذاری`} arrow>
             <IconButton>
               <Share2Icon size={16} />
@@ -43,12 +43,13 @@ const PostMobile = ({ loading, data }) => {
           اطلاعات تماس
         </Button>
       }
+      container='off'
     >
       {!loading && data?.data && data?.data?.title && data?.data?.user ? (
         <div className="w-full flex-col flex justify-between gap-6 ">
           {data?.data?.images[0] && <Images images={data?.data?.images} />}
 
-          <div className="w-full flex flex-col lg:flex-row justify-between gap-2 px-4">
+          <div className="w-full flex flex-col lg:flex-row justify-between gap-2 px-6">
             <PostBreadcrumbs
               bread_crumb={[data?.bread_crumb?.at && data?.bread_crumb?.at(-1)]}
               title=""

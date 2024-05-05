@@ -10,6 +10,8 @@ const SingleLayoutMobile = ({
   title = "",
   navbarActions,
   buttonNavigation,
+  container,
+  buttonNavigationSelected,
 }) => {
   let navigate = useNavigate();
 
@@ -20,7 +22,7 @@ const SingleLayoutMobile = ({
         position="fixed"
       >
         <MainContainer
-          className={`w-full flex justify-between gap-5 py-12 px-6`}
+          className={`w-full flex justify-between gap-5 py-4 px-6`}
         >
           <div className="flex flex-row justify-center items-center gap-2">
             <IconButton onClick={() => navigate(-1)}>
@@ -34,13 +36,18 @@ const SingleLayoutMobile = ({
       <main
         className={`pt-[64px] ${buttonNavigation !== "off" && `pb-[100px]`}`}
       >
-         <MainContainer
-          className={`w-full flex justify-center gap-5 py-12 px-6`}
-        >{children}</MainContainer>
-        
+        {container === "off" ? (
+          children
+        ) : (
+          <MainContainer
+            className={`w-full flex justify-center gap-5 py-8 px-6`}
+          >
+            {children}
+          </MainContainer>
+        )}
       </main>
       {buttonNavigation !== "off" && (
-        <ButtonNavigation buttonNavigation={buttonNavigation} />
+        <ButtonNavigation buttonNavigation={buttonNavigation} selected={buttonNavigationSelected}  />
       )}
     </>
   );
