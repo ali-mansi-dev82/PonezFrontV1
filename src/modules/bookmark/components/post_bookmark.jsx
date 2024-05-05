@@ -37,6 +37,7 @@ const PostBookmark = ({ postId }) => {
       });
     }
   }, [postId, isAuthenticated]);
+  
   return (
     <Tooltip title={bookmark ? `نشان شد` : `نشان کردن`} arrow>
       <IconButton
