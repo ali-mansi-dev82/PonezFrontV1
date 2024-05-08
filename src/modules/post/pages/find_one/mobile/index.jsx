@@ -38,12 +38,12 @@ const PostMobile = ({ loading, data }) => {
           size="medium"
           variant="contained"
           disabled={showPhone}
-          onClick={() => setShowPhone(true)}
+          onClick={setShowPhone.bind(this, true)}
         >
           اطلاعات تماس
         </Button>
       }
-      container='off'
+      container="off"
     >
       {!loading && data?.data && data?.data?.title && data?.data?.user ? (
         <div className="w-full flex-col flex justify-between gap-6 ">
@@ -89,7 +89,7 @@ const PostMobile = ({ loading, data }) => {
       )} */}
       <Dialog
         open={showPhone}
-        onClose={() => setShowPhone(false)}
+        onClose={setShowPhone.bind(this, false)}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -115,7 +115,7 @@ const PostMobile = ({ loading, data }) => {
           <Button
             fullWidth
             variant="contained"
-            onClick={() => setShowPhone(false)}
+            onClick={setShowPhone.bind(this, false)}
           >
             بستن
           </Button>

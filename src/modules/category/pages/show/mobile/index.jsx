@@ -65,10 +65,7 @@ const ShowCategoryMobile = () => {
             {selected?.children.map((value, index) => (
               <SearchItemComponent
                 key={index}
-                icon={value?.icon}
-                name={value?.name}
-                children={value?.children}
-                slug={value?.slug}
+                {...value}
                 onClick={setSelected.bind(this, value)}
               />
             ))}
@@ -79,11 +76,7 @@ const ShowCategoryMobile = () => {
           categoryQuery?.data?.map((value, index) => (
             <SearchItemComponent
               key={index}
-              id={value?._id}
-              children={value?.children}
-              icon={value?.icon}
-              name={value?.name}
-              slug={value?.slug}
+              {...value}
               onClick={setSelected.bind(this, value)}
             />
           ))

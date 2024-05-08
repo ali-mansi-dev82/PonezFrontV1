@@ -19,7 +19,6 @@ function FilterPostDesktop({
   return (
     <BasicLayoutDesktop>
       <div className="flex flex-col gap-6 h-full w-1/5 sticky top-24">
-        {categoryData?.link}
         <span className="text-xs text-gray-500">دسته ها</span>
         {categoryIsPending ? (
           "0"
@@ -65,20 +64,17 @@ function FilterPostDesktop({
             </div>
           </div>
         ) : (
-          <>
-            {categoryData?.length > 0
-              ? categoryData?.map((value, index) => (
-                  <Link
-                    key={index}
-                    to={city ? `/s/${value.slug}` : `/${value.slug}`}
-                    className={`flex flex-row items-center gap-2 text-gray-400 hover:text-gray-800`}
-                  >
-                    {value.icon !== "" && icons[value.icon]}
-                    <span className="text-xs ">{value.name}</span>
-                  </Link>
-                ))
-              : ""}
-          </>
+          categoryData?.length > 0 &&
+          categoryData?.map((value, index) => (
+            <Link
+              key={index}
+              to={city ? `/s/${value.slug}` : `/${value.slug}`}
+              className={`flex flex-row items-center gap-2 text-gray-400 hover:text-gray-800`}
+            >
+              {value.icon !== "" && icons[value.icon]}
+              <span className="text-xs ">{value.name}</span>
+            </Link>
+          ))
         )}
 
         <SideFilter />

@@ -26,7 +26,7 @@ const Images = ({ images }) => {
           <div
             key={index}
             className="relative w-[60px] h-[60px] lg:w-1/6 lg:h-[60px] pb-2/3  rounded-md"
-            onClick={() => setImageIndex(index)}
+            onClick={setImageIndex.bind(this, index)}
           >
             {imageIndex !== index && (
               <div className="absolute top-0 left-0 right-0 bottom-0 bg-black bg-opacity-45 rounded-md z-10"></div>

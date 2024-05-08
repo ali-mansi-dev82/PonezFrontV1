@@ -28,23 +28,29 @@ const SelectPage = () => {
         placeholder="مثلا: تهران، اصفهان، مشهد ..."
       /> */}
       <Autocomplete
-      disablePortal
-      fullWidth
-      options={["اصفهان"]}
-      // onChange={(e, value) => {
-      //   onChange(value.label);
-      // }}
-      sx={{ width: 300 }}
-      renderInput={(params) => (
-        <TextField size="small" fullWidth {...params} />
-      )}
-    />
-      <TextField id="outlined-basic" dir="rtl" size="small" placeholder="شهر خود را انتخاب کنید..." variant="outlined" />
+        disablePortal
+        fullWidth
+        options={["اصفهان"]}
+        // onChange={(e, value) => {
+        //   onChange(value.label);
+        // }}
+        sx={{ width: 300 }}
+        renderInput={(params) => (
+          <TextField size="small" fullWidth {...params} />
+        )}
+      />
+      <TextField
+        id="outlined-basic"
+        dir="rtl"
+        size="small"
+        placeholder="شهر خود را انتخاب کنید..."
+        variant="outlined"
+      />
       <div className="grid grid-cols-4 gap-2 pt-8">
-        <Button onClick={() => setCity("اصفهان")}>اصفهان</Button>
-        <Button onClick={() => setCity("تهران")}>تهران</Button>
-        <Button onClick={() => setCity("مشهد")}>مشهد</Button>
-        <Button onClick={() => setCity("تبریز")}>تبریز</Button>
+        <Button onClick={setCity.bind(this, "اصفهان")}>اصفهان</Button>
+        <Button onClick={setCity.bind(this, "تهران")}>تهران</Button>
+        <Button onClick={setCity.bind(this, "مشهد")}>مشهد</Button>
+        <Button onClick={setCity.bind(this, "تبریز")}>تبریز</Button>
       </div>
     </>
   );

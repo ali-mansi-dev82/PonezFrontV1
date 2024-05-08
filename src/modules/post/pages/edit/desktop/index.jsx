@@ -93,7 +93,7 @@ const EditPostDesktop = ({
                 <div className="w-full flex justify-between">
                   <div className="w-44"></div>
                   <Button
-                    onClick={() => navigate("/my-panel/my-post")}
+                    onClick={navigate.bind(this, "/my-panel/my-post")}
                     variant="text"
                     size="small"
                     className="!text-primary-default"

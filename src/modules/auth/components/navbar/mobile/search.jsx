@@ -11,8 +11,8 @@ const Search = ({ openCity }) => {
   const { city } = useCity();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   // Search
-  const openSearch = () => setIsSearchOpen(true);
-  const closeSearch = () => setIsSearchOpen(false);
+  const openSearch = setIsSearchOpen.bind(this, true);
+  const closeSearch = setIsSearchOpen.bind(this, false);
   const searchMutation = useMutation({
     mutationFn: SearchCategoryFn,
   });

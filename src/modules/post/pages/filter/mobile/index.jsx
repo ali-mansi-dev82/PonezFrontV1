@@ -34,7 +34,6 @@ function FilterPostMobile({
                   {value.icon !== "" && icons[value.icon]}
                 </span>
               )}
-              {/* {value.icon} */}
               <span className="text-xs text-center text-gray-500">
                 {value.name}
               </span>

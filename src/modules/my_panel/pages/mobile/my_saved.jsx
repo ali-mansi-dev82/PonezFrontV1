@@ -11,8 +11,8 @@ const MySavedMobile = ({ isPending, data, handleOnDelete }) => {
             {data?.length > 0 ? (
               data?.map((value, index) => (
                 <SavedPostCard
-                  onDelete={handleOnDelete.bind(this, value)}
                   key={index}
+                  onDelete={handleOnDelete.bind(this, value)}
                   {...value}
                 />
               ))
