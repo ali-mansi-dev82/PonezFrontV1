@@ -47,7 +47,7 @@ const PostDesktop = ({ loading, data }) => {
                       size="medium"
                       variant="contained"
                       disabled={showPhone}
-                      onClick={() => setShowPhone(true)}
+                      onClick={setShowPhone.bind(this, true)}
                     >
                       اطلاعات تماس
                     </Button>

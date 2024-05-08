@@ -49,7 +49,7 @@ const SelectCity = ({ onClose, isMobile }) => {
       >
         <div className="w-full flex flex-row justify-between items-center">
           <h3 className="font-bold text-lg">انتخاب شهر</h3>
-          <Button onClick={() => setLocalCity("")} size="small">
+          <Button onClick={setLocalCity.bind(this, "")} size="small">
             حذف همه
           </Button>
         </div>
@@ -79,7 +79,7 @@ const SelectCity = ({ onClose, isMobile }) => {
         {state?._id ? (
           <>
             <div
-              onClick={() => setState("")}
+              onClick={setState.bind(this, "")}
               className="w-full flex flex-row gap-3 border-b last:border-b-0 items-center py-3 cursor-pointer"
             >
               <span className="text-gray-400">
@@ -97,7 +97,7 @@ const SelectCity = ({ onClose, isMobile }) => {
                 state?.cities?.map((value, index) => (
                   <div
                     key={index}
-                    onClick={() => setLocalCity(value.name)}
+                    onClick={setLocalCity.bind(this, value.name)}
                     className="w-full flex flex-row justify-between gap-3 border-b last:border-b-0 items-center py-1 cursor-pointer"
                   >
                     <p>{value.name}</p>
@@ -110,7 +110,7 @@ const SelectCity = ({ onClose, isMobile }) => {
           statesQuery?.data?.data?.map((value, index) => (
             <div
               key={index}
-              onClick={() => setState(value)}
+              onClick={setState.bind(this, value)}
               className="w-full flex flex-row justify-between border-b last:border-b-0 items-center py-3 cursor-pointer"
             >
               <p>{value.name}</p>

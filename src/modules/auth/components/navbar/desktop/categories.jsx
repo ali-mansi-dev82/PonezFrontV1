@@ -30,14 +30,14 @@ const Categories = () => {
           rightIcon={
             <ChevronDownIcon className={open && `rotate-180`} size={"12px"} />
           }
-          onClick={() => setOpen(true)}
+          onClick={setOpen.bind(this, true)}
         >
           دسته ها
         </Button>
         {open && (
           <>
             <div
-              onClick={() => setOpen(false)}
+              onClick={setOpen.bind(this, false)}
               className="fixed top-[64px] left-0 right-0 bottom-0 bg-black bg-opacity-25 z-0"
             ></div>
             <div className="absolute top-[130%] flex gap-4 right-0 bg-white z-30 w-[55vw] rounded-md p-6 drop-shadow-modal">
@@ -47,8 +47,8 @@ const Categories = () => {
                     {categoryQuery?.data?.map((value, index) => (
                       <Link
                         key={index}
-                        onMouseEnter={() => setCategory(value)}
-                        onClick={() => setOpen(false)}
+                        onMouseEnter={setCategory.bind(this, value)}
+                        onClick={setOpen.bind(this, false)}
                         to={`/s/${value.slug}`}
                         className={`flex flex-row justify-between items-center gap-2 text-gray-400  px-2 py-2 rounded-lg ${
                           category?._id === value._id
@@ -72,7 +72,7 @@ const Categories = () => {
                           <Link
                             key={index}
                             to={`/s/${value.slug}`}
-                            onClick={() => setOpen(false)}
+                            onClick={setOpen.bind(this, false)}
                             className={`flex flex-row items-center gap-2 text-gray-800`}
                           >
                             <span className="text-sm">{value.name}</span>
@@ -84,7 +84,7 @@ const Categories = () => {
                                   <Link
                                     key={index}
                                     to={`/s/${value.slug}`}
-                                    onClick={() => setOpen(false)}
+                                    onClick={setOpen.bind(this, false)}
                                     className={`flex flex-row items-center gap-2 text-gray-400 hover:text-primary-default`}
                                   >
                                     <span className="text-xs">

@@ -129,22 +129,6 @@ const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
           </Button>
         </DialogActions>
       </form>
-      {/* <p className="pt-2 pb-6 text-sm"></p>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="w-full justify-end flex gap-3 pt-2">
-          <Button className="w-max" disabled>
-            {second > 0 ? secontTommss(second) : ""}
-          </Button>
-          <Button
-            variant="contained"
-            className="w-max"
-            type="submit"
-            loading={loading}
-          >
-            ورود
-          </Button>
-        </div>
-      </form> */}
     </>
   );
 };

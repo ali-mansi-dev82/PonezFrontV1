@@ -12,13 +12,13 @@ const NavbarMobile = () => {
 
   const [isCityOpen, setIsCityOpen] = useState(false);
   // City
-  const openCity = () => setIsCityOpen(true);
-  const closeCity = () => setIsCityOpen(false);
+  const openCity = setIsCityOpen.bind(this, true);
+  const closeCity = setIsCityOpen.bind(this, false);
   return (
     <>
       <div className="flex flex-row gap-2 w-full py-3">
         {location.pathname !== "/s/" && (
-          <IconButton onClick={() => navigate(-1)}>
+          <IconButton onClick={navigate.bind(this, -1)}>
             <ArrowRight size={16} />
           </IconButton>
         )}

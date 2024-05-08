@@ -25,7 +25,7 @@ const SingleLayoutMobile = ({
           className={`w-full flex justify-between gap-5 py-4 px-6`}
         >
           <div className="flex flex-row justify-center items-center gap-2">
-            <IconButton onClick={() => navigate(-1)}>
+            <IconButton onClick={navigate.bind(this, -1)}>
               <ArrowRight size={16} />
             </IconButton>
             <span>{title}</span>
@@ -47,7 +47,10 @@ const SingleLayoutMobile = ({
         )}
       </main>
       {buttonNavigation !== "off" && (
-        <ButtonNavigation buttonNavigation={buttonNavigation} selected={buttonNavigationSelected}  />
+        <ButtonNavigation
+          buttonNavigation={buttonNavigation}
+          selected={buttonNavigationSelected}
+        />
       )}
     </>
   );

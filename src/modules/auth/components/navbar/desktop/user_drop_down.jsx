@@ -42,7 +42,12 @@ const UserDropDown = ({ isAuth, mobile, loginFn }) => {
             </Link>
           </MenuItem>
         ) : (
-          <MenuItem sx={{ fontSize: 12 }} className="Fanum" dir="rtl" onClick={onClickHandle}>
+          <MenuItem
+            sx={{ fontSize: 12 }}
+            className="Fanum"
+            dir="rtl"
+            onClick={onClickHandle}
+          >
             {title}
           </MenuItem>
         )}
@@ -94,24 +99,10 @@ const UserDropDown = ({ isAuth, mobile, loginFn }) => {
         >
           {isAuth
             ? authDropDownItems.map((value, index) => {
-                return (
-                  <DropItemComponent
-                    key={index}
-                    link={value.link}
-                    title={value.title}
-                    onClick={value.onClick}
-                  />
-                );
+                return <DropItemComponent key={index} {...value} />;
               })
             : noAuthDropDownItems.map((value, index) => {
-                return (
-                  <DropItemComponent
-                    key={index}
-                    link={value.link}
-                    title={value.title}
-                    onClick={value.onClick}
-                  />
-                );
+                return <DropItemComponent key={index} {...value} />;
               })}
         </Menu>
       </div>

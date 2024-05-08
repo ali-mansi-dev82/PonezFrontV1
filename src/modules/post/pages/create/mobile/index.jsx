@@ -87,10 +87,7 @@ const CreatePostMobile = () => {
                   return (
                     <SearchItemComponent
                       key={index}
-                      id={value?._id}
-                      icon={value?.icon}
-                      name={value?.name}
-                      slug={value?.slug}
+                      {...value}
                     />
                   );
                 })
@@ -117,10 +114,7 @@ const CreatePostMobile = () => {
                   <>
                     <SearchItemComponent
                       key={index}
-                      id={value?._id}
-                      icon={value?.icon}
-                      name={value?.name}
-                      slug={value?.slug}
+                      {...value}
                     />
                   </>
                 );
@@ -151,9 +145,7 @@ const CreatePostMobile = () => {
                   return (
                     <SearchItemComponent
                       key={index}
-                      id={value?._id}
-                      name={value?.name}
-                      slug={value?.slug}
+                      {...value}
                     />
                   );
                 })}

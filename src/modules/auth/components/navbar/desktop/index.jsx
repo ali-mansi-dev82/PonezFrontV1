@@ -13,11 +13,11 @@ const NavbarDektop = ({ isAuthenticated, userData }) => {
   const [isCityOpen, setIsCityOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   // Search
-  const openSearch = () => setIsSearchOpen(true);
-  const closeSearch = () => setIsSearchOpen(false);
+  const openSearch = setIsSearchOpen.bind(this, true);
+  const closeSearch = setIsSearchOpen.bind(this, false);
   // City
-  const openCity = () => setIsCityOpen(true);
-  const closeCity = () => setIsCityOpen(false);
+  const openCity = setIsCityOpen.bind(this, true);
+  const closeCity = setIsCityOpen.bind(this, false);
   return (
     <>
       <div className="flex items-center gap-4 w-max">
@@ -54,9 +54,7 @@ const NavbarDektop = ({ isAuthenticated, userData }) => {
           </Button>
         )}
         <AuthModal open={showModal} onClose={() => setShowModal(false)} />
-        {isCityOpen && (
-          <SelectCity onClose={closeCity} isMobile={false} />
-        )}
+        {isCityOpen && <SelectCity onClose={closeCity} isMobile={false} />}
       </div>
     </>
   );

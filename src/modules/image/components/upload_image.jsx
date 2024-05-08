@@ -100,9 +100,7 @@ const UploadImages = ({ images, setImages, uploadImageFn: noname }) => {
             return (
               <Image
                 key={index}
-                blob={value.blob}
-                uploaded={value.uploaded}
-                percent={value.percent}
+                {...value}
               />
             );
           })}

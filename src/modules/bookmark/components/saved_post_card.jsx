@@ -37,8 +37,8 @@ function MyPostCard({
     handleOpen();
   };
 
-  const handleClose = () => setOpen(false);
-  const handleOpen = () => setOpen(true);
+  const handleClose = setOpen.bind(this, false);
+  const handleOpen = setOpen.bind(this, true);
 
   return (
     <>

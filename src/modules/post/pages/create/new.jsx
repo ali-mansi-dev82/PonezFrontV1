@@ -144,7 +144,7 @@ const New = ({ name, id, slug }) => {
           })}
       </div>
       <div className="flex flex-row gap-3 justify-end pt-4">
-        <Button variant="outlined" onClick={() => navigate("/")}>
+        <Button variant="outlined" onClick={navigate.bind(this, "/")}>
           انصراف
         </Button>
         <Button variant="contained" type="submit">
@@ -158,7 +158,7 @@ const New = ({ name, id, slug }) => {
           <div className="w-full flex justify-between">
             <div className="w-44"></div>
             <Button
-              onClick={() => navigate("/")}
+              onClick={() => navigate.bind(this, "/")}
               variant="text"
               size="small"
               className="!text-primary-default"
