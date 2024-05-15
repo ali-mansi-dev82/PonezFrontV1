@@ -30,46 +30,42 @@ const AuthModal = ({
   };
 
   return (
-    <>
-      <Dialog
-        fullScreen={isMobile}
-        open={open}
-        onClose={handleClose}
-        keepMounted
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
+    <Dialog
+      fullScreen={isMobile}
+      open={open}
+      onClose={handleClose}
+      keepMounted
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      <DialogTitle
+        id="scroll-dialog-title"
+        className="flex flex-row justify-between items-center gap-1 border-b border-gray-300  !py-[20px]"
       >
-        <DialogTitle
-          id="scroll-dialog-title"
-          className="flex flex-row justify-between items-center gap-1 border-b border-gray-300 shadow"
-        >
-          <h1 className="text-base font-bold text-gray-800">
-            ورود با حساب کاربری
-          </h1>
-          <IconButton onClick={handleClose}>
-            <X size={16} />
-          </IconButton>
-        </DialogTitle>
-        {isSendOtpLevel ? (
-          <SendOTP
-            setMobile={setMobile}
-            nextLevel={() => {
-              setIsSendOtpLevel(false);
-            }}
-            setExpireCode={setExpireCode}
-          />
-        ) : (
-          <CheckOTP
-            mobile={mobile}
-            expireCode={expireCode}
-            authSuccess={() => {
-              onSuccess();
-              handleLogin();
-            }}
-          />
-        )}
-      </Dialog>
-    </>
+        <h1 className="text-base  text-gray-800">ورود با حساب کاربری</h1>
+        <IconButton onClick={handleClose}>
+          <X size={16} />
+        </IconButton>
+      </DialogTitle>
+      {isSendOtpLevel ? (
+        <SendOTP
+          setMobile={setMobile}
+          nextLevel={() => {
+            setIsSendOtpLevel(false);
+          }}
+          setExpireCode={setExpireCode}
+        />
+      ) : (
+        <CheckOTP
+          mobile={mobile}
+          expireCode={expireCode}
+          authSuccess={() => {
+            onSuccess();
+            handleLogin();
+          }}
+        />
+      )}
+    </Dialog>
   );
 };
 export default AuthModal;

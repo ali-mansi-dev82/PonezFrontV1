@@ -1,7 +1,7 @@
 import { ImageOffIcon, Share2Icon } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
-import { limitString } from "../../../shared/util/string";
+import { truncateString } from "../../../shared/util/string";
 import { API_UPLOADED_IMAGES_URL } from "../../../config";
 import { dateFormate } from "../../../shared/util/dateFormat";
 import { IconButton } from "@mui/material";
@@ -29,7 +29,7 @@ function MyRecentPostCard({ title, images, district, slug, createdAt }) {
         </div>
         <div className="flex flex-col justify-start h-full gap-1 w-[calc(100%-70px)]">
           <h1 className="text-gray-700 text-sm h-[30px] font-semibold w-full leading-7">
-            {title && limitString(title, 30)}
+            {title && truncateString(title, 30)}
           </h1>
           <span className="text-gray-400 text-xs Fanum">
             {dateFormate(createdAt)} در {district}

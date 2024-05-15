@@ -79,7 +79,7 @@ const UserDropDown = ({ isAuth, mobile, loginFn }) => {
         <Button
           size="small"
           variant="textonly"
-          endIcon={<User size={"16px"} />}
+          startIcon={<User size={16} />}
           id="basic-button"
           aria-controls={open ? "basic-menu" : undefined}
           aria-haspopup="true"

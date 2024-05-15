@@ -4,9 +4,8 @@ import SelectCity from "../select_city";
 import { IconButton } from "@mui/material";
 import { ArrowRight } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
-import ButtonNavigation from "../../button_navigation/button_navigaton";
 
-const NavbarMobile = () => {
+const NavbarMobile = ({ searchText }) => {
   const location = useLocation();
   let navigate = useNavigate();
 
@@ -22,10 +21,9 @@ const NavbarMobile = () => {
             <ArrowRight size={16} />
           </IconButton>
         )}
-        <Search openCity={openCity} />
+        <Search openCity={openCity} searchText={searchText} />
       </div>
       {isCityOpen && <SelectCity onClose={closeCity} isMobile={true} />}
-      <ButtonNavigation />
     </>
   );
 };

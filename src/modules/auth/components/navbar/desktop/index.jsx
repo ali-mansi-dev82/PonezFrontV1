@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import Categories from "./categories";
 import SelectCity from "../select_city";
 import Button from "@mui/material/Button";
+import { Plus } from "lucide-react";
 
 const NavbarDektop = ({ isAuthenticated, userData }) => {
   const [showModal, setShowModal] = useState(false);
@@ -41,18 +42,13 @@ const NavbarDektop = ({ isAuthenticated, userData }) => {
           mobile={userData?.mobile}
           loginFn={() => setShowModal(true)}
         />
-        <Button size="small" variant="textonly" type="link" link="/support">
-          پشتیبانی
+        <Button
+          startIcon={<Plus size={20} />}
+          href={`/new`}
+          variant="contained"
+        >
+          ثبت آگهی
         </Button>
-        {isAuthenticated ? (
-          <Button href={`/new`} variant="contained">
-            ثبت آگهی
-          </Button>
-        ) : (
-          <Button variant="contained" onClick={() => setShowModal(true)}>
-            ثبت آگهی
-          </Button>
-        )}
         <AuthModal open={showModal} onClose={() => setShowModal(false)} />
         {isCityOpen && <SelectCity onClose={closeCity} isMobile={false} />}
       </div>

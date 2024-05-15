@@ -4,11 +4,11 @@ import { useAuth } from "../../context/AuthContext";
 import ButtonNavigation from "../../modules/auth/components/button_navigation/button_navigaton";
 import MainContainer from "../../shared/components/container";
 
-const BasicLayoutMobile = ({ children }) => {
+const BasicLayoutMobile = ({ children, searchText }) => {
   const { isAuthenticated, user } = useAuth();
   return (
     <>
-      <Navbar userData={user} isAuthenticated={isAuthenticated} />
+      <Navbar userData={user} isAuthenticated={isAuthenticated} searchText={searchText} />
       <main className="py-[64px] ">
         {" "}
         <MainContainer

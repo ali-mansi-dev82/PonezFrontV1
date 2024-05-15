@@ -64,11 +64,11 @@ const SendOTP = ({ setMobile, nextLevel, setExpireCode }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="h-full">
-      <DialogContent className="w-auto lg:!w-[430px] h-[calc(100%-65px)] lg:!max-h-[50vh] !py-14">
-        <h3 className="font-bold text-base text-gray-700 mb-6">
+      <DialogContent className="w-auto lg:!w-[430px] h-[calc(100%-70px)] lg:!max-h-[50vh] !py-14">
+        <h3 className="text-lg text-gray-700 mb-4">
           شماره موبایل خود را وارد کنید
         </h3>
-        <p className="pt-2 pb-6 text-sm text-gray-400 leading-7">
+        <p className=" pb-6 text-sm text-gray-400 leading-7">
           قبل از ثبت آگهی، لطفاً وارد حساب خود شوید. کد تأیید به این شماره پیامک
           می‌شود.
         </p>
@@ -80,6 +80,7 @@ const SendOTP = ({ setMobile, nextLevel, setExpireCode }) => {
           placeholder="شماره موبایل"
           errorMessage={errors?.mobile?.message || errore || undefined}
           prefix={"۹۸+"}
+          label={'موبایل'}
           fullWidth
           autoFocus
         />

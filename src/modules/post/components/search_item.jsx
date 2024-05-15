@@ -1,7 +1,7 @@
 import { ChevronLeftIcon, MoveRight } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
-import icons from "../../category/category_icons";
+import { CategoryIconsSm } from "../../category/category_icons";
 
 const SearchItemComponent = ({ id, slug, name, isBack = false, icon = "" }) => {
   return (
@@ -17,8 +17,8 @@ const SearchItemComponent = ({ id, slug, name, isBack = false, icon = "" }) => {
         </span>
       )}
       <div className="flex items-center gap-3">
-        {icon !== "" && icons[icon]}
-        <p>{name}</p>
+        {icon !== "" && CategoryIconsSm[icon]}
+        <p className="text-sm">{name}</p>
       </div>
 
       {!isBack && (

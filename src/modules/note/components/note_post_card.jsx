@@ -1,7 +1,7 @@
 import { ImageOffIcon, TrashIcon } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
-import { limitString } from "../../../shared/util/string";
+import { truncateString } from "../../../shared/util/string";
 import { API_UPLOADED_IMAGES_URL } from "../../../config";
 import { dateFormate } from "../../../shared/util/dateFormat";
 import { IconButton, Tooltip } from "@mui/material";
@@ -49,13 +49,13 @@ function MyNotePostCard({
         </div>
         <div className="flex flex-col justify-start h-full gap-1 w-[calc(100%-80px)]">
           <h1 className="text-gray-700 text-sm h-[30px] font-semibold w-full leading-7">
-            {limitString(title, 30)}
+            {truncateString(title, 30)}
           </h1>
           <span className="text-gray-400 text-xs Fanum">
             {dateFormate(createdAt)} در {district}
           </span>
           <span className="text-gray-500 text-xs pt-5">
-            {limitString(savedContent, 20)}
+            {truncateString(savedContent, 20)}
           </span>
           <div className=" absolute bottom-2 left-2">
             <Tooltip title={`حذف یادداشت`} arrow>

@@ -6,7 +6,8 @@ const TextInput = ({
   children,
   register,
   label,
-  size = "small",
+  size = "medium",
+  variant = "outlined",
   errorMessage = null,
   placeholder = "",
   helperText,
@@ -19,20 +20,8 @@ const TextInput = ({
   fullWidth = true,
   autoFocus = false,
 }) => {
-  // const inputElem = useRef();
-  const handleOnWheel = (e) => {
-    e.preventDefault();
-    // inputElem.current.blur();
-  };
   return (
     <label className="flex flex-col gap-3 w-full">
-      {label && (
-        <div className="label">
-          <span className="label-text text-gray-800 text-base py-10">
-            {label}
-          </span>
-        </div>
-      )}
       {helperText && (
         <div className="label p-0">
           <span className="label-text-alt pb-4 leading-6 text-xs text-gray-400">
@@ -44,8 +33,9 @@ const TextInput = ({
         {...register}
         inputRef={inputRef}
         error={errorMessage}
-        variant="outlined"
+        variant={variant}
         autoComplete="off"
+        label={label}
         size={size}
         placeholder={placeholder}
         type={type}
@@ -55,9 +45,6 @@ const TextInput = ({
         select={select}
         fullWidth={fullWidth}
         autoFocus={autoFocus}
-        className="!Fanum"
-        onWheel={handleOnWheel}
-        dir="rtl"
         InputProps={
           prefix
             ? {
@@ -83,7 +70,9 @@ const TextInput = ({
             </MenuItem>
           ))}
       </TextField>
-      <div className="text-xs text-red-600 ">{errorMessage ?? ""}</div>
+      {errorMessage && (
+        <div className="text-xs text-red-600 ">{errorMessage}</div>
+      )}
     </label>
   );
 };

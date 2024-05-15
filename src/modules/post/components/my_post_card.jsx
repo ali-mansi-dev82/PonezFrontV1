@@ -2,7 +2,7 @@ import { Edit2Icon, ImageOffIcon, Share2Icon, TrashIcon } from "lucide-react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { tomanCurrencyFormat } from "../../../shared/util/numberFormat";
-import { limitString } from "../../../shared/util/string";
+import { truncateString } from "../../../shared/util/string";
 import { API_UPLOADED_IMAGES_URL } from "../../../config";
 import Button from "../../../shared/components/button";
 import { Alert, Dialog, DialogActions, DialogTitle } from "@mui/material";
@@ -48,7 +48,7 @@ function MyPostCard({
         <div className="flex flex-row gap-2 justify-between">
           <div className="flex flex-col justify-between w-max h-full max-w-[50%]">
             <h1 className="text-gray-700 text-sm h-[70px] font-semibold w-full leading-7">
-              {limitString(title, 40)}
+              {truncateString(title, 40)}
             </h1>
             <div className="flex flex-col gap-1">
               <div className="text-gray-400 text-xs py-1">

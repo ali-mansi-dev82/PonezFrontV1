@@ -21,7 +21,7 @@ const Search = ({ open, onOpen, onClose, openCity }) => {
         fullWidth
         size="small"
         placeholder="جستجو در همه آگهی ها"
-        className="!bg-gray-100"
+        className="!bg-gray-100 !border !border-gray-300"
         sx={{
           "& fieldset": { border: "none" },
           borderRadius: "0.3rem",

@@ -71,7 +71,7 @@ const UploadImages = ({ images, setImages, uploadImageFn: noname }) => {
   return (
     <section className="flex flex-col gap-4 w-full">
       <div className="label">
-        <span className="label-text text-gray-800 text-base pb-1">
+        <span className="label-text text-primary-70 text-xs pb-1">
           عکس آگهی
         </span>
       </div>

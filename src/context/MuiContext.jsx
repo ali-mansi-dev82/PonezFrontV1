@@ -1,20 +1,32 @@
 import React from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import createRtlCache from "./rtlCatch";
+import { CacheProvider } from "@emotion/react";
 
 const theme = createTheme({
+  direction: "rtl",
   palette: {
     mode: "light",
     primary: {
-      light: "#4A92CC",
-      main: "#2F80C0",
-      dark: "#156FB7",
+      light: "#2B7FAD",
+      main: "#22668A",
+      dark: "#1E5979",
       contrastText: "#fff",
     },
   },
   components: {
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#EAF2F7",
+          color: "#22668A",
+          borderRadius: "8px",
+        },
+      },
+    },
     MuiIconButton: {
       styleOverrides: {
-        // sizeMedium: { width: "40px", height: "40px" },
+        colorSecondary: "red",
       },
     },
     MuiButtonBase: {
@@ -23,25 +35,54 @@ const theme = createTheme({
         dir: "ltr",
       },
     },
+    MuiTextField: {
+      defaultProps: {
+        sx: { borderRadius: "24px" },
+        className:''
+      },
+      styleOverrides: {
+        root: {
+          borderRadius: 24,
+        },
+        
+      },
+    },
+    MuiRadio:{
+      styleOverrides: {
+        root: {
+          color:'#D1D5DB',
+        },
+      },
+    },
     MuiButton: {
       defaultProps: {
         sx: {
-          // boxShadow: "",
-          // borderRadius: "0.4rem",
-          // fontWeight: 500,
-          // padding: "0.5rem 1.1rem",
-          // fontSize: '0.9rem',
+          paddingY: "10px",
+          borderRadius: "8px",
+          boxShadow: "none",
         },
       },
       styleOverrides: {
         contained: {
           fontWeight: 500,
         },
+        outlined: {
+          borderColor: "#E5E7EB",
+          color: "#111928",
+        },
       },
     },
   },
 });
 
+const cacheRtl = createRtlCache();
+
 export default function App({ children }) {
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+  return (
+    <CacheProvider value={cacheRtl}>
+      <ThemeProvider theme={theme}>
+        <div className="rtl">{children}</div>
+      </ThemeProvider>
+    </CacheProvider>
+  );
 }

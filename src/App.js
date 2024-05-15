@@ -33,7 +33,7 @@ const App = () => {
       />
       <Route
         path="/category"
-        element={<AuthGuard component={<ShowCategory isMobile={isMobile} />} />}
+        element={<ShowCategory isMobile={isMobile} />}
       />
       <Route path="/my-panel">
         <Route
