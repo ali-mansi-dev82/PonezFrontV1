@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { Share2Icon } from "lucide-react";
+import { Mail, Phone, Share2Icon, X } from "lucide-react";
 import Images from "../images";
 import {
   Alert,
   Button,
   CircularProgress,
+  Dialog,
+  DialogContent,
+  DialogTitle,
   IconButton,
   Tooltip,
 } from "@mui/material";
@@ -15,6 +18,8 @@ import PostOptions from "../options";
 import PostDescription from "../description";
 import PostBreadcrumbs from "../post_breadcrumbs";
 import BasicLayoutDesktop from "../../../../../layouts/desktop/basic_layout";
+import { tomanCurrencyFormat } from "../../../../../shared/util/numberFormat";
+import { RWebShare } from "react-web-share";
 
 const PostDesktop = ({ loading, data }) => {
   const [showPhone, setShowPhone] = useState(false);
@@ -29,13 +34,17 @@ const PostDesktop = ({ loading, data }) => {
           />
           <div className="w-full flex justify-between gap-36">
             <div className="flex flex-col gap-4 w-1/2">
-              <h5 className="text-2xl text-gray-900 leading-10">
+              <h5 className="text-xl text-gray-900 leading-10">
                 {data?.data?.title}
               </h5>
-              <span className="text-gray-400 text-xs Fanum">
+              <div className="Fanum text-sm lg:text-md w-2/3 text-right text-gray-600 ">
+                {data?.data?.amount && data?.data?.amount > 0
+                  ? tomanCurrencyFormat(data?.data?.amount)
+                  : "توافقی"}
+              </div>
+              <span className="text-gray-400 text-xs Fanum mb-3">
                 {dateFormate(data?.data?.updatedAt)} در {data?.data?.district}
               </span>
-              <hr className="w-full" />
               {data?.data?.isDelete ? (
                 <Alert icon={<></>} severity="error">
                   آگهی حذف شده است
@@ -54,20 +63,19 @@ const PostDesktop = ({ loading, data }) => {
                   </div>
                   <div className="flex flex-row gap-3 ">
                     <PostBookmark postId={data?.data?._id} />
-                    <Tooltip title={`اشتراک گذاری`} arrow>
-                      <IconButton>
-                        <Share2Icon size={16} />
-                      </IconButton>
-                    </Tooltip>
+                    <RWebShare
+                      data={{
+                        url: `${window.location.pathname}`,
+                        title: `${data?.data?.title}`,
+                      }}
+                    >
+                      <Tooltip title={`اشتراک گذاری`} arrow>
+                        <IconButton>
+                          <Share2Icon size={16} />
+                        </IconButton>
+                      </Tooltip>
+                    </RWebShare>
                   </div>
-                </div>
-              )}
-              {showPhone && (
-                <div className="p-0 mt-4 flex justify-between">
-                  <h6>شمارهٔ موبایل</h6>
-                  <p className="text-[#2F80C0] Fanum">
-                    {data?.data?.user?.mobile}
-                  </p>
                 </div>
               )}
               <hr className="w-full" />
@@ -88,6 +96,59 @@ const PostDesktop = ({ loading, data }) => {
           <CircularProgress />
         </div>
       )}
+      <Dialog
+        open={showPhone}
+        onClose={setShowPhone.bind(this, false)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle
+          className="border-b items-center justify-between"
+          sx={{
+            m: 0,
+            p: 2,
+            width: "100%",
+            display: "flex",
+          }}
+        >
+          <span className="text-lg">شماره تماس</span>
+          <IconButton onClick={setShowPhone.bind(this, false)}>
+            <X size={16} />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent
+          sx={{ justifyContent: "center", gap: "0.5rem", padding: "1rem" }}
+        >
+          <div className="flex flex-col gap-2 pt-4 w-[380px]">
+            <div className="bg-teal-100 text-teal-700 rounded-lg p-3">
+              <h6 className="text-sm">هشدار</h6>
+              <p className="text-xs leading-6">
+                برای جلوگیری از هر گونه کلاهبرداری، قبل از انجام معامله و پرداخت
+                وجه از صحت کالا یا خدمات ارائه شده به صورت حضوری اطمینان حاصل
+                کنید.
+              </p>
+            </div>
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href={`call:${data?.data?.user?.mobile}`}
+              className="w-full flex text-sm justify-start gap-2 items-center  py-3"
+            >
+              <Phone className="!stroke-[1px]" size={16} /> تماس با{" "}
+              <span className="Fanum">{data?.data?.user?.mobile}</span>
+            </a>
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href={`call:${data?.data?.user?.mobile}`}
+              className="w-full flex text-sm justify-start gap-2 items-center  py-3"
+            >
+              <Mail className="!stroke-[1px]" size={16} /> پیامک با{" "}
+              <span className="Fanum">{data?.data?.user?.mobile}</span>
+            </a>
+          </div>
+        </DialogContent>
+      </Dialog>
     </BasicLayoutDesktop>
   );
 };

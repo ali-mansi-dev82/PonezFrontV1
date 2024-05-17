@@ -103,7 +103,7 @@ const New = ({ name, id, slug, icon }) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-5 mb-[55px]"
+      className="flex flex-col gap-10 mb-[55px]"
     >
       <div className="text-xl text-gray-800 hidden lg:block">ثبت آگهی</div>
       <TextField
@@ -122,7 +122,7 @@ const New = ({ name, id, slug, icon }) => {
               to={"/new"}
               className="bg-primary-default text-white text-xs flex items-center w-max py-2 px-4 gap-2 pl-2 rounded-lg"
             >
-              <span className="w-max">تغییر دسته بندی </span>
+              <span className="w-max">تغییر دسته</span>
               <ChevronLeftIcon size={16} />
             </Link>
           ),
@@ -154,7 +154,7 @@ const New = ({ name, id, slug, icon }) => {
         errorMessage={errors?.content?.message}
         multiline
       />
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-8">
         {optionQuery?.data?.data?.length > 0 &&
           optionQuery?.data?.data?.map((value, index) => {
             return (
@@ -162,7 +162,10 @@ const New = ({ name, id, slug, icon }) => {
             );
           })}
       </div>
-      <div className="flex flex-row gap-3 justify-end pt-4 fixed bottom-0 left-0 right-0 bg-white z-40 p-[12px] border-t border-gray-300">
+      <div className="flex flex-row gap-3 justify-end pt-4 fixed lg:static bottom-0 left-0 right-0 bg-white z-40 p-[12px] lg:p-0 border-t lg:border-t-0 border-gray-300">
+        <Button fullWidth variant="contained" type="submit">
+          ارسال اگهی
+        </Button>
         <Button
           fullWidth
           size="small"
@@ -171,12 +174,9 @@ const New = ({ name, id, slug, icon }) => {
         >
           انصراف
         </Button>
-        <Button fullWidth variant="contained" type="submit">
-          ارسال اگهی
-        </Button>
       </div>
       {open && (
-        <div className="fixed flex flex-col gap-4 bottom-4 left-4 right-4 z-50 border max-w-[200px] border-green-400 bg-white p-4 rounded-lg">
+        <div className="fixed flex flex-col gap-4 bottom-4 left-4 right-4 z-50 border lg:max-w-[200px] border-green-400 bg-white p-4 rounded-lg">
           <div className="flex items-center gap-2 text-green-500">
             <CheckCircle size={16} />
             <span className="text-sm">آگهی شما با موفقیت ثبت شد.</span>

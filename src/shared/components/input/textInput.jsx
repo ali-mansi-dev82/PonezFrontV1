@@ -1,4 +1,4 @@
-import { Chip, InputAdornment, MenuItem, TextField } from "@mui/material";
+import { MenuItem, TextField } from "@mui/material";
 import React from "react";
 
 const TextInput = ({
@@ -49,9 +49,9 @@ const TextInput = ({
           prefix
             ? {
                 endAdornment: (
-                  <InputAdornment position="start">
-                    <Chip label={prefix} size="small" sx={{ marginLeft: 1 }} />
-                  </InputAdornment>
+                  <span className="text-xs bg-primary-0 text-primary-70 py-1 px-2 rounded-lg mr-2 Fanum">
+                    {prefix}
+                  </span>
                 ),
               }
             : undefined

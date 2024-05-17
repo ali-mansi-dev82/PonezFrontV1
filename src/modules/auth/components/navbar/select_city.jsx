@@ -11,7 +11,7 @@ import {
   RadioGroup,
   TextField,
 } from "@mui/material";
-import {  ChevronLeft, MoveRightIcon, X } from "lucide-react";
+import {  ChevronLeft, MoveRightIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { useCity } from "../../../../context/CityContext";
 import { FindStateFn } from "../../../state/query";
@@ -68,7 +68,7 @@ const SelectCity = ({ onClose, isMobile }) => {
           placeholder="جستجو در شهر ها"
         />
       </DialogTitle>
-      <DialogContent className="w-auto lg:!min-w-[400px] lg:!max-h-[50vh] text-gray-800">
+      <DialogContent className="w-auto lg:!min-w-[450px] lg:!max-h-[50vh] text-gray-800">
         {state?._id ? (
           <>
             <div

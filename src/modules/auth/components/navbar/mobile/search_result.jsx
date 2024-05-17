@@ -5,7 +5,6 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
-  TextField,
 } from "@mui/material";
 import Spinner from "../../../../../shared/components/spiner";
 import PopularSearch from "../search/popular_search";

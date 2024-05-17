@@ -56,7 +56,7 @@ const CreatePostMobile = () => {
 
   return (
     <SingleLayoutMobile title="ثبت آگهی جدید" buttonNavigation={"off"}>
-      <div className="flex flex-col w-full lg:w-[600px] gap-0">
+      <div className="flex flex-col w-full  gap-0">
         {/* we have 4 Senario */}
         {/* Search */}
         {!(senario === 2 && categoryQuery?.data?.children?.length <= 0) && (

@@ -104,6 +104,7 @@ const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
             register={register("code")}
             type="number"
             placeholder="کد ورود"
+            label="کد ورود"
             errorMessage={errors?.mobile?.message || errore || undefined}
             InputProps={{
               endAdornment: (
@@ -115,17 +116,22 @@ const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
             fullWidth
           />
         </DialogContent>
-        <DialogActions className="gap-3 border-t border-gray-300 flex-col !p-3 w-full">
-          <div className="text-xs text-gray-400 w-max"><span className="Fanum">{second > 0 ? secontTommss(second) : ""}</span>  مانده تا تلاش مجدد</div>
+        <DialogActions className="felx flex-col gap-2 border-t border-gray-300 !p-4">
+          <div className="text-xs text-gray-400 w-max">
+            <span className="Fanum">
+              {second > 0 ? secontTommss(second) : ""}
+            </span>{" "}
+            مانده تا تلاش مجدد
+          </div>
           <Button
-          fullWidth
-          variant="contained"
-          disabled={loading}
-          loading={loading}
-          type="submit"
-        >
-          تایید
-        </Button>
+            fullWidth
+            variant="contained"
+            disabled={loading}
+            loading={loading}
+            type="submit"
+          >
+            تایید
+          </Button>
         </DialogActions>
       </form>
     </>

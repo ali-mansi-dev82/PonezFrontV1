@@ -1,6 +1,7 @@
 import React from "react";
-import { CirclePlus, HomeIcon, ShapesIcon, UserIcon } from "lucide-react";
+import { CirclePlus, ShapesIcon, UserIcon } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ReactComponent as Logo } from './Logo.svg';
 
 const ButtonNavigationItem = ({ selected, icon, link, title }) => {
   return (
@@ -21,7 +22,7 @@ const ButtonNavigationItem = ({ selected, icon, link, title }) => {
 };
 const items = [
   {
-    icon: <HomeIcon className="stroke-[1.3px]" size={20} />,
+    icon: <Logo className="stroke-[1.3px]" size={20} />,
     title: "آگهی ها",
     link: `/s/`,
     key: "posts",
@@ -48,7 +49,7 @@ const items = [
 
 const ButtonNavigation = ({ buttonNavigation, selected = "posts" }) => {
   return (
-    <div className="fixed flex flex-row items-center justify-around bottom-0 left-0 right-0 bg-white shadow-bottomNavigate h-[65px] text-gray-400 px-3 gap-3">
+    <div className="fixed flex flex-row items-center justify-around bottom-0 left-0 right-0 bg-white border-t border-gray-200 h-[65px] text-gray-400 px-3 gap-3">
       {buttonNavigation
         ? buttonNavigation
         : items.map((value) => (

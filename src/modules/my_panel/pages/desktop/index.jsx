@@ -1,11 +1,11 @@
 import React from "react";
 import BasicLayoutDesktop from "../../../../layouts/desktop/basic_layout";
-import MySaved from "../my_saved";
+import MyPost from "../my_post";
 
 const MyPanelDesktop = () => {
   return (
     <BasicLayoutDesktop>
-      <MySaved />
+      <MyPost />
     </BasicLayoutDesktop>
   );
 };

@@ -1,10 +1,12 @@
 import React from "react";
 import SingleLayoutMobile from "../../../../layouts/mobile/single_layout";
 import MyNotePostCard from "../../../note/components/note_post_card";
+import EmptyState from "../empty_state";
 
 const MyNotesMobile = ({ isPending, data, handleOnDelete }) => {
   return (
     <SingleLayoutMobile buttonNavigation="off" title="یادداشت ها">
+      <title>My Site: Contact Us</title>
       <div className="grid grid-cols-1 h-full w-full gap-5">
         {!isPending ? (
           <>
@@ -18,10 +20,8 @@ const MyNotesMobile = ({ isPending, data, handleOnDelete }) => {
                 />
               ))
             ) : (
-              <div className="flex flex-col justify-center gap-4 items-center col-span-3">
-                <span className="text-xs text-gray-400">
-                  هیچ یادداشتی یافت نشد.
-                </span>
+              <div className="flex flex-col justify-center gap-4 items-center grid-cols-3 col-span-3 py-[20vh]">
+                <EmptyState title={"یادداشتی یافت نشد !"} />
               </div>
             )}
           </>

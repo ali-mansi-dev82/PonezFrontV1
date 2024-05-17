@@ -10,9 +10,6 @@ import { useNavigate } from "react-router-dom";
 const AuthModal = ({
   open,
   onClose,
-  onSuccess = () => {
-    return;
-  },
 }) => {
   const [mobile, setMobile] = useState("");
   const [expireCode, setExpireCode] = useState(0);
@@ -60,8 +57,8 @@ const AuthModal = ({
           mobile={mobile}
           expireCode={expireCode}
           authSuccess={() => {
-            onSuccess();
             handleLogin();
+            onClose();
           }}
         />
       )}

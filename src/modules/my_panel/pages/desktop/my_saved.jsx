@@ -6,7 +6,7 @@ import BasicLayoutDesktop from "../../../../layouts/desktop/basic_layout";
 const MySavedDesktop = ({ isPending, data, handleOnDelete }) => {
   return (
     <BasicLayoutDesktop>
-        <SidePanel selected="saved" />
+        <SidePanel />
         <div className="grid grid-cols-2 h-max w-4/5 gap-5">
           {!isPending ? (
             <>

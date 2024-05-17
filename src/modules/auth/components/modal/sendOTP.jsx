@@ -84,14 +84,14 @@ const SendOTP = ({ setMobile, nextLevel, setExpireCode }) => {
           fullWidth
           autoFocus
         />
-        <div className="text-sm pb-4">
+        <div className="text-sm pb-4 mt-2">
           <span className="text-primary-default">شرایط استفاده از خدمات</span>
           {"  و  "}
           <span className="text-primary-default"> حریم خصوصی</span> پونز را
           می‌پذیرم.
         </div>
       </DialogContent>
-      <DialogActions className="gap-2 border-t border-gray-300 !p-3">
+      <DialogActions className="gap-2 border-t border-gray-300 !p-4">
         <Button
           fullWidth
           variant="contained"

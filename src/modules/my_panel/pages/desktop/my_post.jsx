@@ -6,8 +6,8 @@ import BasicLayoutDesktop from "../../../../layouts/desktop/basic_layout";
 
 const MyPostDesktop = ({ isPending, data, handleOnDelete }) => {
   return (
-    <BasicLayoutDesktop>
-      <SidePanel selected="my-post" />
+    <BasicLayoutDesktop >
+      <SidePanel />
       <div className="grid grid-cols-2 h-max w-4/5 gap-5">
         {!isPending ? (
           <>

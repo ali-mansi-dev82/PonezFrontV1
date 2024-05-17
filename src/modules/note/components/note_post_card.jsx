@@ -1,10 +1,9 @@
-import { ImageOffIcon, TrashIcon } from "lucide-react";
-import React from "react";
+import { ImageOffIcon, Info, NotebookPenIcon, TrashIcon } from "lucide-react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { truncateString } from "../../../shared/util/string";
 import { API_UPLOADED_IMAGES_URL } from "../../../config";
-import { dateFormate } from "../../../shared/util/dateFormat";
-import { IconButton, Tooltip } from "@mui/material";
+import { Button, Dialog, DialogContent, IconButton } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import { DeleteNoteFn } from "../mutation";
 
@@ -18,6 +17,8 @@ function MyNotePostCard({
   slug,
   createdAt,
 }) {
+  const [open, setOpen] = useState(false);
+
   const deletePostMutation = useMutation({
     mutationFn: DeleteNoteFn,
   });
@@ -28,16 +29,21 @@ function MyNotePostCard({
       onDelete();
     }
   };
+  const handleClose = setOpen.bind(this, false);
+  const handleOpen = (event) => {
+    event.preventDefault();
+    setOpen(true);
+  };
   return (
     <>
       <Link
         to={`/v/${slug}`}
-        className="flex flex-row gap-4 p-3 border border-gray-200 rounded-md  cursor-pointer relative h-max"
+        className="flex flex-row gap-4 p-3 border border-gray-200 rounded-2xl  cursor-pointer relative h-max"
       >
         <div className="relative w-[80px] h-[80px] pb-2/3  rounded-md">
           {images[0] ? (
             <img
-              className="absolute w-[80px] h-full inset-0 object-cover object-top rounded-md"
+              className="absolute w-[80px] h-full inset-0 object-cover object-top rounded-xl"
               src={`${API_UPLOADED_IMAGES_URL}${images[0]}`}
               alt={title}
             />
@@ -47,25 +53,54 @@ function MyNotePostCard({
             </div>
           )}
         </div>
-        <div className="flex flex-col justify-start h-full gap-1 w-[calc(100%-80px)]">
-          <h1 className="text-gray-700 text-sm h-[30px] font-semibold w-full leading-7">
+        <div className="flex flex-col justify-between h-full w-[calc(100%-80px)] ">
+          <h1 className="text-gray-700 text-sm h-max font-semibold w-full leading-7">
             {truncateString(title, 30)}
           </h1>
-          <span className="text-gray-400 text-xs Fanum">
-            {dateFormate(createdAt)} در {district}
-          </span>
-          <span className="text-gray-500 text-xs pt-5">
-            {truncateString(savedContent, 20)}
-          </span>
-          <div className=" absolute bottom-2 left-2">
-            <Tooltip title={`حذف یادداشت`} arrow>
-              <IconButton size="medium" onClick={handleDelete}>
-                <TrashIcon size={12} />
-              </IconButton>
-            </Tooltip>
+          <div className="flex flex-row items-center gap-1 text-gray-500 text-xs pt-8">
+            <NotebookPenIcon size={12} className="stroke-[1px]" />
+            <p>{truncateString(savedContent, 20)}</p>
+          </div>
+          <div className=" absolute bottom-2 left-2" onClick={handleOpen}>
+            <IconButton size="medium">
+              <TrashIcon className="stroke-[1px]" size={16} />
+            </IconButton>
           </div>
         </div>
       </Link>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent
+          sx={{ justifyContent: "center", gap: "0.5rem", padding: "1rem" }}
+        >
+          <div className="w-[74vw] lg:w-[300px] items-center flex flex-col gap-8">
+            <div className="w-full flex flex-col items-center gap-4">
+              <span className="text-gray-400">
+                <Info size={36} />
+              </span>
+
+              <p className="text-base">از حذف آگهی مطمئن هستید؟</p>
+            </div>
+            <div className="flex flex-row gap-4">
+              <Button
+                onClick={handleClose}
+                variant="contained"
+                color="error"
+                size="small"
+              >
+                نه، لغو
+              </Button>
+              <Button onClick={handleDelete} variant="outlined" size="small">
+                بله من مطمئن هستم
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

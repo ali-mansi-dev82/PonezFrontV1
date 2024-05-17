@@ -16,7 +16,7 @@ const Navbar = ({
 
   return (
     <AppBar
-      className="!bg-white !shadow-md lg:h-[65px] justify-center"
+      className="!bg-white !shadow-none border-b border-gray-300 lg:h-[65px] justify-center"
       position="fixed"
     >
       <MainContainer className={`flex flex-row justify-between items-center`}>
@@ -27,7 +27,11 @@ const Navbar = ({
             searchText={searchText}
           />
         ) : (
-          <NavbarDektop isAuthenticated={isAuthenticated} userData={userData} />
+          <NavbarDektop
+            isAuthenticated={isAuthenticated}
+            userData={userData}
+            searchText={searchText}
+          />
         )}
       </MainContainer>
     </AppBar>

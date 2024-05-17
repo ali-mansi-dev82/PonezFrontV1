@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { FindChildrenCategorybySlugFn } from "../../../query";
 import SingleLayoutMobile from "../../../../../layouts/mobile/single_layout";
 import { ChevronLeftIcon, MoveRight } from "lucide-react";
-import icons from "../../../../category/category_icons";
+import {CategoryIconsSm} from "../../../../category/category_icons";
 import { useNavigate } from "react-router-dom";
 
 const SearchItemComponent = ({
@@ -31,8 +31,8 @@ const SearchItemComponent = ({
         </span>
       )}
       <div className="flex items-center gap-3">
-        {icon !== "" && icons[icon]}
-        <p>{name}</p>
+        {icon !== "" && CategoryIconsSm[icon]}
+        <p className="text-sm">{name}</p>
       </div>
 
       {!isBack && (

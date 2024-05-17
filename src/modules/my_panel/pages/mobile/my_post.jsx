@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "@mui/material";
 import MyPostCard from "../../../post/components/my_post_card";
 import SingleLayoutMobile from "../../../../layouts/mobile/single_layout";
+import EmptyState from "../empty_state";
 
 const MyPostMobile = ({ isPending, data, handleOnDelete }) => {
   return (
@@ -14,13 +15,15 @@ const MyPostMobile = ({ isPending, data, handleOnDelete }) => {
                 <MyPostCard onDelete={handleOnDelete} key={index} {...value} />
               ))
             ) : (
-              <div className="flex flex-col justify-center gap-4 items-center grid-cols-3 col-span-3 py-[30vh]">
-                <span className="text-xs text-gray-400">
-                  در حال حاضر آگهی ثبت‌ شده ندارید.
-                </span>
-                <Button href={`/new`} variant="contained">
-                  ثبت اگهی
-                </Button>
+              <div className="flex flex-col justify-center gap-4 items-center grid-cols-3 col-span-3 py-[20vh]">
+                <EmptyState
+                  title={"آگهی یافت نشد!"}
+                  action={
+                    <Button href={`/new`} variant="contained">
+                      ثبت آگهی جدید
+                    </Button>
+                  }
+                />
               </div>
             )}
           </>

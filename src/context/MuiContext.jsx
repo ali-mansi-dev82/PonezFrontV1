@@ -36,24 +36,28 @@ const theme = createTheme({
       },
     },
     MuiTextField: {
-      defaultProps: {
-        sx: { borderRadius: "24px" },
-        className:''
-      },
       styleOverrides: {
-        root: {
-          borderRadius: 24,
-        },
-        
+        root: { outline: { borderRadius: "18px" } },
       },
     },
-    MuiRadio:{
+    MuiMenu: { styleOverrides: {} },
+    MuiRadio: {
       styleOverrides: {
         root: {
-          color:'#D1D5DB',
+          color: "#D1D5DB",
         },
       },
     },
+    MuiAlert: {
+      styleOverrides: {
+        standardError: {
+          background: "#FDE8E8",
+          color: "#C81E1E",
+          borderRadius: "8px",
+        },
+      },
+    },
+    MuiDialog: { styleOverrides: { paper: { borderRadius: "8px" } } },
     MuiButton: {
       defaultProps: {
         sx: {
@@ -80,9 +84,7 @@ const cacheRtl = createRtlCache();
 export default function App({ children }) {
   return (
     <CacheProvider value={cacheRtl}>
-      <ThemeProvider theme={theme}>
-        <div className="rtl">{children}</div>
-      </ThemeProvider>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </CacheProvider>
   );
 }
