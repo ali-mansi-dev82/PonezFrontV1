@@ -1,11 +1,19 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import TextInput from "../../../../../shared/components/input/textInput";
-import { Button, CircularProgress, Snackbar } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  InputAdornment,
+  Snackbar,
+  TextField,
+} from "@mui/material";
 import UploadImages from "../../../../image/components/upload_image";
 import { uploadImageFn } from "../../../../image/mutation";
 import OptionComponent from "../../../components/option";
 import BasicLayoutDesktop from "../../../../../layouts/desktop/basic_layout";
+import { CategoryIconsXs } from "../../../../category/category_icons";
+import { ChevronLeftIcon } from "lucide-react";
 
 const EditPostDesktop = ({
   loading,
@@ -28,8 +36,29 @@ const EditPostDesktop = ({
             <CircularProgress />
           </div>
         ) : (
-          <form onSubmit={onSubmit} className="flex flex-col gap-5">
-            <div className="text-xl text-gray-800">ثبت آگهی</div>
+          <form onSubmit={onSubmit} className="flex flex-col gap-10">
+            <TextField
+              label={"دسته بندی"}
+              focused
+              value={data?.data?.category?.name}
+              className="!text-sm"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    {CategoryIconsXs[data?.data?.category?.icon]}
+                  </InputAdornment>
+                ),
+                endAdornment: (
+                  <div
+                    to={"/new"}
+                    className="bg-primary-default text-white text-xs flex items-center w-max py-2 px-4 gap-2 pl-2 rounded-lg"
+                  >
+                    <span className="w-max">تغییر دسته بندی </span>
+                    <ChevronLeftIcon size={16} />
+                  </div>
+                ),
+              }}
+            />
             <UploadImages
               images={images}
               setImages={setImages}
@@ -39,7 +68,6 @@ const EditPostDesktop = ({
               label={"عنوان آگهی"}
               placeholder="عنوان آگهی"
               register={register("title")}
-              helperText={`در عنوان آگهی به موارد مهمی مانند نوع ملک، متراژ و محله اشاره کنید.`}
               errorMessage={errors?.title?.message}
               value={data?.data?.title}
             />
@@ -57,7 +85,6 @@ const EditPostDesktop = ({
               placeholder="توضیحات آگهی"
               register={register("content")}
               errorMessage={errors?.content?.message}
-              helperText={`در توضیحات آگهی به مواردی مانند شرایط اجاره، جزئیات و ویژگی‌های قابل توجه، دسترسی‌های محلی و موقعیت قرارگیری ملک اشاره کنید.`}
               multiline
               value={data?.data?.content}
             />
@@ -79,12 +106,14 @@ const EditPostDesktop = ({
                 })}
             </div>
             <div className="flex flex-row gap-3 justify-end pt-4">
-              <Link to={`/my-panel/my-post`}>
-                <Button variant="outlined">انصراف</Button>
-              </Link>
-              <Button variant="contained" type="submit">
+              <Button fullWidth variant="contained" type="submit">
                 ارسال اگهی
               </Button>
+              <Link className="w-full" to={`/my-panel/my-post`}>
+                <Button fullWidth variant="outlined">
+                  انصراف
+                </Button>
+              </Link>
             </div>
             <Snackbar
               open={snackbarOpen}

@@ -16,7 +16,7 @@ const AuthGuard = ({ component }) => {
     <>
       {auth === "loading" && (
         <MainContainer
-          className={`w-full flex justify-center  py-44 gap-5 px-6`}
+          className={`w-full flex justify-center  py-44 gap-5`}
         >
           <CircularProgress />
         </MainContainer>

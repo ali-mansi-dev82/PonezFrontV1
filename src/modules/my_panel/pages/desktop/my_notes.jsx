@@ -6,8 +6,8 @@ import BasicLayoutDesktop from "../../../../layouts/desktop/basic_layout";
 const MyNotesDesktop = ({ isPending, data, handleOnDelete }) => {
   return (
     <BasicLayoutDesktop>
-      <SidePanel selected="notes" />
-      <div className="grid grid-cols-3 h-full w-4/5 gap-5">
+      <SidePanel />
+      <div className="grid grid-cols-2 h-full w-4/5 gap-5">
         {!isPending ? (
           <>
             {data?.length > 0 ? (

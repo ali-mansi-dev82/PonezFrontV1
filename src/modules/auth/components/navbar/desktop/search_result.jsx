@@ -10,7 +10,7 @@ const SearchResult = ({ searchMutation, onClose }) => {
         onClick={onClose}
         className="fixed top-[64px] left-0 right-0 bottom-0 bg-black bg-opacity-25 z-0"
       ></div>
-      <div className="absolute left-0 top-[130%] max-h-[60vh] overflow-y-auto flex gap-4 right-0 bg-white z-30 rounded-md drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)]">
+      <div className="absolute left-0 top-[110%] max-h-[60vh] overflow-y-auto flex gap-4 right-0 bg-white z-30 rounded-md drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)]">
         {searchMutation?.data ? (
           <>
             {searchMutation?.isSuccess ? (

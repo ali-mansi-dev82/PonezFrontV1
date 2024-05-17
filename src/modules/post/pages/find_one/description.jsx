@@ -5,7 +5,7 @@ const PostDescription = ({ desription }) => {
     <>
       {desription && desription.length > 0 && (
         <div className="flex flex-col gap-1 w-full h-max">
-          <h6 className="text-gray-700 text-sm lg:text-md font-semibold">توضیحات</h6>
+          <h6 className="text-gray-400 text-sm lg:text-md py-2">توضیحات</h6>
           <p
             dangerouslySetInnerHTML={{
               __html: desription.replaceAll("\n", "<br />"),

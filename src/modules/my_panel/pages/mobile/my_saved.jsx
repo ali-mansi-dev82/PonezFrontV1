@@ -1,6 +1,7 @@
 import React from "react";
 import SavedPostCard from "../../../bookmark/components/saved_post_card";
 import SingleLayoutMobile from "../../../../layouts/mobile/single_layout";
+import EmptyState from "../empty_state";
 
 const MySavedMobile = ({ isPending, data, handleOnDelete }) => {
   return (
@@ -17,10 +18,8 @@ const MySavedMobile = ({ isPending, data, handleOnDelete }) => {
                 />
               ))
             ) : (
-              <div className="col-span-3 py-[30vh] flex flex-col justify-center gap-4 items-center">
-                <span className="text-xs text-gray-400">
-                  هیچ آگهی را نشان نکرده اید.
-                </span>
+              <div className="flex flex-col justify-center gap-4 items-center grid-cols-3 col-span-3 py-[20vh]">
+                <EmptyState title={"آگهی نشان شده ای یافت نشد!"} />
               </div>
             )}
           </>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
 import AuthModal from "../../modal";
 import Search from "./search";
 import UserDropDown from "./user_drop_down";
@@ -7,9 +6,11 @@ import { Link } from "react-router-dom";
 import Categories from "./categories";
 import SelectCity from "../select_city";
 import Button from "@mui/material/Button";
+import { Plus } from "lucide-react";
+import { ReactComponent as Logo } from "../../../../../svgs/Logo.svg";
 
-const NavbarDektop = ({ isAuthenticated, userData }) => {
-  const [showModal, setShowModal] = useState(false);
+const NavbarDektop = ({ isAuthenticated, userData, searchText }) => {
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const [isCityOpen, setIsCityOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   // Search
@@ -20,13 +21,12 @@ const NavbarDektop = ({ isAuthenticated, userData }) => {
   const closeCity = setIsCityOpen.bind(this, false);
   return (
     <>
-      <div className="flex items-center gap-4 w-max">
-        <div className="w-[44px]">
+      <div className="flex items-center gap-6 w-max">
+        <div className="w-max ml-8">
           <Link to={`/s/`}>
-            <img src={logo} alt="" className="w-[44px]" loading="lazy" />
+            <Logo />
           </Link>
         </div>
-        <div className="flex w-[3px] h-[30px] border-r border-r-gray-300"></div>
         <Categories />
         <Search
           open={isSearchOpen}
@@ -35,25 +35,26 @@ const NavbarDektop = ({ isAuthenticated, userData }) => {
           openCity={openCity}
         />
       </div>
-      <div className="flex items-center gap-4 w-max">
+      <div className="flex items-center gap-10 w-max">
         <UserDropDown
           isAuth={isAuthenticated}
           mobile={userData?.mobile}
-          loginFn={() => setShowModal(true)}
+          loginFn={setShowAuthModal.bind(this, true)}
         />
-        <Button size="small" variant="textonly" type="link" link="/support">
-          پشتیبانی
+        <Button
+          startIcon={<Plus size={20} />}
+          href={`/new`}
+          variant="contained"
+        >
+          ثبت آگهی
         </Button>
-        {isAuthenticated ? (
-          <Button href={`/new`} variant="contained">
-            ثبت آگهی
-          </Button>
-        ) : (
-          <Button variant="contained" onClick={() => setShowModal(true)}>
-            ثبت آگهی
-          </Button>
+        {showAuthModal && (
+          <AuthModal
+            open={showAuthModal}
+            onClose={setShowAuthModal.bind(this, false)}
+          />
         )}
-        <AuthModal open={showModal} onClose={() => setShowModal(false)} />
+
         {isCityOpen && <SelectCity onClose={closeCity} isMobile={false} />}
       </div>
     </>

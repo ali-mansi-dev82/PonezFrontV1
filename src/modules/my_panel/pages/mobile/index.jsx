@@ -4,7 +4,7 @@ import SidePanel from "../side_panel";
 
 const MyPanelMobile = () => {
   return (
-    <SingleLayoutMobile title="پنل من">
+    <SingleLayoutMobile buttonNavigationSelected='my-panel' title="پنل من">
       <SidePanel />
     </SingleLayoutMobile>
   );

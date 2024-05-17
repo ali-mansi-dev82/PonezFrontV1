@@ -1,22 +1,23 @@
 import { ImageOffIcon, Share2Icon } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
-import { limitString } from "../../../shared/util/string";
+import { truncateString } from "../../../shared/util/string";
 import { API_UPLOADED_IMAGES_URL } from "../../../config";
 import { dateFormate } from "../../../shared/util/dateFormat";
 import { IconButton } from "@mui/material";
+import { RWebShare } from "react-web-share";
 
 function MyRecentPostCard({ title, images, district, slug, createdAt }) {
   return (
     <>
       <Link
         to={`/v/${slug}`}
-        className="flex flex-row justify-start gap-3 p-3 border border-gray-200 rounded-md  cursor-pointer h-max"
+        className="flex flex-row justify-start gap-3 p-3 border border-gray-200 rounded-2xl cursor-pointer h-max"
       >
         <div className="relative w-[80px] h-[80px] pb-2/3  rounded-md">
           {images && images[0] ? (
             <img
-              className="absolute w-[80px] h-full inset-0 object-cover object-top rounded-md"
+              className="absolute w-[80px] h-full inset-0 object-cover object-top rounded-xl"
               src={`${API_UPLOADED_IMAGES_URL}${images && images[0]}`}
               alt={title}
               loading="lazy"
@@ -29,15 +30,27 @@ function MyRecentPostCard({ title, images, district, slug, createdAt }) {
         </div>
         <div className="flex flex-col justify-start h-full gap-1 w-[calc(100%-70px)]">
           <h1 className="text-gray-700 text-sm h-[30px] font-semibold w-full leading-7">
-            {title && limitString(title, 30)}
+            {title && truncateString(title, 30)}
           </h1>
           <span className="text-gray-400 text-xs Fanum">
             {dateFormate(createdAt)} در {district}
           </span>
-          <div className="w-full flex justify-end gap-2">
-            <IconButton >
-              <Share2Icon size={12} />
-            </IconButton>
+          <div
+            className="w-full flex justify-end gap-2"
+            onClick={(event) => {
+              event.preventDefault();
+            }}
+          >
+            <RWebShare
+              data={{
+                url: `/v/${slug}`,
+                title: `${title}`,
+              }}
+            >
+              <IconButton>
+                <Share2Icon size={16} />
+              </IconButton>
+            </RWebShare>
           </div>
         </div>
       </Link>

@@ -1,10 +1,18 @@
 import React from "react";
 import TextInput from "../../../../../shared/components/input/textInput";
-import { Button, CircularProgress, Snackbar } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  InputAdornment,
+  TextField,
+} from "@mui/material";
 import UploadImages from "../../../../image/components/upload_image";
 import { uploadImageFn } from "../../../../image/mutation";
 import OptionComponent from "../../../components/option";
 import SingleLayoutMobile from "../../../../../layouts/mobile/single_layout";
+import { CategoryIconsXs } from "../../../../category/category_icons";
+import { CheckCircle, ChevronLeftIcon } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const EditPostMobile = ({
   loading,
@@ -19,19 +27,18 @@ const EditPostMobile = ({
 }) => {
   return (
     <form onSubmit={onSubmit}>
-      {" "}
       <SingleLayoutMobile
         buttonNavigation={
           <>
+            <Button className="!w-full" variant="contained" type="submit">
+              ارسال اگهی
+            </Button>
             <Button
-              className="!w-full"
+              className="!w-full z-40"
               href={`/my-panel/my-post`}
               variant="outlined"
             >
               انصراف
-            </Button>
-            <Button className="!w-full" variant="contained" type="submit">
-              ارسال اگهی
             </Button>
           </>
         }
@@ -43,8 +50,29 @@ const EditPostMobile = ({
               <CircularProgress />
             </div>
           ) : (
-            <div className="flex flex-col gap-5">
-              <div className="text-xl text-gray-800">ثبت آگهی</div>
+            <div className="flex flex-col gap-10">
+              <TextField
+                label={"دسته بندی"}
+                focused
+                value={data?.data?.category?.name}
+                className="!text-sm"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      {CategoryIconsXs[data?.data?.category?.icon]}
+                    </InputAdornment>
+                  ),
+                  endAdornment: (
+                    <div
+                      to={"/new"}
+                      className="bg-primary-default text-white text-xs flex items-center w-max py-2 px-4 gap-2 pl-2 rounded-lg"
+                    >
+                      <span className="w-max">تغییر دسته بندی </span>
+                      <ChevronLeftIcon size={16} />
+                    </div>
+                  ),
+                }}
+              />
               <UploadImages
                 images={images}
                 setImages={setImages}
@@ -54,7 +82,6 @@ const EditPostMobile = ({
                 label={"عنوان آگهی"}
                 placeholder="عنوان آگهی"
                 register={register("title")}
-                helperText={`در عنوان آگهی به موارد مهمی مانند نوع ملک، متراژ و محله اشاره کنید.`}
                 errorMessage={errors?.title?.message}
                 value={data?.data?.title}
               />
@@ -72,7 +99,6 @@ const EditPostMobile = ({
                 placeholder="توضیحات آگهی"
                 register={register("content")}
                 errorMessage={errors?.content?.message}
-                helperText={`در توضیحات آگهی به مواردی مانند شرایط اجاره، جزئیات و ویژگی‌های قابل توجه، دسترسی‌های محلی و موقعیت قرارگیری ملک اشاره کنید.`}
                 multiline
                 value={data?.data?.content}
               />
@@ -94,21 +120,20 @@ const EditPostMobile = ({
                   })}
               </div>
 
-              <Snackbar
-                open={snackbarOpen}
-                message="آگهی شما ثبت شد"
-                className="!justify-between"
-                action={
-                  <Button
-                    href="/my-panel/my-post"
-                    variant="text"
-                    size="small"
-                    className="!text-primary-default"
+              {snackbarOpen && (
+                <div className="fixed flex flex-col gap-4 bottom-4 left-4 right-4 z-50 border lg:max-w-[200px] border-green-400 bg-white p-4 rounded-lg">
+                  <div className="flex items-center gap-2 text-green-500">
+                    <CheckCircle size={16} />
+                    <span className="text-sm">آگهی شما با موفقیت ثبت شد.</span>
+                  </div>
+                  <Link
+                    to={"/"}
+                    className="bg-green-700 text-white px-4 py-2 w-max text-sm rounded-lg"
                   >
                     تایید
-                  </Button>
-                }
-              />
+                  </Link>
+                </div>
+              )}
             </div>
           )}
         </div>

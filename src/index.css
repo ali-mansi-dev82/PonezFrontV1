@@ -14,26 +14,26 @@
 
 @layer base {
   @font-face {
-    font-family: 'Vazir';
+    font-family: "IranYekanX";
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url("./../public/font/Vazir.ttf") format('woff2');
+    src: url("./../public/font/IranYekanX.ttf") format("woff2");
   }
 }
-.vazir{
-  font-family: 'Vazir';
+.IranYekanX {
+  font-family: "IranYekanX";
 }
-.Fanum{
-  font-family: 'Fanum' !important;
+.Fanum {
+  font-family: "Fanum" !important;
 }
 @font-face {
-  font-family: "Vazir";
-  src: url("./../public/font/Vazir.ttf");
+  font-family: "IranYekanX";
+  src: url("./../public/font/IranYekanX.ttf");
 }
 @font-face {
   font-family: "Fanum";
-  src: url("./../public/font/IRANSans-fanum.woff");
+  src: url("./../public/font/Shabnam-FD-WOL.ttf");
 }
 
 /* @font-face {
@@ -48,16 +48,17 @@
 
 body {
   margin: 0;
-  font-family: "IRANSans", "Vazir", -apple-system, BlinkMacSystemFont,
+  font-family: "IranYekanX", "IRANSans", -apple-system, BlinkMacSystemFont,
     "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  direction: rtl;
+  /* direction: rtl; */
 }
 
 * {
-  font-family: "IRANSans", "Vazir" !important;
+  font-family: "IranYekanX", "IRANSans" !important;
+  direction: rtl;
 }
 
 code {
@@ -67,7 +68,6 @@ code {
 :root {
   background-color: white;
 }
-
 
 .lds-ellipsis,
 .lds-ellipsis div {
@@ -129,6 +129,3 @@ code {
     transform: translate(24px, 0);
   }
 }
-
-
-      

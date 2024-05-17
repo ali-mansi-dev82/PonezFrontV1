@@ -62,15 +62,16 @@ const CreatePostDesktop = () => {
         {!(senario === 2 && categoryQuery?.data?.children?.length <= 0) && (
           <>
             <h6 className="w-full text-lg text-gray-800 mb-3">
-              چه چیزی آگهی می‌کنید؟
+              چه چیزی میخواهی آگهی کنی؟
             </h6>
-            <p className="w-full text-sm text-gray-400 mb-4">
-              با جستجو در کادر زیر، دستهٔ آگهی را انتخاب کنید.
+            <p className="w-full text-sm text-gray-400 mb-8">
+              دسته آگه رو از کادر زیر انتخاب کن.
             </p>
             <TextField
               inputRef={inputRef}
               variant="outlined"
-              size="small"
+              size="medium"
+              label="دسته ها"
               focused
               autoComplete="off"
               sx={{ marginBottom: "1rem" }}
@@ -84,12 +85,7 @@ const CreatePostDesktop = () => {
           <>
             {searchCategoryQuery?.data && searchCategoryQuery?.data.length > 0
               ? searchCategoryQuery?.data?.map((value, index) => {
-                  return (
-                    <SearchItemComponent
-                      key={index}
-                      {...value}
-                    />
-                  );
+                  return <SearchItemComponent key={index} {...value} />;
                 })
               : "دسته بندی پیدا نشد!!"}
           </>
@@ -112,10 +108,7 @@ const CreatePostDesktop = () => {
               categoryQuery?.data?.map((value, index) => {
                 return (
                   <>
-                    <SearchItemComponent
-                      key={index}
-                      {...value}
-                    />
+                    <SearchItemComponent key={index} {...value} />
                   </>
                 );
               })}
@@ -142,12 +135,7 @@ const CreatePostDesktop = () => {
                   }
                 />
                 {categoryQuery?.data?.children?.map((value, index) => {
-                  return (
-                    <SearchItemComponent
-                      key={index}
-                      {...value}
-                    />
-                  );
+                  return <SearchItemComponent key={index} {...value} />;
                 })}
               </>
             ) : (

@@ -1,60 +1,55 @@
 import { useMutation } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { useCity } from "../../../../../context/CityContext";
-import { TextField } from "@mui/material";
-import Button from "../../../../../shared/components/button";
 import { SearchCategoryFn } from "../../../../category/query";
-import { MapPinIcon } from "lucide-react";
+import { MapPinIcon, PinIcon } from "lucide-react";
 import SearchResult from "./search_result";
 
-const Search = ({ openCity }) => {
+const Search = ({ openCity, searchText }) => {
   const { city } = useCity();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  // Search
-  const openSearch = setIsSearchOpen.bind(this, true);
-  const closeSearch = setIsSearchOpen.bind(this, false);
   const searchMutation = useMutation({
     mutationFn: SearchCategoryFn,
   });
   const searchFn = (query) => searchMutation.mutateAsync(query);
-
+  const openCityHandle = (event) => {
+    event.stopPropagation();
+    openCity();
+  };
+  const closeSearch = (event) => {
+    event.stopPropagation();
+    setIsSearchOpen(false);
+  };
   return (
-    <div className="w-full lg:w-[400px]">
-      <TextField
-        variant="outlined"
-        fullWidth
-        size="small"
-        placeholder="جستجو در همه آگهی ها"
-        className="!bg-gray-100"
-        sx={{
-          "& fieldset": { border: "none" },
-          borderRadius: "0.3rem",
-        }}
-        autoComplete="off"
-        onClick={openSearch}
-        focused
-        InputProps={{
-          endAdornment: (
-            <div className="flex flex-row  items-center">
-              <div className="h-[20px] w-1 border-r border-gray-300"></div>
-              <Button
-                size="small"
-                variant="textonly"
-                className="w-max"
-                leftIcon={<MapPinIcon size={"16px"} />}
-                onClick={(event) => {
-                  event.stopPropagation();
-                  openCity();
-                }}
-              >
-                {city && city !== "" ? city : "شهر"}
-              </Button>
-            </div>
-          ),
-          readOnly: true,
-        }}
-      />
-      {isSearchOpen && (
+    <div
+      className="w-full lg:w-[400px]"
+      onClick={setIsSearchOpen.bind(this, true)}
+    >
+      <div className="w-full flex justify-between items-center bg-gray-100 px-4 py-[10px] rounded-lg border border-gray-300">
+        {searchText ? (
+          <span className="text-sm">{searchText}</span>
+        ) : (
+          <div className="flex items-center gap-2">
+            <span className="text-primary-default">
+              <PinIcon size={14} />
+            </span>
+            <span className="text-sm text-gray-500">جستجو در پونز</span>
+          </div>
+        )}
+
+        <div className="flex items-center gap-3">
+          <div className="h-[26px] w-1 border-r border-gray-300"></div>
+          <div className="flex gap-2 text-gray-500" onClick={openCityHandle}>
+            <span className="text-xs">
+              {city && city !== "" ? city : "شهر"}
+            </span>
+            <span>
+              <MapPinIcon size={"14px"} />
+            </span>
+          </div>
+        </div>
+      </div>
+      {isSearchOpen === true && (
         <SearchResult
           searchFn={searchFn}
           closeSearch={closeSearch}

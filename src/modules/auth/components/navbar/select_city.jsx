@@ -7,12 +7,11 @@ import {
   DialogContent,
   DialogTitle,
   FormControlLabel,
-  InputAdornment,
   Radio,
   RadioGroup,
   TextField,
 } from "@mui/material";
-import { ArrowRight, ChevronLeft, Search } from "lucide-react";
+import {  ChevronLeft, MoveRightIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { useCity } from "../../../../context/CityContext";
 import { FindStateFn } from "../../../state/query";
@@ -45,15 +44,15 @@ const SelectCity = ({ onClose, isMobile }) => {
     >
       <DialogTitle
         id="scroll-dialog-title"
-        className="flex flex-col gap-1 border-b border-gray-300 shadow"
+        className="flex flex-col gap-1 border-b border-gray-300 "
       >
         <div className="w-full flex flex-row justify-between items-center">
-          <h3 className="font-bold text-lg">انتخاب شهر</h3>
+          <h3 className="text-lg">انتخاب شهر</h3>
           <Button onClick={setLocalCity.bind(this, "")} size="small">
             حذف همه
           </Button>
         </div>
-        <div className="pb-2">
+        <div className="my-2 ">
           {localCity !== "" ? (
             <Chip label={localCity} />
           ) : (
@@ -64,26 +63,20 @@ const SelectCity = ({ onClose, isMobile }) => {
         </div>
         <TextField
           variant="outlined"
-          size="small"
+          size="medium"
+          label="شهر ها"
           placeholder="جستجو در شهر ها"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <Search size={16} />
-              </InputAdornment>
-            ),
-          }}
         />
       </DialogTitle>
-      <DialogContent className="w-auto lg:!min-w-[400px] lg:!max-h-[50vh]">
+      <DialogContent className="w-auto lg:!min-w-[450px] lg:!max-h-[50vh] text-gray-800">
         {state?._id ? (
           <>
             <div
               onClick={setState.bind(this, "")}
-              className="w-full flex flex-row gap-3 border-b last:border-b-0 items-center py-3 cursor-pointer"
+              className="w-full flex flex-row gap-3 border-b last:border-b-0 items-center py-[18px] cursor-pointer"
             >
-              <span className="text-gray-400">
-                <ArrowRight size={16} />
+              <span className="">
+                <MoveRightIcon size={16} />
               </span>
               <p>همه شهر ها</p>
             </div>
@@ -111,9 +104,9 @@ const SelectCity = ({ onClose, isMobile }) => {
             <div
               key={index}
               onClick={setState.bind(this, value)}
-              className="w-full flex flex-row justify-between border-b last:border-b-0 items-center py-3 cursor-pointer"
+              className="w-full flex flex-row justify-between border-b last:border-b-0 items-center py-[18px] cursor-pointer"
             >
-              <p>{value.name}</p>
+              <p className="text-sm">{value.name}</p>
               <span className="text-gray-400">
                 <ChevronLeft size={16} />
               </span>
@@ -123,11 +116,7 @@ const SelectCity = ({ onClose, isMobile }) => {
           <Spinner />
         )}
       </DialogContent>
-      <DialogActions className="gap-2 border-t border-gray-300">
-        {" "}
-        <Button className="!w-1/2" variant="outlined" onClick={onClose}>
-          انصراف
-        </Button>
+      <DialogActions className="gap-2 border-t border-gray-300 !p-[16px]">
         <Button
           className="!w-1/2"
           variant="contained"
@@ -139,19 +128,10 @@ const SelectCity = ({ onClose, isMobile }) => {
         >
           تایید
         </Button>
+        <Button className="!w-1/2 !border-gray-200 !text-gray-900" variant="outlined" onClick={onClose}>
+          انصراف
+        </Button>
       </DialogActions>
-      {/* <div
-        className="modal bg-white select-none w-[80vw] lg:w-[450px]"
-        role="dialog"
-      >
-        <div className="modal-box bg-white p-0 rounded-md">
-          <div className="flex flex-col p-6 gap-3 border-b"></div>
-          <div className="max-h-[50vh] overflow-y-auto py-2 px-6">
-            
-          </div>
-          <div className="w-full flex flex-row gap-4 items-center p-4 border-t"></div>
-        </div>
-      </div> */}
     </Dialog>
   );
 };

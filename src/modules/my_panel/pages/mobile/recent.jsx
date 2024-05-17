@@ -1,6 +1,7 @@
 import React from "react";
 import MyRecentPostCard from "../../components/recent_post_card";
 import SingleLayoutMobile from "../../../../layouts/mobile/single_layout";
+import EmptyState from "../empty_state";
 
 const MyRecentMobile = ({ isPending, data }) => {
   return (
@@ -13,10 +14,8 @@ const MyRecentMobile = ({ isPending, data }) => {
                 <MyRecentPostCard key={index} {...value} />
               ))
             ) : (
-              <div className="flex flex-col justify-center gap-4 items-center col-span-3">
-                <span className="text-xs text-gray-400">
-                  هیچ آگهی را بازدید نکرده اید.
-                </span>
+              <div className="flex flex-col justify-center gap-4 items-center grid-cols-3 col-span-3 py-[20vh]">
+                <EmptyState title={"بازدیدی یافت نشد !"} />
               </div>
             )}
           </>

@@ -9,10 +9,12 @@ import { CreatePostSchema } from "../../schema";
 import { FindOptionbyCategorySlugFn } from "../../../option/query";
 import { CreatePostFn } from "../../mutation";
 import { uploadImageFn } from "../../../image/mutation";
-import { Button, Snackbar } from "@mui/material";
+import { Button, InputAdornment, TextField } from "@mui/material";
 import TextInput from "../../../../shared/components/input/textInput";
+import { CategoryIconsXs } from "../../../category/category_icons";
+import { CheckCircle, ChevronLeftIcon } from "lucide-react";
 
-const New = ({ name, id, slug }) => {
+const New = ({ name, id, slug, icon }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const [images, setImages] = useState([]);
@@ -99,14 +101,33 @@ const New = ({ name, id, slug }) => {
   });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
-      <div className="text-xl text-gray-800">ثبت آگهی</div>
-      <div className="flex flex-row justify-between items-center border border-gray-300 rounded-lg p-8">
-        <p className="text-base text-gray-500 font-semibold">{name}</p>
-        <Link to={"/new"}>
-          <Button variant="contained">تغییر دسته بندی</Button>
-        </Link>
-      </div>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col gap-10 mb-[55px]"
+    >
+      <div className="text-xl text-gray-800 hidden lg:block">ثبت آگهی</div>
+      <TextField
+        label={"دسته بندی"}
+        focused
+        value={name}
+        className="!text-sm"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              {CategoryIconsXs[icon]}
+            </InputAdornment>
+          ),
+          endAdornment: (
+            <Link
+              to={"/new"}
+              className="bg-primary-default text-white text-xs flex items-center w-max py-2 px-4 gap-2 pl-2 rounded-lg"
+            >
+              <span className="w-max">تغییر دسته</span>
+              <ChevronLeftIcon size={16} />
+            </Link>
+          ),
+        }}
+      />
       <UploadImages
         images={images}
         setImages={setImages}
@@ -116,7 +137,6 @@ const New = ({ name, id, slug }) => {
         label={"عنوان آگهی"}
         placeholder="عنوان آگهی"
         register={register("title")}
-        helperText={`در عنوان آگهی به موارد مهمی مانند نوع ملک، متراژ و محله اشاره کنید.`}
         errorMessage={errors?.title?.message}
       />
       <TextInput
@@ -132,10 +152,9 @@ const New = ({ name, id, slug }) => {
         placeholder="توضیحات آگهی"
         register={register("content")}
         errorMessage={errors?.content?.message}
-        helperText={`در توضیحات آگهی به مواردی مانند شرایط اجاره، جزئیات و ویژگی‌های قابل توجه، دسترسی‌های محلی و موقعیت قرارگیری ملک اشاره کنید.`}
         multiline
       />
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-8">
         {optionQuery?.data?.data?.length > 0 &&
           optionQuery?.data?.data?.map((value, index) => {
             return (
@@ -143,31 +162,33 @@ const New = ({ name, id, slug }) => {
             );
           })}
       </div>
-      <div className="flex flex-row gap-3 justify-end pt-4">
-        <Button variant="outlined" onClick={navigate.bind(this, "/")}>
-          انصراف
-        </Button>
-        <Button variant="contained" type="submit">
+      <div className="flex flex-row gap-3 justify-end pt-4 fixed lg:static bottom-0 left-0 right-0 bg-white z-40 p-[12px] lg:p-0 border-t lg:border-t-0 border-gray-300">
+        <Button fullWidth variant="contained" type="submit">
           ارسال اگهی
         </Button>
+        <Button
+          fullWidth
+          size="small"
+          variant="outlined"
+          onClick={navigate.bind(this, "/")}
+        >
+          انصراف
+        </Button>
       </div>
-      <Snackbar
-        open={open}
-        message="آگهی شما ثبت شد"
-        action={
-          <div className="w-full flex justify-between">
-            <div className="w-44"></div>
-            <Button
-              onClick={() => navigate.bind(this, "/")}
-              variant="text"
-              size="small"
-              className="!text-primary-default"
-            >
-              تایید
-            </Button>
+      {open && (
+        <div className="fixed flex flex-col gap-4 bottom-4 left-4 right-4 z-50 border lg:max-w-[200px] border-green-400 bg-white p-4 rounded-lg">
+          <div className="flex items-center gap-2 text-green-500">
+            <CheckCircle size={16} />
+            <span className="text-sm">آگهی شما با موفقیت ثبت شد.</span>
           </div>
-        }
-      />
+          <Link
+            to={"/"}
+            className="bg-green-700 text-white px-4 py-2 w-max text-sm rounded-lg"
+          >
+            تایید
+          </Link>
+        </div>
+      )}
     </form>
   );
 };

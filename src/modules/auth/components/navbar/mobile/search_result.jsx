@@ -1,17 +1,24 @@
-import React from "react";
-import { X } from "lucide-react";
+import React, { useEffect, useRef } from "react";
+import { ArrowRight } from "lucide-react";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
   IconButton,
-  TextField,
 } from "@mui/material";
 import Spinner from "../../../../../shared/components/spiner";
 import PopularSearch from "../search/popular_search";
 import { Link } from "react-router-dom";
+import TextInput from "../../../../../shared/components/input/textInput";
 
 const SearchResult = ({ searchFn, closeSearch, searchMutation }) => {
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+    console.log(inputRef.current);
+  }, []);
+
   return (
     <Dialog
       fullScreen
@@ -20,21 +27,23 @@ const SearchResult = ({ searchFn, closeSearch, searchMutation }) => {
       keepMounted
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
+      className=""
     >
-      <DialogTitle className="flex flex-row gap-1">
-        <TextField
+      <DialogTitle className="flex flex-row gap-3 p-4">
+        <IconButton onClick={closeSearch} size="small">
+          <ArrowRight size={20} />
+        </IconButton>
+        {/* TextInput */}
+        <TextInput
+          inputRef={inputRef}
+          placeholder="جستجو در پونز"
+          size="small"
           variant="standard"
           fullWidth
-          size="small"
-          placeholder="جستجو در همه آگهی ها"
-          autoComplete="off"
-          onChange={(e) => searchFn(e.target.value)}
+          autoFocus
         />
-        <IconButton onClick={closeSearch} size="small">
-          <X />
-        </IconButton>
       </DialogTitle>
-      <DialogContent>
+      <DialogContent className="p-4">
         {searchMutation?.data ? (
           <>
             {searchMutation?.isSuccess ? (

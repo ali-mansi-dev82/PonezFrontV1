@@ -40,16 +40,11 @@ const mostSearched = [
 const PopularSearch = ({ onClose }) => {
   return (
     <div className="flex flex-col lg:p-5 gap-4">
-      <h1 className="text-sm text-gray-500">بیشترین جستجوهای پونز</h1>
-      <div className="flex flex-row flex-wrap gap-2 text-gray-400">
+      <h1 className="text-sm text-gray-500">جستجو های پرطرفدار</h1>
+      <div className="flex flex-row flex-wrap gap-3 text-gray-400">
         {mostSearched.map((value, index) => (
           <Link key={index} to={value.link} onClick={onClose}>
-            <Chip
-              size="small"
-              sx={{ padding: "6px" }}
-              label={value.label}
-              variant="outlined"
-            />
+            <div className="bg-gray-100 text-gray-700 px-3 py-2 text-xs rounded-lg">{value.label}</div>
           </Link>
         ))}
       </div>

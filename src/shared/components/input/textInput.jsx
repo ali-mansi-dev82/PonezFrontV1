@@ -1,4 +1,4 @@
-import { Chip, InputAdornment, MenuItem, TextField } from "@mui/material";
+import { MenuItem, TextField } from "@mui/material";
 import React from "react";
 
 const TextInput = ({
@@ -6,7 +6,8 @@ const TextInput = ({
   children,
   register,
   label,
-  size = "small",
+  size = "medium",
+  variant = "outlined",
   errorMessage = null,
   placeholder = "",
   helperText,
@@ -19,20 +20,8 @@ const TextInput = ({
   fullWidth = true,
   autoFocus = false,
 }) => {
-  // const inputElem = useRef();
-  const handleOnWheel = (e) => {
-    e.preventDefault();
-    // inputElem.current.blur();
-  };
   return (
     <label className="flex flex-col gap-3 w-full">
-      {label && (
-        <div className="label">
-          <span className="label-text text-gray-800 text-base py-10">
-            {label}
-          </span>
-        </div>
-      )}
       {helperText && (
         <div className="label p-0">
           <span className="label-text-alt pb-4 leading-6 text-xs text-gray-400">
@@ -44,8 +33,9 @@ const TextInput = ({
         {...register}
         inputRef={inputRef}
         error={errorMessage}
-        variant="outlined"
+        variant={variant}
         autoComplete="off"
+        label={label}
         size={size}
         placeholder={placeholder}
         type={type}
@@ -55,16 +45,13 @@ const TextInput = ({
         select={select}
         fullWidth={fullWidth}
         autoFocus={autoFocus}
-        className="!Fanum"
-        onWheel={handleOnWheel}
-        dir="rtl"
         InputProps={
           prefix
             ? {
                 endAdornment: (
-                  <InputAdornment position="start">
-                    <Chip label={prefix} size="small" sx={{ marginLeft: 1 }} />
-                  </InputAdornment>
+                  <span className="text-xs bg-primary-0 text-primary-70 py-1 px-2 rounded-lg mr-2 Fanum">
+                    {prefix}
+                  </span>
                 ),
               }
             : undefined
@@ -83,7 +70,9 @@ const TextInput = ({
             </MenuItem>
           ))}
       </TextField>
-      <div className="text-xs text-red-600 ">{errorMessage ?? ""}</div>
+      {errorMessage && (
+        <div className="text-xs text-red-600 ">{errorMessage}</div>
+      )}
     </label>
   );
 };

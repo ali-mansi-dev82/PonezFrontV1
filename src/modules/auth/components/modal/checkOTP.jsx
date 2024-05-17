@@ -93,16 +93,18 @@ const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="h-full">
-        <DialogContent className="w-auto lg:!w-[430px] h-[calc(100%-65px)] lg:!max-h-[50vh] !py-14">
-          <h3 className="font-bold text-base text-gray-700 mb-6">تایید کد</h3>
-          <p className="pt-2 pb-6 text-sm text-gray-400 leading-7 Fanum">
-            کد ارسال شده به شماره {mobile} را وارد کنید
+        <DialogContent className="w-auto lg:!w-[430px] h-[calc(100%-100px)] lg:!max-h-[50vh] !py-14">
+          <h3 className="text-lg text-gray-700 mb-4">کد تایید را وارد کنید</h3>
+          <p className=" pb-6 text-sm text-gray-400 leading-7">
+            کد ارسال شده به شماره <span className="Fanum">{mobile}</span> را
+            وارد کنید
           </p>
           <TextInput
             inputRef={inputRef}
             register={register("code")}
             type="number"
             placeholder="کد ورود"
+            label="کد ورود"
             errorMessage={errors?.mobile?.message || errore || undefined}
             InputProps={{
               endAdornment: (
@@ -114,10 +116,13 @@ const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
             fullWidth
           />
         </DialogContent>
-        <DialogActions className="gap-2 border-t border-gray-300 !p-3">
-          <Button className="w-max" disabled>
-            {second > 0 ? secontTommss(second) : ""}
-          </Button>
+        <DialogActions className="felx flex-col gap-2 border-t border-gray-300 !p-4">
+          <div className="text-xs text-gray-400 w-max">
+            <span className="Fanum">
+              {second > 0 ? secontTommss(second) : ""}
+            </span>{" "}
+            مانده تا تلاش مجدد
+          </div>
           <Button
             fullWidth
             variant="contained"
@@ -125,7 +130,7 @@ const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
             loading={loading}
             type="submit"
           >
-            ورود
+            تایید
           </Button>
         </DialogActions>
       </form>

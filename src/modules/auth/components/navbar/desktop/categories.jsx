@@ -3,7 +3,7 @@ import { ChevronDownIcon, ChevronLeftIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { FindCategoryFn } from "../../../../category/query";
 import { Link } from "react-router-dom";
-import { CategoryIconsSm } from "../../../../category/category_icons";
+import { CategoryIconsXs } from "../../../../category/category_icons";
 import Button from "../../../../../shared/components/button";
 import Spinner from "../../../../../shared/components/spiner";
 
@@ -40,10 +40,10 @@ const Categories = () => {
               onClick={setOpen.bind(this, false)}
               className="fixed top-[64px] left-0 right-0 bottom-0 bg-black bg-opacity-25 z-0"
             ></div>
-            <div className="absolute top-[130%] flex gap-4 right-0 bg-white z-30 w-[55vw] rounded-md p-6 drop-shadow-modal">
+            <div className="absolute top-[130%] flex gap-4 right-0 bg-white z-30 w-[50vw] rounded-md p-6 drop-shadow-modal">
               {categoryQuery?.data ? (
                 <>
-                  <div className="w-1/5 flex flex-col gap-2 border-l pl-3">
+                  <div className="w-1/4 flex flex-col gap-2 border-l pl-3">
                     {categoryQuery?.data?.map((value, index) => (
                       <Link
                         key={index}
@@ -56,15 +56,15 @@ const Categories = () => {
                             : `hover:bg-gray-100 hover:text-gray-800`
                         }`}
                       >
-                        <span className="flex gap-2">
-                          {value.icon !== "" && CategoryIconsSm[value.icon]}
+                        <span className="flex gap-2 items-center">
+                          {value.icon !== "" && CategoryIconsXs[value.icon]}
                           <span className="text-xs">{value.name}</span>
                         </span>
                         <ChevronLeftIcon size={14} />
                       </Link>
                     ))}
                   </div>
-                  <div className="w-4/5 flex flex-col gap-1">
+                  <div className="w-3/4 flex flex-col gap-1">
                     {category?.children &&
                       category?.children.length > 0 &&
                       category?.children?.map((value, index) => (

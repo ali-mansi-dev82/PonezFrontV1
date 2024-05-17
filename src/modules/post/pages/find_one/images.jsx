@@ -21,7 +21,7 @@ const Images = ({ images }) => {
           </div>
         )}
       </div>
-      <div className="flex flex-row gap-4 max-w-[460px] h-[100p] px-6 lg:px-0">
+      <div className="flex flex-row gap-4 max-w-[460px] h-[100p] lg:px-0 px-3">
         {images.slice(0, 5).map((image, index) => (
           <div
             key={index}
