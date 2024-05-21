@@ -18,7 +18,7 @@ To install Ponez, follow these steps:
 1.Clone the repository to your local machine.
 
 ```bash
-git clone https://github.com/your-username/your-repository.git
+git clone https://github.com/alimansoo/PonezFrontV1.git
 ```
 
 2.Install any necessary dependencies.
