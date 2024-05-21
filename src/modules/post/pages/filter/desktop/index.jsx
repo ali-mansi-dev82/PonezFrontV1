@@ -1,12 +1,11 @@
 import React from "react";
-import PostCard from "../../../components/post_card";
 import { Link } from "react-router-dom";
 import { CategoryIconsSm } from "../../../../category/category_icons";
 import BasicLayoutDesktop from "../../../../../layouts/desktop/basic_layout";
-import PostCardSkeleton from "../../../components/post_card_skeleton";
 import TextSkeleton from "../../../components/text_skeleton";
 import { MoveRightIcon } from "lucide-react";
-import EmptyState from "../empty_state";
+import SpecialPost from "../special_post";
+import CardsPreview from "../cards_preview";
 
 function FilterPostDesktop({
   slug,
@@ -81,29 +80,13 @@ function FilterPostDesktop({
             ))
           )}
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 h-full w-full gap-5">
-          {categoryData?.name && (
-            <div className="text-xs col-span-3 text-gray-800">
-              {categoryData?.name} در{" "}
-              <span className="text-gray-400">{city}</span>
-            </div>
-          )}
-          {isPending ? (
-            "0"
-              .repeat(12)
-              .split("")
-              .map(() => <PostCardSkeleton />)
-          ) : data?.result?.length > 0 ? (
-            data?.result?.map((value, index) => (
-              <PostCard key={index} {...value} />
-            ))
-          ) : (
-            <div className="col-span-3 py-20">
-              <EmptyState />
-            </div>
-          )}
-        </div>
+        {!slug && <SpecialPost />}
+        <CardsPreview
+          categoryData={categoryData}
+          isPending={isPending}
+          city={city}
+          data={data}
+        />
       </div>
     </BasicLayoutDesktop>
   );

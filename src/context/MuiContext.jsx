@@ -5,6 +5,7 @@ import { CacheProvider } from "@emotion/react";
 
 const theme = createTheme({
   direction: "rtl",
+  typography: { fontFamily: "IranYekanX" },
   palette: {
     mode: "light",
     primary: {

@@ -1,11 +1,10 @@
 import React from "react";
-import PostCard from "../../../components/post_card";
 import { Link } from "react-router-dom";
 import icons from "../../../../category/category_icons";
 import BasicLayoutMobile from "../../../../../layouts/mobile/basic_layout";
-import PostCardSkeleton from "../../../components/post_card_skeleton";
 import TextSkeleton from "../../../components/text_skeleton";
-import EmptyState from "../empty_state";
+import CardsPreview from "../cards_preview";
+import SpecialPost from "../special_post";
 
 function FilterPostMobile({
   slug,
@@ -68,27 +67,13 @@ function FilterPostMobile({
             ))}
         </div>
       )}
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 h-full w-full lg:w-4/5 gap-5">
-        {categoryData?.name && (
-          <div className="text-xs col-span-1 text-gray-800">
-            {categoryData?.name} در{" "}
-            <span className="text-gray-400">{city}</span>
-          </div>
-        )}
-        {isPending ? (
-          "0"
-            .repeat(12)
-            .split("")
-            .map(() => <PostCardSkeleton />)
-        ) : data?.result?.length > 0 ? (
-          data?.result?.map((value, index) => (
-            <PostCard key={index} {...value} />
-          ))
-        ) : (
-          <EmptyState />
-        )}
-      </div>
+      {!slug && <SpecialPost />}
+      <CardsPreview
+        categoryData={categoryData}
+        isPending={isPending}
+        city={city}
+        data={data}
+      />
     </BasicLayoutMobile>
   );
 }

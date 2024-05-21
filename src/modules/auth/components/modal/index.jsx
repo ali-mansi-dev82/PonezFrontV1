@@ -58,7 +58,7 @@ const AuthModal = ({
           expireCode={expireCode}
           authSuccess={() => {
             handleLogin();
-            onClose();
+            if (onClose) return onClose();
           }}
         />
       )}

@@ -4,16 +4,26 @@ import MyPostCard from "../../../post/components/my_post_card";
 import SingleLayoutMobile from "../../../../layouts/mobile/single_layout";
 import EmptyState from "../empty_state";
 
-const MyPostMobile = ({ isPending, data, handleOnDelete }) => {
+const MyPostMobile = ({ isPending, data, handleOnDelete, mySpecials }) => {
   return (
     <SingleLayoutMobile buttonNavigation="off" title="آگهی ها من">
       <div className="grid grid-cols-1 h-max w-full gap-5">
         {!isPending ? (
           <>
             {data?.length > 0 ? (
-              data?.map((value, index) => (
-                <MyPostCard onDelete={handleOnDelete} key={index} {...value} />
-              ))
+              data?.map((value, index) => {
+                const special = mySpecials?.filter(
+                  (item) => value._id === item.post
+                )?.length;
+                return (
+                  <MyPostCard
+                    onDelete={handleOnDelete}
+                    key={index}
+                    {...value}
+                    special={special}
+                  />
+                );
+              })
             ) : (
               <div className="flex flex-col justify-center gap-4 items-center grid-cols-3 col-span-3 py-[20vh]">
                 <EmptyState

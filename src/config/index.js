@@ -2,6 +2,7 @@ export const API_URL = process.env.REACT_APP_API_URL;
 export const API_AUTH_URL = API_URL + "auth";
 export const API_USER_URL = API_URL + "user";
 export const API_CATEGORY_URL = API_URL + "category";
+export const API_SPECIAL_URL = API_URL + "special";
 export const API_BOOKMARK_URL = API_URL + "bookmark";
 export const API_NOTE_URL = API_URL + "note";
 export const API_OPTION_URL = API_URL + "option";

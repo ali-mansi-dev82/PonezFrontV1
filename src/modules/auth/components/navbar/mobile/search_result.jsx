@@ -1,11 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { ArrowRight } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-} from "@mui/material";
+import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
 import Spinner from "../../../../../shared/components/spiner";
 import PopularSearch from "../search/popular_search";
 import { Link } from "react-router-dom";
@@ -16,7 +11,6 @@ const SearchResult = ({ searchFn, closeSearch, searchMutation }) => {
 
   useEffect(() => {
     inputRef.current?.focus();
-    console.log(inputRef.current);
   }, []);
 
   return (
@@ -41,6 +35,7 @@ const SearchResult = ({ searchFn, closeSearch, searchMutation }) => {
           variant="standard"
           fullWidth
           autoFocus
+          onChange={(e) => searchFn(e?.target?.value)}
         />
       </DialogTitle>
       <DialogContent className="p-4">

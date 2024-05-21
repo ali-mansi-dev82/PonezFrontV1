@@ -19,6 +19,7 @@ const TextInput = ({
   prefix = undefined,
   fullWidth = true,
   autoFocus = false,
+  onChange,
 }) => {
   return (
     <label className="flex flex-col gap-3 w-full">
@@ -45,6 +46,7 @@ const TextInput = ({
         select={select}
         fullWidth={fullWidth}
         autoFocus={autoFocus}
+        onChange={onChange || undefined}
         InputProps={
           prefix
             ? {

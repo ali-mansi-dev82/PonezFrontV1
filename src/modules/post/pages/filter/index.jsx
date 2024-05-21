@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { useCity } from "../../../../context/CityContext";
@@ -10,7 +10,6 @@ import FilterPostMobile from "./mobile";
 function NewPost({ isMobile }) {
   const { city } = useCity();
   const { slug } = useParams();
-  // const [loading, setLoading] = useState(true);
 
   const categoryQuery = useMutation({
     mutationFn: FindChildrenCategorybySlugFn.bind(this, slug ?? "root"),
