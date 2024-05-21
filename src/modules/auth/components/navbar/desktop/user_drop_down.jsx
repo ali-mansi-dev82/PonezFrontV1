@@ -60,6 +60,7 @@ const UserDropDown = ({ isAuth, mobile, loginFn }) => {
   };
 
   const authDropDownItems = [
+    { title: "آگهی ها من", link: `/my-panel/my-post` },
     { title: "یادداشت ها", link: `/my-panel/notes` },
     { title: "نشان ها", link: `/my-panel/saved` },
     { title: "بازدید های اخیر", link: `/my-panel/recent` },

@@ -2,7 +2,6 @@ import { ImageOffIcon, Info, Share2Icon, TrashIcon } from "lucide-react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { tomanCurrencyFormat } from "../../../shared/util/numberFormat";
-import { truncateString } from "../../../shared/util/string";
 import { API_UPLOADED_IMAGES_URL } from "../../../config";
 import { Button, Dialog, DialogContent } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
@@ -52,7 +51,7 @@ function MyPostCard({
         <div className="flex flex-row gap-2 justify-between">
           <div className="flex flex-col justify-between w-max h-[130px] max-w-[50%]">
             <h1 className="text-gray-700 text-sm h-[70px] font-semibold w-full leading-7 line-clamp-2">
-              {truncateString(title, 40)}
+              {title}
             </h1>
             <div className="flex flex-col gap-1">
               <div className="text-gray-400 text-xs py-1">

@@ -49,7 +49,7 @@ const items = [
 
 const ButtonNavigation = ({ buttonNavigation, selected = "posts" }) => {
   return (
-    <div className="fixed flex flex-row items-center justify-around bottom-0 left-0 right-0 bg-white border-t border-gray-200 h-[65px] text-gray-400 px-3 gap-3">
+    <div className="fixed flex flex-row items-center justify-around bottom-0 left-0 right-0 bg-white border-t border-gray-200 h-[65px] text-gray-400 px-3 gap-3 z-50">
       {buttonNavigation
         ? buttonNavigation
         : items.map((value) => (

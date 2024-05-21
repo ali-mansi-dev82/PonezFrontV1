@@ -4,17 +4,27 @@ import SidePanel from "../side_panel";
 import MyPostCard from "../../../post/components/my_post_card";
 import BasicLayoutDesktop from "../../../../layouts/desktop/basic_layout";
 
-const MyPostDesktop = ({ isPending, data, handleOnDelete }) => {
+const MyPostDesktop = ({ isPending, data, handleOnDelete, mySpecials }) => {
   return (
-    <BasicLayoutDesktop >
+    <BasicLayoutDesktop>
       <SidePanel />
       <div className="grid grid-cols-2 h-max w-4/5 gap-5">
         {!isPending ? (
           <>
             {data?.length > 0 ? (
-              data?.map((value, index) => (
-                <MyPostCard onDelete={handleOnDelete} key={index} {...value} />
-              ))
+              data?.map((value, index) => {
+                const special = mySpecials?.filter(
+                  (item) => value._id === item.post
+                )?.length;
+                return (
+                  <MyPostCard
+                    onDelete={handleOnDelete}
+                    key={index}
+                    {...value}
+                    special={special}
+                  />
+                );
+              })
             ) : (
               <div className="flex flex-col justify-center gap-4 items-center grid-cols-3 col-span-3 py-[30vh]">
                 <span className="text-xs text-gray-400">

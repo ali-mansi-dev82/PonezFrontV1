@@ -41,13 +41,11 @@ const NavbarDektop = ({ isAuthenticated, userData, searchText }) => {
           mobile={userData?.mobile}
           loginFn={setShowAuthModal.bind(this, true)}
         />
-        <Button
-          startIcon={<Plus size={20} />}
-          href={`/new`}
-          variant="contained"
-        >
-          ثبت آگهی
-        </Button>
+        <Link to={`/new`}>
+          <Button startIcon={<Plus size={20} />} variant="contained">
+            ثبت آگهی
+          </Button>
+        </Link>
         {showAuthModal && (
           <AuthModal
             open={showAuthModal}

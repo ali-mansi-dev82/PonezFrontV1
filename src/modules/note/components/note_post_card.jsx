@@ -1,7 +1,6 @@
 import { ImageOffIcon, Info, NotebookPenIcon, TrashIcon } from "lucide-react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { truncateString } from "../../../shared/util/string";
 import { API_UPLOADED_IMAGES_URL } from "../../../config";
 import { Button, Dialog, DialogContent, IconButton } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
@@ -54,12 +53,12 @@ function MyNotePostCard({
           )}
         </div>
         <div className="flex flex-col justify-between h-full w-[calc(100%-80px)] ">
-          <h1 className="text-gray-700 text-sm h-max font-semibold w-full leading-7">
-            {truncateString(title, 30)}
+          <h1 className="text-gray-700 text-sm h-max font-semibold w-full leading-7 line-clamp-1">
+            {title}
           </h1>
           <div className="flex flex-row items-center gap-1 text-gray-500 text-xs pt-8">
             <NotebookPenIcon size={12} className="stroke-[1px]" />
-            <p>{truncateString(savedContent, 20)}</p>
+            <p className="line-clamp-1">{savedContent}</p>
           </div>
           <div className=" absolute bottom-2 left-2" onClick={handleOpen}>
             <IconButton size="medium">

@@ -2,16 +2,6 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-/* @font-face {
-  font-family: 'Yekan';
-  src: url('./font/Yekan.ttf');
-}
-
-@font-face {
-  font-family: 'Nazanin';
-  src: url('./font/B-NAZANIN.TTF');
-} */
-
 @layer base {
   @font-face {
     font-family: "IranYekanX";
@@ -21,12 +11,6 @@
     src: url("./../public/font/IranYekanX.ttf") format("woff2");
   }
 }
-.IranYekanX {
-  font-family: "IranYekanX";
-}
-.Fanum {
-  font-family: "Fanum" !important;
-}
 @font-face {
   font-family: "IranYekanX";
   src: url("./../public/font/IranYekanX.ttf");
@@ -35,12 +19,6 @@
   font-family: "Fanum";
   src: url("./../public/font/Shabnam-FD-WOL.ttf");
 }
-
-/* @font-face {
-  font-family: 'Dana';
-  src: url('./font/Dana-medium.woff');
-} */
-
 @font-face {
   font-family: "IRANSans";
   src: url("./../public/font/IRANSansWeb.cdb118d6.woff2");
@@ -48,84 +26,23 @@
 
 body {
   margin: 0;
-  font-family: "IranYekanX", "IRANSans", -apple-system, BlinkMacSystemFont,
-    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-    "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "IranYekanX", "IRANSans", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* direction: rtl; */
-}
-
-* {
-  font-family: "IranYekanX", "IRANSans" !important;
   direction: rtl;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.IranYekanX {
+  font-family: "IranYekanX";
+}
+.Fanum {
+  font-family: "Fanum" !important;
+}
+* {
+  font-family: "IranYekanX", "IRANSans";
+  direction: rtl;
 }
 :root {
   background-color: white;
-}
-
-.lds-ellipsis,
-.lds-ellipsis div {
-  box-sizing: border-box;
-}
-.lds-ellipsis {
-  display: inline-block;
-  position: relative;
-  width: 70px;
-  height: 40px;
-}
-.lds-ellipsis div {
-  position: absolute;
-  top: 40%;
-  transform: translateY(50%);
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: white;
-  animation-timing-function: cubic-bezier(0, 1, 1, 0);
-}
-.lds-ellipsis div:nth-child(1) {
-  left: 8px;
-  animation: lds-ellipsis1 0.6s infinite;
-}
-.lds-ellipsis div:nth-child(2) {
-  left: 8px;
-  animation: lds-ellipsis2 0.6s infinite;
-}
-.lds-ellipsis div:nth-child(3) {
-  left: 32px;
-  animation: lds-ellipsis2 0.6s infinite;
-}
-.lds-ellipsis div:nth-child(4) {
-  left: 56px;
-  animation: lds-ellipsis3 0.6s infinite;
-}
-@keyframes lds-ellipsis1 {
-  0% {
-    transform: scale(0);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-@keyframes lds-ellipsis3 {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(0);
-  }
-}
-@keyframes lds-ellipsis2 {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(24px, 0);
-  }
 }
