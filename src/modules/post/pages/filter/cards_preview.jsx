@@ -13,7 +13,7 @@ const CardsPreview = ({ categoryData, isPending, data, city }) => {
         </div>
       )}
       {isPending ? (
-        skeleton.map((value) => <PostCardSkeleton key={value} />)
+        skeleton.map((_, index) => <PostCardSkeleton key={index} />)
       ) : data?.result?.length > 0 ? (
         data?.result?.map((value, index) => <PostCard key={index} {...value} />)
       ) : (
