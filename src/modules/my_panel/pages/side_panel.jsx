@@ -8,7 +8,7 @@ import {
   NotebookPenIcon,
   UserIcon,
 } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 
 const SidePanel = () => {
@@ -18,7 +18,6 @@ const SidePanel = () => {
     await logout();
     navigate(`/s/`);
   };
-  const url = window.location.pathname;
   const items = [
     {
       title: "اگهی های من",
@@ -57,26 +56,22 @@ const SidePanel = () => {
         <hr />
         {items?.map((value, index, array) => (
           <li key={index} className="text-sm py-4">
-            <Link
+            <NavLink
               to={value.link}
-              className={`w-full flex flex-row items-center justify-between gap-2 ${
-                url === value?.link && ` text-primary-40`
-              }`}
+              className={({ isActive }) =>
+                isActive && "text-primary-40 font-bold"
+              }
             >
               <div className="flex flex-row items-center gap-2">
                 {value.icon}
-                <span
-                  className={`text-sm ${url === value?.link && `font-bold`}`}
-                >
-                  {value.title}
-                </span>
+                <span className={`text-sm`}>{value.title}</span>
               </div>
               <span>
                 <span className="lg:hidden">
                   <ChevronLeftIcon size={16} />
                 </span>
               </span>
-            </Link>
+            </NavLink>
           </li>
         ))}
         <hr className="text-sm" />
