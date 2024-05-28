@@ -8,27 +8,28 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url("./../public/font/IranYekanX.ttf") format("woff2");
+    src: url("./../public/font/IranYekanX_medium.woff2") format(".woff2");
   }
 }
 @font-face {
   font-family: "IranYekanX";
-  src: url("./../public/font/IranYekanX.ttf");
+  src: url("./../public/font/IranYekanX_medium.ttf") format(".ttf");
 }
 @font-face {
   font-family: "Fanum";
-  src: url("./../public/font/Shabnam-FD-WOL.ttf");
+  src: url("./../public/font/Shabnam-FD-WOL.ttf") format(".ttf");
 }
 @font-face {
   font-family: "IRANSans";
-  src: url("./../public/font/IRANSansWeb.cdb118d6.woff2");
+  src: url("./../public/font/IranSans.ttf") format(".ttf");
+  src: url("./../public/font/IranSans.woff") format(".woff");
 }
 
 body {
   margin: 0;
-  font-family: "IranYekanX", "IRANSans", -apple-system,
-    BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "IranYekanX", "IRANSans", "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   direction: rtl;
@@ -37,6 +38,9 @@ body {
   font-family: "IranYekanX";
 }
 .Fanum {
+  font-family: "Fanum" !important;
+}
+span.Fanum {
   font-family: "Fanum" !important;
 }
 * {
