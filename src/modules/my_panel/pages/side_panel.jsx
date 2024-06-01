@@ -54,12 +54,12 @@ const SidePanel = () => {
           </span>
         </li>
         <hr />
-        {items?.map((value, index, array) => (
+        {items?.map((value, index) => (
           <li key={index} className="text-sm py-4">
             <NavLink
               to={value.link}
               className={({ isActive }) =>
-                isActive && "text-primary-40 font-bold"
+                `flex justify-between items-center ${isActive && "text-primary-40 font-bold"}`
               }
             >
               <div className="flex flex-row items-center gap-2">

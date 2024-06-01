@@ -23,35 +23,42 @@ const SpecialPost = () => {
     <div className="flex flex-col gap-4 overflow-hidden">
       <h6>جایگاه ویژه</h6>
       <div className="slider-container z-10">
-        <Swiper
-          slidesPerView={4}
-          breakpoints={{
-            100: {
-              slidesPerView: 2,
-              spaceBetween: 20,
-            },
-            768: {
-              slidesPerView: 3,
-              spaceBetween: 26,
-            },
-            1024: {
-              slidesPerView: 5,
-              spaceBetween: 30,
-            },
-          }}
-          pagination={{ clickable: true }}
-          modules={[Pagination]}
-          className="mySwiper"
-        >
-          {specialPostQuery?.isPending
-            ? skeleton.map((value, index) => <PostCardSkeleton key={index} />)
-            : specialPostQuery?.data?.length > 0 &&
-              specialPostQuery?.data?.map((value, index) => (
+        {specialPostQuery?.isPending ? (
+          <div className="flex flex-row gap-4">
+            {skeleton.map((value, index) => (
+              <PostCardSkeleton key={index} />
+            ))}
+          </div>
+        ) : (
+          specialPostQuery?.data?.length > 0 && (
+            <Swiper
+              slidesPerView={4}
+              breakpoints={{
+                100: {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                768: {
+                  slidesPerView: 3,
+                  spaceBetween: 26,
+                },
+                1024: {
+                  slidesPerView: 5,
+                  spaceBetween: 30,
+                },
+              }}
+              pagination={{ clickable: true }}
+              modules={[Pagination]}
+              className="mySwiper"
+            >
+              {specialPostQuery?.data?.map((value, index) => (
                 <SwiperSlide>
                   <SpecialPostCard key={index} {...value} />
                 </SwiperSlide>
               ))}
-        </Swiper>
+            </Swiper>
+          )
+        )}
       </div>
     </div>
   );
