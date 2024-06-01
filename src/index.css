@@ -13,16 +13,15 @@
 }
 @font-face {
   font-family: "IranYekanX";
-  src: url("./../public/font/IranYekanX_medium.ttf") format(".ttf");
+  src: url("./../public/font/IranYekanX_medium.ttf");
 }
 @font-face {
   font-family: "Fanum";
-  src: url("./../public/font/Shabnam-FD-WOL.ttf") format(".ttf");
+  src: url("./../public/font/Shabnam-FD-WOL.ttf");
 }
 @font-face {
   font-family: "IRANSans";
-  src: url("./../public/font/IranSans.ttf") format(".ttf");
-  src: url("./../public/font/IranSans.woff") format(".woff");
+  src: url("./../public/font/IranSans.ttf");
 }
 
 body {
