@@ -1,22 +1,21 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Index from "./modules/index";
-import Posts from "./modules/post/pages/filter/index";
-import NewPost from "./modules/post/pages/create/index";
-import Post from "./modules/post/pages/find_one/index";
-import AuthGuard from "./middleware/AuthGuard";
-import TestMui from "./modules/test/index";
-//panel
-import MyPost from "./modules/my_panel/pages/my_post";
-import MySaved from "./modules/my_panel/pages/my_saved";
-import MyNotes from "./modules/my_panel/pages/my_notes";
-import MyRecent from "./modules/my_panel/pages/recent";
-import EditPost from "./modules/post/pages/edit";
-//errors
-import NotFound from "./modules/error/pages/not_found";
-import MyPanel from "./modules/my_panel/pages";
+import React from "react";
+
 import { useResponsive } from "./context/ResponsiveContext";
 import ShowCategory from "./modules/category/pages/show";
+import NewPost from "./modules/post/pages/create/index";
+import MySaved from "./modules/my_panel/pages/my_saved";
+import MyNotes from "./modules/my_panel/pages/my_notes";
+import Post from "./modules/post/pages/find_one/index";
+import MyRecent from "./modules/my_panel/pages/recent";
+import NotFound from "./modules/error/pages/not_found";
+import Posts from "./modules/post/pages/filter/index";
+import MyPost from "./modules/my_panel/pages/my_post";
+import EditPost from "./modules/post/pages/edit";
+import AuthGuard from "./middleware/AuthGuard";
+import MyPanel from "./modules/my_panel/pages";
+import TestMui from "./modules/test/index";
+import Index from "./modules/index";
 
 const App = () => {
   const { isMobile } = useResponsive();
@@ -31,10 +30,7 @@ const App = () => {
         path="/new"
         element={<AuthGuard component={<NewPost isMobile={isMobile} />} />}
       />
-      <Route
-        path="/category"
-        element={<ShowCategory isMobile={isMobile} />}
-      />
+      <Route path="/category" element={<ShowCategory isMobile={isMobile} />} />
       <Route path="/my-panel">
         <Route
           path=""

@@ -1,21 +1,22 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
-import { checkOtpSchema } from "./schemas";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { setAccessTokenCookies } from "../../../../shared/util/accessTokenCookie";
-import { API_AUTH_URL } from "../../../../config";
-import { secontTommss } from "../../../../shared/util/functions";
-import { useAuth } from "../../../../context/AuthContext";
-import TextInput from "../../../../shared/components/input/textInput";
 import {
-  Button,
-  Chip,
+  InputAdornment,
   DialogActions,
   DialogContent,
-  InputAdornment,
+  Button,
+  Chip,
 } from "@mui/material";
+import React, { useState, useEffect, useRef } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+
+import { setAccessTokenCookies } from "../../../../shared/util/accessTokenCookie";
+import TextInput from "../../../../shared/components/input/textInput";
+import { secontTommss } from "../../../../shared/util/functions";
+import { useAuth } from "../../../../context/AuthContext";
+import { API_AUTH_URL } from "../../../../config";
+import { checkOtpSchema } from "./schemas";
 
 const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
   const [loading, setLoading] = useState(false);

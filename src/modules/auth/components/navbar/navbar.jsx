@@ -1,9 +1,10 @@
-import React from "react";
-import MainContainer from "../../../../shared/components/container";
 import { AppBar } from "@mui/material";
-import NavbarMobile from "./mobile";
-import NavbarDektop from "./desktop";
+import React from "react";
+
 import { useResponsive } from "../../../../context/ResponsiveContext";
+import MainContainer from "../../../../shared/components/container";
+import NavbarDektop from "./desktop";
+import NavbarMobile from "./mobile";
 
 const Navbar = ({
   userData,

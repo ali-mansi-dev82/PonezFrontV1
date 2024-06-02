@@ -1,6 +1,7 @@
-import React from "react";
-import { TrashIcon } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
+import { TrashIcon } from "lucide-react";
+import React from "react";
+
 import { DeleteImageFn } from "../mutation";
 
 const PreviewImage = ({

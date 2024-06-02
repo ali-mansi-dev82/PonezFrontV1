@@ -1,8 +1,9 @@
-import React from "react";
 import { Button } from "@mui/material";
-import SidePanel from "../side_panel";
-import MyPostCard from "../../../post/components/my_post_card";
+import React from "react";
+
 import BasicLayoutDesktop from "../../../../layouts/desktop/basic_layout";
+import MyPostCard from "../../../post/components/my_post_card";
+import SidePanel from "../side_panel";
 
 const MyPostDesktop = ({ isPending, data, handleOnDelete, mySpecials }) => {
   return (

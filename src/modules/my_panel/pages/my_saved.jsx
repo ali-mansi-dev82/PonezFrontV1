@@ -1,8 +1,9 @@
-import React from "react";
 import { useQuery } from "@tanstack/react-query";
+import React from "react";
+
+import MySavedDesktop from "./desktop/my_saved";
 import { UserSavedFn } from "../../user/query";
 import MySavedMobile from "./mobile/my_saved";
-import MySavedDesktop from "./desktop/my_saved";
 
 const MySaved = ({isMobile}) => {
   const myPostQuery = useQuery({

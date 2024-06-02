@@ -1,7 +1,8 @@
-import React from "react";
 import { Button } from "@mui/material";
-import MyPostCard from "../../../post/components/my_post_card";
+import React from "react";
+
 import SingleLayoutMobile from "../../../../layouts/mobile/single_layout";
+import MyPostCard from "../../../post/components/my_post_card";
 import EmptyState from "../empty_state";
 
 const MyPostMobile = ({ isPending, data, handleOnDelete, mySpecials }) => {

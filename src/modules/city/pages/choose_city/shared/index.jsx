@@ -1,7 +1,8 @@
-import React from "react";
 import { Autocomplete, Button, TextField } from "@mui/material";
-import { useCity } from "../../../../../context/CityContext";
 import { useQuery } from "@tanstack/react-query";
+import React from "react";
+
+import { useCity } from "../../../../../context/CityContext";
 import { FindCityFn } from "../../../query";
 
 const ChooseCity = () => {

@@ -1,9 +1,10 @@
-import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { UserPostsFn } from "../../user/query";
-import MyPostMobile from "./mobile/my_post";
-import MyPostDesktop from "./desktop/my_post";
+import React from "react";
+
 import { FindMySpecailFn } from "../../special/query";
+import { UserPostsFn } from "../../user/query";
+import MyPostDesktop from "./desktop/my_post";
+import MyPostMobile from "./mobile/my_post";
 
 const Index = ({ isMobile }) => {
   const myPostQuery = useQuery({

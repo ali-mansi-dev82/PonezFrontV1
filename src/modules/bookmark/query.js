@@ -1,6 +1,7 @@
 import axios from "axios";
-import { API_BOOKMARK_URL } from "../../config";
+
 import { getAccessTokenCookies } from "../../shared/util/accessTokenCookie";
+import { API_BOOKMARK_URL } from "../../config";
 
 export const CheckPostisBookmark = async (id) => {
   const token = await getAccessTokenCookies();

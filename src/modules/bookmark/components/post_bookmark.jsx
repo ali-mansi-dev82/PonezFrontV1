@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
 import { IconButton, Tooltip } from "@mui/material";
-import { BookmarkIcon } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
+import React, { useEffect, useState } from "react";
+import { BookmarkIcon } from "lucide-react";
+
+import { useAuth } from "../../../context/AuthContext";
 import { SavePostBookmark } from "../mutation";
 import { CheckPostisBookmark } from "../query";
-import { useAuth } from "../../../context/AuthContext";
 
 const PostBookmark = ({ postId }) => {
   const { isAuthenticated } = useAuth();

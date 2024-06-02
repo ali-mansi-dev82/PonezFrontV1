@@ -1,7 +1,8 @@
 import React from "react";
+
+import BasicLayoutDesktop from "../../../../layouts/desktop/basic_layout";
 import MyNotePostCard from "../../../note/components/note_post_card";
 import SidePanel from "../side_panel";
-import BasicLayoutDesktop from "../../../../layouts/desktop/basic_layout";
 
 const MyNotesDesktop = ({ isPending, data, handleOnDelete }) => {
   return (

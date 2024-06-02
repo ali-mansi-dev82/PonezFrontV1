@@ -1,4 +1,5 @@
 import React from "react";
+
 import SingleLayoutMobile from "../../../../layouts/mobile/single_layout";
 import MyNotePostCard from "../../../note/components/note_post_card";
 import EmptyState from "../empty_state";

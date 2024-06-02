@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from "react";
 import {
-  Button,
-  Chip,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
   FormControlLabel,
-  Radio,
+  DialogContent,
+  DialogActions,
+  DialogTitle,
   RadioGroup,
   TextField,
+  Button,
+  Dialog,
+  Radio,
+  Chip,
 } from "@mui/material";
 import {  ChevronLeft, MoveRightIcon } from "lucide-react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+
+import Spinner from "../../../../shared/components/spiner";
 import { useCity } from "../../../../context/CityContext";
 import { FindStateFn } from "../../../state/query";
-import Spinner from "../../../../shared/components/spiner";
 
 const SelectCity = ({ onClose, isMobile }) => {
   const { city, setCity } = useCity();

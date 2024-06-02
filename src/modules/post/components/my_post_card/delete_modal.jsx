@@ -1,7 +1,8 @@
-import { Info } from "lucide-react";
-import React from "react";
 import { Button, Dialog, DialogContent } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
+import { Info } from "lucide-react";
+import React from "react";
+
 import { DeletePostFn } from "../../mutation";
 
 function DeleteModal({ onDelete, _id, open, setOpen }) {

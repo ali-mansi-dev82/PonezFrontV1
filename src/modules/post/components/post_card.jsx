@@ -1,9 +1,10 @@
 import { ImageOffIcon, ImagesIcon } from "lucide-react";
-import React from "react";
 import { Link } from "react-router-dom";
+import React from "react";
+
 import { tomanCurrencyFormat } from "../../../shared/util/numberFormat";
-import { API_UPLOADED_IMAGES_URL } from "../../../config";
 import { dateFormate } from "../../../shared/util/dateFormat";
+import { API_UPLOADED_IMAGES_URL } from "../../../config";
 
 function PostCard({ title, images, district, slug, amount, updatedAt }) {
   return (

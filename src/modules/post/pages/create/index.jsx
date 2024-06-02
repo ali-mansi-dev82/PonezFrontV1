@@ -1,4 +1,5 @@
 import React from "react";
+
 import CreatePostDesktop from "./desktop";
 import CreatePostMobile from "./mobile";
 

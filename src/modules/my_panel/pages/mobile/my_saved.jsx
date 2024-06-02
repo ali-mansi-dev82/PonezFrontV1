@@ -1,6 +1,7 @@
 import React from "react";
-import SavedPostCard from "../../../bookmark/components/saved_post_card";
+
 import SingleLayoutMobile from "../../../../layouts/mobile/single_layout";
+import SavedPostCard from "../../../bookmark/components/saved_post_card";
 import EmptyState from "../empty_state";
 
 const MySavedMobile = ({ isPending, data, handleOnDelete }) => {

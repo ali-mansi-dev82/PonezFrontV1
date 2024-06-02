@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import OptionComponent from "../../components/option";
-import UploadImages from "../../../image/components/upload_image";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { CreatePostSchema } from "../../schema";
-import { FindOptionbyCategorySlugFn } from "../../../option/query";
-import { CreatePostFn } from "../../mutation";
-import { uploadImageFn } from "../../../image/mutation";
 import { Button, InputAdornment, TextField } from "@mui/material";
-import TextInput from "../../../../shared/components/input/textInput";
-import { CategoryIconsXs } from "../../../category/category_icons";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { CheckCircle, ChevronLeftIcon } from "lucide-react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+
+import TextInput from "../../../../shared/components/input/textInput";
+import { FindOptionbyCategorySlugFn } from "../../../option/query";
+import { CategoryIconsXs } from "../../../category/category_icons";
+import UploadImages from "../../../image/components/upload_image";
+import { uploadImageFn } from "../../../image/mutation";
+import OptionComponent from "../../components/option";
+import { CreatePostSchema } from "../../schema";
+import { CreatePostFn } from "../../mutation";
 
 const New = ({ name, id, slug, icon }) => {
   const [open, setOpen] = useState(false);

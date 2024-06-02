@@ -1,6 +1,7 @@
 import axios from "axios";
-import { API_AUTH_URL } from "../../config";
+
 import { getAccessTokenCookies } from "../../shared/util/accessTokenCookie";
+import { API_AUTH_URL } from "../../config";
 
 export const SendOtpFn = async (data) => {
   return await axios.post(`${API_AUTH_URL}/send-otp/`, data);

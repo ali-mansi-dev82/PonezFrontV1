@@ -1,12 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
-import React from "react";
-import { SearchCategoryFn } from "../../../../category/query";
-import SearchMobile from "./mobile";
-import SearchDektop from "./desktop";
-import { useCity } from "../../../../../context/CityContext";
 import { TextField } from "@mui/material";
-import Button from "../../../../../shared/components/button";
 import { MapPinIcon } from "lucide-react";
+import React from "react";
+
+import { SearchCategoryFn } from "../../../../category/query";
+import { useCity } from "../../../../../context/CityContext";
+import Button from "../../../../../shared/components/button";
 
 const Search = ({ open, onOpen, onClose, isMobile, openCity }) => {
   const { city } = useCity();
@@ -47,24 +46,6 @@ const Search = ({ open, onOpen, onClose, isMobile, openCity }) => {
           ),
         }}
       />
-      {/*  */}
-      {/* {isMobile ? (
-        <SearchMobile
-          open={open}
-          onOpen={onOpen}
-          onClose={onClose}
-          searchFn={searchFn}
-          searchData={searchMutation}
-        />
-      ) : (
-        <SearchDektop
-          open={open}
-          onOpen={onOpen}
-          onClose={onClose}
-          searchFn={searchFn}
-          searchData={searchMutation}
-        />
-      )} */}
     </div>
   );
 };

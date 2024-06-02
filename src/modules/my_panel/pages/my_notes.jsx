@@ -1,8 +1,9 @@
-import React from "react";
 import { useQuery } from "@tanstack/react-query";
+import React from "react";
+
+import MyNotesDesktop from "./desktop/my_notes";
 import { UserNoteFn } from "../../user/query";
 import MyNotesMobile from "./mobile/my_notes";
-import MyNotesDesktop from "./desktop/my_notes";
 
 const Index = ({isMobile}) => {
   const myNotesQuery = useQuery({

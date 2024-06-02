@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ChooseCityPage from "../modules/city/pages/choose_city";
-import Spinner from "../shared/components/spiner";
-import MainContainer from "../shared/components/container";
-import { useCity } from "../context/CityContext";
+
 import { getCityCookie, setCityCookie } from "../shared/util/cityCookie";
+import ChooseCityPage from "../modules/city/pages/choose_city";
+import MainContainer from "../shared/components/container";
+import Spinner from "../shared/components/spiner";
+import { useCity } from "../context/CityContext";
 
 const Home = ({ isMobile }) => {
   const { city, setCity } = useCity();

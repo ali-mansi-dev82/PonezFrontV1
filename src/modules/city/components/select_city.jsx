@@ -1,6 +1,7 @@
+import { Autocomplete, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Autocomplete, TextField } from "@mui/material";
+
 import { FindCityFn } from "../query";
 
 const SelectCity = ({ placeholder, onChange }) => {

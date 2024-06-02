@@ -1,9 +1,10 @@
+import { useMutation } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+import { FindPostbySlugFn } from "../../query";
 import PostDesktop from "./desktop";
 import PostMobile from "./mobile";
-import { useParams } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
-import { FindPostbySlugFn } from "../../query";
 
 const Index = ({isMobile}) => {
   const { slug } = useParams();

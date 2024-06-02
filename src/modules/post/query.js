@@ -1,6 +1,7 @@
 import axios from "axios";
-import { API_POST_URL } from "../../config";
+
 import { getAccessTokenCookies } from "../../shared/util/accessTokenCookie";
+import { API_POST_URL } from "../../config";
 
 export const FindPostbySlugFn = async (slug) => {
   try {

@@ -1,9 +1,10 @@
 import { ImageOffIcon, Info, NotebookPenIcon, TrashIcon } from "lucide-react";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { API_UPLOADED_IMAGES_URL } from "../../../config";
 import { Button, Dialog, DialogContent, IconButton } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
+import { API_UPLOADED_IMAGES_URL } from "../../../config";
 import { DeleteNoteFn } from "../mutation";
 
 function MyNotePostCard({
