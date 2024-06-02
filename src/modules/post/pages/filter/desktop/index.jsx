@@ -1,11 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { CategoryIconsSm } from "../../../../category/category_icons";
-import BasicLayoutDesktop from "../../../../../layouts/desktop/basic_layout";
-import TextSkeleton from "../../../components/text_skeleton";
 import { MoveRightIcon } from "lucide-react";
-import SpecialPost from "../special_post";
+import { Link } from "react-router-dom";
+import React from "react";
+
+import BasicLayoutDesktop from "../../../../../layouts/desktop/basic_layout";
+import { CategoryIconsSm } from "../../../../category/category_icons";
+import TextSkeleton from "../../../components/text_skeleton";
 import CardsPreview from "../cards_preview";
+import SpecialPost from "../special_post";
 
 function FilterPostDesktop({
   slug,

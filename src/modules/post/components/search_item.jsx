@@ -1,6 +1,7 @@
 import { ChevronLeftIcon, MoveRight } from "lucide-react";
-import React from "react";
 import { Link } from "react-router-dom";
+import React from "react";
+
 import { CategoryIconsSm } from "../../category/category_icons";
 
 const SearchItemComponent = ({ id, slug, name, isBack = false, icon = "" }) => {

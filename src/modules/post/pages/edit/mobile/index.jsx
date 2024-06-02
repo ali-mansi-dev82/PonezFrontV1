@@ -1,18 +1,19 @@
-import React from "react";
-import TextInput from "../../../../../shared/components/input/textInput";
 import {
-  Button,
   CircularProgress,
   InputAdornment,
   TextField,
+  Button,
 } from "@mui/material";
+import { CheckCircle, ChevronLeftIcon } from "lucide-react";
+import { Link } from "react-router-dom";
+import React from "react";
+
+import SingleLayoutMobile from "../../../../../layouts/mobile/single_layout";
+import TextInput from "../../../../../shared/components/input/textInput";
+import { CategoryIconsXs } from "../../../../category/category_icons";
 import UploadImages from "../../../../image/components/upload_image";
 import { uploadImageFn } from "../../../../image/mutation";
 import OptionComponent from "../../../components/option";
-import SingleLayoutMobile from "../../../../../layouts/mobile/single_layout";
-import { CategoryIconsXs } from "../../../../category/category_icons";
-import { CheckCircle, ChevronLeftIcon } from "lucide-react";
-import { Link } from "react-router-dom";
 
 const EditPostMobile = ({
   loading,

@@ -1,7 +1,8 @@
 import React from "react";
-import SidePanel from "../side_panel";
-import MyRecentPostCard from "../../components/recent_post_card";
+
 import BasicLayoutDesktop from "../../../../layouts/desktop/basic_layout";
+import MyRecentPostCard from "../../components/recent_post_card";
+import SidePanel from "../side_panel";
 
 const MyRecentDesktop = ({ isPending, data }) => {
   return (

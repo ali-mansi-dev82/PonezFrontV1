@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { API_CATEGORY_URL } from "../../config";
 
 export const FindCategoryFn = async () => {

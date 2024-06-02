@@ -1,25 +1,26 @@
-import React, { useState } from "react";
-import { Mail, Phone, Share2Icon, X } from "lucide-react";
-import Images from "../images";
 import {
-  Alert,
-  Button,
   CircularProgress,
-  Dialog,
   DialogContent,
   DialogTitle,
   IconButton,
   Tooltip,
+  Button,
+  Dialog,
+  Alert,
 } from "@mui/material";
-import SaveNote from "../../../../note/components/save_note";
-import { dateFormate } from "../../../../../shared/util/dateFormat";
-import PostBookmark from "../../../../bookmark/components/post_bookmark";
-import PostOptions from "../options";
-import PostDescription from "../description";
-import PostBreadcrumbs from "../post_breadcrumbs";
-import BasicLayoutDesktop from "../../../../../layouts/desktop/basic_layout";
-import { tomanCurrencyFormat } from "../../../../../shared/util/numberFormat";
+import { Mail, Phone, Share2Icon, X } from "lucide-react";
 import { RWebShare } from "react-web-share";
+import React, { useState } from "react";
+
+import { tomanCurrencyFormat } from "../../../../../shared/util/numberFormat";
+import BasicLayoutDesktop from "../../../../../layouts/desktop/basic_layout";
+import PostBookmark from "../../../../bookmark/components/post_bookmark";
+import { dateFormate } from "../../../../../shared/util/dateFormat";
+import SaveNote from "../../../../note/components/save_note";
+import PostBreadcrumbs from "../post_breadcrumbs";
+import PostDescription from "../description";
+import PostOptions from "../options";
+import Images from "../images";
 
 const PostDesktop = ({ loading, data }) => {
   const [showPhone, setShowPhone] = useState(false);

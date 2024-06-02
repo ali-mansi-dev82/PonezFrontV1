@@ -1,4 +1,5 @@
 import React from "react";
+
 import { ReactComponent as Empty } from "../../../../svgs/Empty State Search.svg";
 
 const EmptyState = () => {

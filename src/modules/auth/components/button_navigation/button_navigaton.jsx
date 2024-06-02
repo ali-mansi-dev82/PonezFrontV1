@@ -1,6 +1,7 @@
-import React from "react";
 import { CirclePlus, ShapesIcon, UserIcon } from "lucide-react";
 import { Link } from "react-router-dom";
+import React from "react";
+
 import { ReactComponent as Logo } from './Logo.svg';
 
 const ButtonNavigationItem = ({ selected, icon, link, title }) => {

@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+
+import { FindChildrenCategorybySlugFn } from "../../../category/query";
 import { useCity } from "../../../../context/CityContext";
 import { FindPostFn } from "../../mutation";
-import { FindChildrenCategorybySlugFn } from "../../../category/query";
 import FilterPostDesktop from "./desktop";
 import FilterPostMobile from "./mobile";
 

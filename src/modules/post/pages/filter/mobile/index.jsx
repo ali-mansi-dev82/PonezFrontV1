@@ -1,8 +1,9 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import icons from "../../../../category/category_icons";
+import React from "react";
+
 import BasicLayoutMobile from "../../../../../layouts/mobile/basic_layout";
 import TextSkeleton from "../../../components/text_skeleton";
+import icons from "../../../../category/category_icons";
 import CardsPreview from "../cards_preview";
 import SpecialPost from "../special_post";
 

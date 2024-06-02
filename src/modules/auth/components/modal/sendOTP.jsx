@@ -1,12 +1,13 @@
+import { Button, DialogActions, DialogContent } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
 import axios from "axios";
+
+import TextInput from "../../../../shared/components/input/textInput";
 import { API_AUTH_URL } from "../../../../config";
 import { sendOtpSchema } from "./schemas";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import TextInput from "../../../../shared/components/input/textInput";
-import { Button, DialogActions, DialogContent } from "@mui/material";
 
 const SendOTP = ({ setMobile, nextLevel, setExpireCode }) => {
   const [loading, setLoading] = useState(false);

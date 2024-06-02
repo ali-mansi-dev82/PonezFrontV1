@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { API_IMAGE_URL } from "../../config";
 
 export const uploadImageFn = async ({data, onUploadProgressFn = (e) => e}) => {

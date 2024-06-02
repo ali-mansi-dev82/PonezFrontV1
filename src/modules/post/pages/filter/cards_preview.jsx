@@ -1,7 +1,8 @@
 import React from "react";
-import EmptyState from "./empty_state";
+
 import PostCardSkeleton from "../../components/post_card_skeleton";
 import PostCard from "../../components/post_card";
+import EmptyState from "./empty_state";
 
 const CardsPreview = ({ categoryData, isPending, data, city }) => {
   const skeleton = "0".repeat(12).split("");

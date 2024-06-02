@@ -1,6 +1,5 @@
-import { Chip } from "@mui/material";
-import React from "react";
 import { Link } from "react-router-dom";
+import React from "react";
 
 const mostSearched = [
   {

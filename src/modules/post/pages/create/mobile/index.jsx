@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import New from "../new";
-import SearchItemComponent from "../../../components/search_item";
+import { useLocation } from "react-router-dom";
+import { TextField } from "@mui/material";
+
 import {
   FindChildrenCategorybySlugFn,
   SearchCategoryFn,
 } from "../../../../category/query";
-import { isEmpty } from "../../../../../shared/util/functions";
-import { TextField } from "@mui/material";
 import SingleLayoutMobile from "../../../../../layouts/mobile/single_layout";
+import SearchItemComponent from "../../../components/search_item";
+import { isEmpty } from "../../../../../shared/util/functions";
+import New from "../new";
 
 const CreatePostMobile = () => {
   const location = useLocation();

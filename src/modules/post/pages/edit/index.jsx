@@ -1,16 +1,17 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useMutation } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
-import { FindPostbySlugFn } from "../../query";
-import { useAuth } from "../../../../context/AuthContext";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { CreatePostSchema } from "../../schema";
+
 import { FindOptionbyCategoryIdFn } from "../../../option/query";
 import { API_UPLOADED_IMAGES_URL } from "../../../../config";
+import { useAuth } from "../../../../context/AuthContext";
+import { CreatePostSchema } from "../../schema";
+import { FindPostbySlugFn } from "../../query";
 import { UpdatePostFn } from "../../mutation";
-import EditPostMobile from "./mobile";
 import EditPostDesktop from "./desktop";
+import EditPostMobile from "./mobile";
 
 const EditPost = ({ isMobile }) => {
   const { slug } = useParams();

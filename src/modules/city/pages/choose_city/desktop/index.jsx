@@ -1,6 +1,7 @@
 import React from "react";
-import ChooseCity from "../shared";
+
 import InitialLayoutDesktop from "../../../../../layouts/desktop/initial_layout";
+import ChooseCity from "../shared";
 
 const ChooseCityDesktop = () => {
   return (

@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { API_CITY_URL } from "../../config";
 
 export const FindCityFn = async () => {

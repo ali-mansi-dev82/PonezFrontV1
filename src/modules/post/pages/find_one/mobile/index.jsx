@@ -1,22 +1,23 @@
-import React, { useState } from "react";
-import { Mail, Phone, Share2Icon } from "lucide-react";
 import {
-  Alert,
-  Button,
   CircularProgress,
-  IconButton,
   SwipeableDrawer,
+  IconButton,
+  Button,
+  Alert,
 } from "@mui/material";
-import SaveNote from "../../../../note/components/save_note";
-import { dateFormate } from "../../../../../shared/util/dateFormat";
-import PostOptions from "../options";
-import PostDescription from "../description";
-import PostBookmark from "../../../../bookmark/components/post_bookmark";
-import PostBreadcrumbs from "../post_breadcrumbs";
-import Images from "../images";
-import SingleLayoutMobile from "../../../../../layouts/mobile/single_layout";
-import { tomanCurrencyFormat } from "../../../../../shared/util/numberFormat";
+import { Mail, Phone, Share2Icon } from "lucide-react";
 import { RWebShare } from "react-web-share";
+import React, { useState } from "react";
+
+import { tomanCurrencyFormat } from "../../../../../shared/util/numberFormat";
+import SingleLayoutMobile from "../../../../../layouts/mobile/single_layout";
+import PostBookmark from "../../../../bookmark/components/post_bookmark";
+import { dateFormate } from "../../../../../shared/util/dateFormat";
+import SaveNote from "../../../../note/components/save_note";
+import PostBreadcrumbs from "../post_breadcrumbs";
+import PostDescription from "../description";
+import PostOptions from "../options";
+import Images from "../images";
 
 const PostMobile = ({ loading, data }) => {
   const [showPhone, setShowPhone] = useState(false);

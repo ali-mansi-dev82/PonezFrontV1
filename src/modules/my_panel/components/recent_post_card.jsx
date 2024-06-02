@@ -1,10 +1,11 @@
 import { ImageOffIcon, Share2Icon } from "lucide-react";
-import React from "react";
-import { Link } from "react-router-dom";
-import { API_UPLOADED_IMAGES_URL } from "../../../config";
-import { dateFormate } from "../../../shared/util/dateFormat";
-import { IconButton } from "@mui/material";
 import { RWebShare } from "react-web-share";
+import { IconButton } from "@mui/material";
+import { Link } from "react-router-dom";
+import React from "react";
+
+import { dateFormate } from "../../../shared/util/dateFormat";
+import { API_UPLOADED_IMAGES_URL } from "../../../config";
 
 function MyRecentPostCard({ title, images, district, slug, createdAt }) {
   return (

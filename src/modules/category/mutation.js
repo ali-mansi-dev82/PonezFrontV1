@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { API_CATEGORY_URL } from "../../config";
 
 export const CreateCategoryFn = async (data) => {
@@ -7,6 +8,3 @@ export const CreateCategoryFn = async (data) => {
 export const UpdateCategoryFn = async (id) => {
   return await axios.put(`${API_CATEGORY_URL}/update/${id ?? ""}`);
 };
-// export const DeleteCategoryFn = async (id) => {
-//   return await axios.delete(`${API_CATEGORY_URL}/delete/${id ?? ""}`);
-// };

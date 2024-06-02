@@ -1,17 +1,18 @@
-import React from "react";
-import { FindSpecailFn } from "../../../special/query";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { useQuery } from "@tanstack/react-query";
-import SpecialPostCard from "../../../special/components/special_post_card";
-import "swiper/css";
+import { Pagination } from "swiper/modules";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import PostCardSkeleton from "../../components/post_card_skeleton";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/free-mode";
 import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
+import "swiper/css/scrollbar";
+import "swiper/css/free-mode";
+import React from "react";
+import "swiper/css";
+import "swiper/css";
+
+import SpecialPostCard from "../../../special/components/special_post_card";
+import PostCardSkeleton from "../../components/post_card_skeleton";
+import { FindSpecailFn } from "../../../special/query";
 
 const SpecialPost = () => {
   const specialPostQuery = useQuery({

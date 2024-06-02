@@ -1,6 +1,7 @@
 import axios from "axios";
-import { API_NOTE_URL } from "../../config";
+
 import { getAccessTokenCookies } from "../../shared/util/accessTokenCookie";
+import { API_NOTE_URL } from "../../config";
 
 export const SaveNoteFn = async ({ id, content }) => {
   const token = await getAccessTokenCookies();

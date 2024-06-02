@@ -1,14 +1,15 @@
-import React from "react";
 import {
-  BookmarkIcon,
-  ChevronLeftIcon,
   ClipboardPenLineIcon,
-  Clock2Icon,
-  LogOutIcon,
+  ChevronLeftIcon,
   NotebookPenIcon,
+  BookmarkIcon,
+  LogOutIcon,
+  Clock2Icon,
   UserIcon,
 } from "lucide-react";
 import { useNavigate, NavLink } from "react-router-dom";
+import React from "react";
+
 import { useAuth } from "../../../context/AuthContext";
 
 const SidePanel = () => {

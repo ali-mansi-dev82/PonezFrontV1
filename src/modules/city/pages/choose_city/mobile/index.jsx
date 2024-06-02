@@ -1,6 +1,7 @@
 import React from "react";
-import ChooseCity from "../shared";
+
 import InitialLayoutMobile from "../../../../../layouts/mobile/initial_layout";
+import ChooseCity from "../shared";
 
 const ChooseCityMobile = () => {
   return (

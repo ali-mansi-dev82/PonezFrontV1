@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { API_UPLOADED_IMAGES_URL } from "../../../../config";
 import { ImageOffIcon } from "lucide-react";
+import React, { useState } from "react";
+
+import { API_UPLOADED_IMAGES_URL } from "../../../../config";
 
 const Images = ({ images }) => {
   const [imageIndex, setImageIndex] = useState(0);

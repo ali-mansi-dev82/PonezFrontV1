@@ -1,19 +1,20 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import TextInput from "../../../../../shared/components/input/textInput";
 import {
-  Button,
   CircularProgress,
   InputAdornment,
-  Snackbar,
   TextField,
+  Snackbar,
+  Button,
 } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import { ChevronLeftIcon } from "lucide-react";
+import React from "react";
+
+import BasicLayoutDesktop from "../../../../../layouts/desktop/basic_layout";
+import TextInput from "../../../../../shared/components/input/textInput";
+import { CategoryIconsXs } from "../../../../category/category_icons";
 import UploadImages from "../../../../image/components/upload_image";
 import { uploadImageFn } from "../../../../image/mutation";
 import OptionComponent from "../../../components/option";
-import BasicLayoutDesktop from "../../../../../layouts/desktop/basic_layout";
-import { CategoryIconsXs } from "../../../../category/category_icons";
-import { ChevronLeftIcon } from "lucide-react";
 
 const EditPostDesktop = ({
   loading,

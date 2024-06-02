@@ -1,6 +1,7 @@
 import React from "react";
-import MyRecentPostCard from "../../components/recent_post_card";
+
 import SingleLayoutMobile from "../../../../layouts/mobile/single_layout";
+import MyRecentPostCard from "../../components/recent_post_card";
 import EmptyState from "../empty_state";
 
 const MyRecentMobile = ({ isPending, data }) => {

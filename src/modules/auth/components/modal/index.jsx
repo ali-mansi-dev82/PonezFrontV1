@@ -1,11 +1,12 @@
+import { Dialog, DialogTitle, IconButton } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
+import { X } from "lucide-react";
+
+import { useResponsive } from "../../../../context/ResponsiveContext";
+import { useAuth } from "../../../../context/AuthContext";
 import CheckOTP from "./checkOTP";
 import SendOTP from "./sendOTP";
-import { useAuth } from "../../../../context/AuthContext";
-import { Dialog, DialogTitle, IconButton } from "@mui/material";
-import { useResponsive } from "../../../../context/ResponsiveContext";
-import { X } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
 const AuthModal = ({
   open,
