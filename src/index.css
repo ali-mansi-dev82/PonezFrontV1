@@ -8,20 +8,20 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url("./../public/font/IranYekanX_medium.woff2") format(".woff2");
+    src: url("./../public/font/YekanBakhFaNum-Regular.woff");
   }
 }
 @font-face {
   font-family: "IranYekanX";
-  src: url("./../public/font/IranYekanX_medium.ttf");
+  src: url("./../public/font/YekanBakhFaNum-Regular.woff");
 }
 @font-face {
   font-family: "Fanum";
-  src: url("./../public/font/Shabnam-FD-WOL.ttf");
+  src: url("./../public/font/Shabnam-FD-WOL.woff");
 }
 @font-face {
   font-family: "IRANSans";
-  src: url("./../public/font/IranSans.ttf");
+  src: url("./../public/font/IranSans.woff");
 }
 
 body {
