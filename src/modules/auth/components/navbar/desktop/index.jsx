@@ -1,24 +1,21 @@
-import React, { useState } from "react";
+import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
+import { Plus } from "lucide-react";
+import React from "react";
+
+import { ReactComponent as Logo } from "../../../../../svgs/Logo.svg";
+import useToggle from "../../../../../hooks/useToggle";
+import UserDropDown from "./user_drop_down";
+import SelectCity from "../select_city";
+import Categories from "./categories";
 import AuthModal from "../../modal";
 import Search from "./search";
-import UserDropDown from "./user_drop_down";
-import { Link } from "react-router-dom";
-import Categories from "./categories";
-import SelectCity from "../select_city";
-import Button from "@mui/material/Button";
-import { Plus } from "lucide-react";
-import { ReactComponent as Logo } from "../../../../../svgs/Logo.svg";
 
-const NavbarDektop = ({ isAuthenticated, userData, searchText }) => {
-  const [showAuthModal, setShowAuthModal] = useState(false);
-  const [isCityOpen, setIsCityOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  // Search
-  const openSearch = setIsSearchOpen.bind(this, true);
-  const closeSearch = setIsSearchOpen.bind(this, false);
-  // City
-  const openCity = setIsCityOpen.bind(this, true);
-  const closeCity = setIsCityOpen.bind(this, false);
+const NavbarDektop = ({ isAuthenticated, userData }) => {
+  const [showAuthModal, toggleShowAuthModal] = useToggle(false);
+  const [isCityOpen, toggleIsCityOpen] = useToggle(false);
+  const [isSearchOpen, toggleIsSearchOpen] = useToggle(false);
+
   return (
     <>
       <div className="flex items-center gap-6 w-max">
@@ -30,16 +27,16 @@ const NavbarDektop = ({ isAuthenticated, userData, searchText }) => {
         <Categories />
         <Search
           open={isSearchOpen}
-          onOpen={openSearch}
-          onClose={closeSearch}
-          openCity={openCity}
+          onOpen={toggleIsSearchOpen}
+          onClose={toggleIsSearchOpen}
+          openCity={toggleIsCityOpen}
         />
       </div>
       <div className="flex items-center gap-10 w-max">
         <UserDropDown
           isAuth={isAuthenticated}
           mobile={userData?.mobile}
-          loginFn={setShowAuthModal.bind(this, true)}
+          loginFn={toggleShowAuthModal}
         />
         <Link to={`/new`}>
           <Button startIcon={<Plus size={20} />} variant="contained">
@@ -47,13 +44,12 @@ const NavbarDektop = ({ isAuthenticated, userData, searchText }) => {
           </Button>
         </Link>
         {showAuthModal && (
-          <AuthModal
-            open={showAuthModal}
-            onClose={setShowAuthModal.bind(this, false)}
-          />
+          <AuthModal open={showAuthModal} onClose={toggleShowAuthModal} />
         )}
 
-        {isCityOpen && <SelectCity onClose={closeCity} isMobile={false} />}
+        {isCityOpen && (
+          <SelectCity onClose={toggleIsCityOpen} isMobile={false} />
+        )}
       </div>
     </>
   );

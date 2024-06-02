@@ -7,7 +7,7 @@ import { SearchCategoryFn } from "../../../../category/query";
 import { useCity } from "../../../../../context/CityContext";
 import Button from "../../../../../shared/components/button";
 
-const Search = ({ open, onOpen, onClose, isMobile, openCity }) => {
+const Search = ({ onOpen, openCity }) => {
   const { city } = useCity();
   const searchMutation = useMutation({
     mutationFn: SearchCategoryFn,

@@ -8,10 +8,7 @@ import { useAuth } from "../../../../context/AuthContext";
 import CheckOTP from "./checkOTP";
 import SendOTP from "./sendOTP";
 
-const AuthModal = ({
-  open,
-  onClose,
-}) => {
+const AuthModal = ({ open, onClose }) => {
   const [mobile, setMobile] = useState("");
   const [expireCode, setExpireCode] = useState(0);
   const [isSendOtpLevel, setIsSendOtpLevel] = useState(true);

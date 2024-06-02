@@ -1,13 +1,15 @@
 import { useMutation } from "@tanstack/react-query";
-import React, { useState } from "react";
-import { useCity } from "../../../../../context/CityContext";
-import { SearchCategoryFn } from "../../../../category/query";
 import { MapPinIcon, PinIcon } from "lucide-react";
+import React from "react";
+
+import { SearchCategoryFn } from "../../../../category/query";
+import { useCity } from "../../../../../context/CityContext";
+import useToggle from "../../../../../hooks/useToggle";
 import SearchResult from "./search_result";
 
 const Search = ({ openCity, searchText }) => {
   const { city } = useCity();
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isSearchOpen, toggleIsSearchOpen] = useToggle(false);
   const searchMutation = useMutation({
     mutationFn: SearchCategoryFn,
   });
@@ -18,13 +20,10 @@ const Search = ({ openCity, searchText }) => {
   };
   const closeSearch = (event) => {
     event.stopPropagation();
-    setIsSearchOpen(false);
+    toggleIsSearchOpen();
   };
   return (
-    <div
-      className="w-full lg:w-[400px]"
-      onClick={setIsSearchOpen.bind(this, true)}
-    >
+    <div className="w-full lg:w-[400px]" onClick={toggleIsSearchOpen}>
       <div className="w-full flex justify-between items-center bg-gray-100 px-4 py-[10px] rounded-lg border border-gray-300">
         {searchText ? (
           <span className="text-sm">{searchText}</span>
