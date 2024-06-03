@@ -1,7 +1,8 @@
-import React from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import createRtlCache from "./rtlCatch";
 import { CacheProvider } from "@emotion/react";
+import React from "react";
+
+import createRtlCache from "./rtlCatch";
 
 const theme = createTheme({
   direction: "rtl",

@@ -1,6 +1,7 @@
-import React from "react";
-import MainContainer from "../../shared/components/container";
 import { AppBar } from "@mui/material";
+import React from "react";
+
+import MainContainer from "../../shared/components/container";
 import { ReactComponent as Logo } from "../../svgs/Logo.svg";
 
 const InitialLayoutMobile = ({ children, searchText, filter = [] }) => {

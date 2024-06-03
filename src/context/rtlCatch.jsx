@@ -1,5 +1,5 @@
-import createCache from '@emotion/cache';
 import rtlPlugin from 'stylis-plugin-rtl';
+import createCache from '@emotion/cache';
 import { prefixer } from 'stylis';
 
 const createRtlCache = () => createCache({

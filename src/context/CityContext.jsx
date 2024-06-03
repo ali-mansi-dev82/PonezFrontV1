@@ -1,6 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { getCityCookie, setCityCookie } from "../shared/util/cityCookie";
 import { useNavigate } from "react-router-dom";
+
+import { getCityCookie, setCityCookie } from "../shared/util/cityCookie";
 
 const CityContext = createContext();
 

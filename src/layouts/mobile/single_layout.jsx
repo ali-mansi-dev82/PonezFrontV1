@@ -1,8 +1,9 @@
-import React from "react";
-import ButtonNavigation from "../../modules/auth/components/button_navigation/button_navigaton";
 import { AppBar, IconButton } from "@mui/material";
 import { ChevronRightIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import React from "react";
+
+import ButtonNavigation from "../../modules/auth/components/button_navigation/button_navigaton";
 import MainContainer from "../../shared/components/container";
 
 const SingleLayoutMobile = ({

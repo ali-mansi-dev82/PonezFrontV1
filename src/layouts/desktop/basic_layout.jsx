@@ -1,7 +1,8 @@
 import React from "react";
+
 import Navbar from "../../modules/auth/components/navbar/navbar";
-import { useAuth } from "../../context/AuthContext";
 import MainContainer from "../../shared/components/container";
+import { useAuth } from "../../context/AuthContext";
 
 const BasicLayoutDesktop = ({ children, containerClass, searchText = "" }) => {
   const { isAuthenticated, user } = useAuth();
