@@ -1,11 +1,12 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
+
 import {
-  getAccessTokenCookies,
   removeAccessTokenCookies,
+  getAccessTokenCookies,
 } from "../shared/util/accessTokenCookie";
-import { UserInfoFn } from "../modules/user/query";
 import { LogoutFn } from "../modules/auth/mutations";
+import { UserInfoFn } from "../modules/user/query";
 
 const AuthContext = createContext();
 

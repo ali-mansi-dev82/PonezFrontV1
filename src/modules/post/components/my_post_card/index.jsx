@@ -8,12 +8,13 @@ import {
 } from "lucide-react";
 import { Alert, Button } from "@mui/material";
 import { RWebShare } from "react-web-share";
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import React from "react";
 
 import { tomanCurrencyFormat } from "../../../../shared/util/numberFormat";
 import { dateFormate } from "../../../../shared/util/dateFormat";
 import { API_UPLOADED_IMAGES_URL } from "../../../../config";
+import useToggle from "../../../../hooks/useToggle";
 import SpecialModal from "./special_modal";
 import DeleteModal from "./delete_modal";
 
@@ -29,8 +30,8 @@ function MyPostCard({
   isDelete = false,
   special,
 }) {
-  const [deleteModelOpen, setDeleteModelOpen] = useState(false);
-  const [promoteModelOpen, setPromoteModelOpen] = useState(false);
+  const [deleteModelOpen, toggleDeleteModelOpen] = useToggle(false);
+  const [promoteModelOpen, togglePromoteModelOpen] = useToggle(false);
 
   const handleEdit = (event) => {
     event.stopPropagation();
@@ -69,7 +70,11 @@ function MyPostCard({
                 <ImageOffIcon size={32} />
               </div>
             )}
-            {special&&<div className="absolute top-2 left-2 bg-white bg-opacity-80 p-[6px] rounded-lg text-yellow-500"><StarIcon className="stroke-[1.5px] fill-current" size={18}/></div>}
+            {special && (
+              <div className="absolute top-2 left-2 bg-white bg-opacity-80 p-[6px] rounded-lg text-yellow-500">
+                <StarIcon className="stroke-[1.5px] fill-current" size={18} />
+              </div>
+            )}
           </div>
         </div>
         {isDelete ? (
@@ -106,7 +111,7 @@ function MyPostCard({
                 ویرایش
               </Button>
               <Button
-                onClick={setDeleteModelOpen.bind(this, true)}
+                onClick={toggleDeleteModelOpen}
                 variant="outlined"
                 size="small"
                 className="!w-full"
@@ -117,7 +122,7 @@ function MyPostCard({
             </div>
             <div className="w-full flex flex-row lg:flex-row gap-3">
               <Button
-                onClick={setPromoteModelOpen.bind(this, true)}
+                onClick={togglePromoteModelOpen}
                 variant="outlined"
                 size="small"
                 className="!w-full"
@@ -147,13 +152,13 @@ function MyPostCard({
         _id={_id}
         onDelete={onDelete}
         open={deleteModelOpen}
-        setOpen={setDeleteModelOpen}
+        setOpen={toggleDeleteModelOpen}
       />
       <SpecialModal
         _id={_id}
         onDelete={onDelete}
         open={promoteModelOpen}
-        setOpen={setPromoteModelOpen}
+        setOpen={togglePromoteModelOpen}
         special={special}
       />
     </>

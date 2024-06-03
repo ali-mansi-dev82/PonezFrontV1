@@ -43,7 +43,9 @@ const PopularSearch = ({ onClose }) => {
       <div className="flex flex-row flex-wrap gap-3 text-gray-400">
         {mostSearched.map((value, index) => (
           <Link key={index} to={value.link} onClick={onClose}>
-            <div className="bg-gray-100 text-gray-700 px-3 py-2 text-xs rounded-lg">{value.label}</div>
+            <div className="bg-gray-100 text-gray-700 px-3 py-2 text-xs rounded-lg">
+              {value.label}
+            </div>
           </Link>
         ))}
       </div>

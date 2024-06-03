@@ -1,9 +1,10 @@
-import React from "react";
-import Navbar from "../../modules/auth/components/navbar/navbar";
-import { useAuth } from "../../context/AuthContext";
-import ButtonNavigation from "../../modules/auth/components/button_navigation/button_navigaton";
-import MainContainer from "../../shared/components/container";
 // import { Settings2Icon, X } from "lucide-react";
+import React from "react";
+
+import ButtonNavigation from "../../modules/auth/components/button_navigation/button_navigaton";
+import Navbar from "../../modules/auth/components/navbar/navbar";
+import MainContainer from "../../shared/components/container";
+import { useAuth } from "../../context/AuthContext";
 
 const BasicLayoutMobile = ({ children, searchText, filter = [] }) => {
   const { isAuthenticated, user } = useAuth();

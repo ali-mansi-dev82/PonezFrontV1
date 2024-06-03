@@ -1,5 +1,5 @@
-import { useMediaQuery } from "@mui/material";
 import React, { createContext, useContext } from "react";
+import { useMediaQuery } from "@mui/material";
 
 const ResponsiveContext = createContext();
 

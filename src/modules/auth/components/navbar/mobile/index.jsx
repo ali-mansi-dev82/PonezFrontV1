@@ -1,18 +1,17 @@
-import React, { useState } from "react";
-import Search from "./search";
-import SelectCity from "../select_city";
+import { useLocation, useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import { ArrowRight } from "lucide-react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React from "react";
+
+import useToggle from "../../../../../hooks/useToggle";
+import SelectCity from "../select_city";
+import Search from "./search";
 
 const NavbarMobile = ({ searchText }) => {
   const location = useLocation();
   let navigate = useNavigate();
 
-  const [isCityOpen, setIsCityOpen] = useState(false);
-  // City
-  const openCity = setIsCityOpen.bind(this, true);
-  const closeCity = setIsCityOpen.bind(this, false);
+  const [isCityOpen, toggleIsCityOpen] = useToggle(false);
   return (
     <>
       <div className="flex flex-row gap-2 w-full py-3">
@@ -21,9 +20,9 @@ const NavbarMobile = ({ searchText }) => {
             <ArrowRight size={16} />
           </IconButton>
         )}
-        <Search openCity={openCity} searchText={searchText} />
+        <Search openCity={toggleIsCityOpen} searchText={searchText} />
       </div>
-      {isCityOpen && <SelectCity onClose={closeCity} isMobile={true} />}
+      {isCityOpen && <SelectCity onClose={toggleIsCityOpen} isMobile={true} />}
     </>
   );
 };

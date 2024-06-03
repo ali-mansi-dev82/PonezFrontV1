@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../context/AuthContext";
-import AuthModal from "../modules/auth/components/modal";
 import { CircularProgress } from "@mui/material";
+
 import MainContainer from "../shared/components/container";
+import AuthModal from "../modules/auth/components/modal";
+import { useAuth } from "../context/AuthContext";
 
 const AuthGuard = ({ component }) => {
   const { isAuthenticated } = useAuth();
