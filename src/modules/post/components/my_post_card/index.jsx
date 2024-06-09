@@ -9,7 +9,7 @@ import {
 import { Alert, Button } from "@mui/material";
 import { RWebShare } from "react-web-share";
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { memo } from "react";
 
 import { tomanCurrencyFormat } from "../../../../shared/util/numberFormat";
 import { dateFormate } from "../../../../shared/util/dateFormat";
@@ -165,4 +165,4 @@ function MyPostCard({
   );
 }
 
-export default MyPostCard;
+export default memo(MyPostCard);

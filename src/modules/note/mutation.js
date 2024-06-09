@@ -1,26 +1,11 @@
-import axios from "axios";
-
-import { getAccessTokenCookies } from "../../shared/util/accessTokenCookie";
+import authorizedAxios from "../../api/authrized_axios";
 import { API_NOTE_URL } from "../../config";
 
 export const SaveNoteFn = async ({ id, content }) => {
-  const token = await getAccessTokenCookies();
-  return (
-    await axios.post(
-      `${API_NOTE_URL}/save/${id}`,
-      { content },
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    )
-  ).data;
+  return (await authorizedAxios.post(`${API_NOTE_URL}/save/${id}`, { content }))
+    .data;
 };
 
 export const DeleteNoteFn = async (id) => {
-  const token = await getAccessTokenCookies();
-  return (
-    await axios.delete(`${API_NOTE_URL}/delete/${id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-  ).data;
+  return (await authorizedAxios.delete(`${API_NOTE_URL}/delete/${id}`)).data;
 };
