@@ -1,6 +1,6 @@
 import { ImageOffIcon, ImagesIcon } from "lucide-react";
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { memo } from "react";
 
 import { tomanCurrencyFormat } from "../../../shared/util/numberFormat";
 import { dateFormate } from "../../../shared/util/dateFormat";
@@ -51,4 +51,4 @@ function PostCard({ title, images, district, slug, amount, updatedAt }) {
   );
 }
 
-export default PostCard;
+export default memo(PostCard);

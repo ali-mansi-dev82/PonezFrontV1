@@ -1,6 +1,6 @@
 import { MoveRightIcon } from "lucide-react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import React from "react";
 
 import BasicLayoutDesktop from "../../../../../layouts/desktop/basic_layout";
 import { CategoryIconsSm } from "../../../../category/category_icons";
@@ -16,6 +16,16 @@ function FilterPostDesktop({
   categoryData,
   categoryIsPending,
 }) {
+  useEffect(() => {
+    window.navigator.geolocation.getCurrentPosition(
+      (e) => {
+        console.log("success ", e);
+      },
+      (e) => {
+        console.log("failer ", e);
+      }
+    );
+  }, []);
   return (
     <BasicLayoutDesktop containerClass="">
       <div className="w-full h-full flex flex-col gap-12">

@@ -1,15 +1,17 @@
-import React, { useState } from "react";
-import { User } from "lucide-react";
-import { useAuth } from "../../../../../context/AuthContext";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
+import { User } from "lucide-react";
+import React from "react";
+
+import { useAuth } from "../../../../../context/AuthContext";
+import useToggle from "../../../../../hooks/useToggle";
 
 const UserDropDown = ({ isAuth, mobile, loginFn }) => {
   const { logout } = useAuth();
-  const [open, setOpen] = useState(false);
-  const handleClick = (event) => {
+  const [open, toggleOpen] = useToggle(false);
+  const handleClick = () => {
     if (isAuth) {
-      return setOpen(!open);
+      return toggleOpen();
     }
     loginFn();
   };
@@ -66,12 +68,13 @@ const UserDropDown = ({ isAuth, mobile, loginFn }) => {
     { title: "بازدید های اخیر", link: `/my-panel/recent` },
   ];
 
+
   return (
-    <>
-      <div className="relative">
+    <div>
+      <div className="relative" >
         <Button
           size="small"
-          className={`${open&&`!bg-gray-100`}`}
+          className={`${open && `!bg-gray-100`}`}
           variant="textonly"
           startIcon={<User size={16} />}
           onClick={handleClick}
@@ -79,7 +82,10 @@ const UserDropDown = ({ isAuth, mobile, loginFn }) => {
           پنل من
         </Button>
         {isAuth && open && (
-          <ul className="absolute bg-white border border-gray-300 rounded-md w-[170px] mt-1 overflow-hidden shadow" onBlur={setOpen.bind(this, false)}>
+          <ul
+            className="absolute bg-white border border-gray-300 rounded-md w-[170px] mt-1 overflow-hidden shadow"
+            onBlur={toggleOpen}
+          >
             <DropItemComponent
               className="border-b"
               title="کاربر پونز"
@@ -97,7 +103,7 @@ const UserDropDown = ({ isAuth, mobile, loginFn }) => {
           </ul>
         )}
       </div>
-    </>
+    </div>
   );
 };
 export default UserDropDown;

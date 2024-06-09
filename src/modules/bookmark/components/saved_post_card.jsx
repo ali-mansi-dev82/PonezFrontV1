@@ -1,8 +1,8 @@
 import { ImageOffIcon, Info, Share2Icon, TrashIcon } from "lucide-react";
 import { Button, Dialog, DialogContent } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
+import React, { memo, useState } from "react";
 import { RWebShare } from "react-web-share";
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { tomanCurrencyFormat } from "../../../shared/util/numberFormat";
@@ -142,4 +142,4 @@ function MyPostCard({
   );
 }
 
-export default MyPostCard;
+export default memo(MyPostCard);
