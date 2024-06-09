@@ -1,14 +1,9 @@
-import axios from "axios";
-
-import { getAccessTokenCookies } from "../../shared/util/accessTokenCookie";
+import authorizedAxios from "../../api/authrized_axios";
 import { API_POST_URL } from "../../config";
 
 export const FindPostbySlugFn = async (slug) => {
   try {
-    const token = (await getAccessTokenCookies()) || "";
-    const data = await axios.get(`${API_POST_URL}/${slug ?? ``}`, {
-      headers: { Authorization: `Bearer ${token || ""}` },
-    });
+    const data = await authorizedAxios.get(`${API_POST_URL}/${slug ?? ``}`);
     return data.data;
   } catch (error) {
     console.error(error);

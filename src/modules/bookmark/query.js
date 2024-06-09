@@ -1,12 +1,7 @@
-import axios from "axios";
-
-import { getAccessTokenCookies } from "../../shared/util/accessTokenCookie";
+import authorizedAxios from "../../api/authrized_axios";
 import { API_BOOKMARK_URL } from "../../config";
 
 export const CheckPostisBookmark = async (id) => {
-  const token = await getAccessTokenCookies();
-  const data = await axios.get(`${API_BOOKMARK_URL}/${id ?? "root"}`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const data = await authorizedAxios.get(`${API_BOOKMARK_URL}/${id ?? "root"}`);
   return data.data;
 };

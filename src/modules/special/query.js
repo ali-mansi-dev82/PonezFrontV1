@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { getAccessTokenCookies } from "../../shared/util/accessTokenCookie";
+import authorizedAxios from "../../api/authrized_axios";
 import { API_SPECIAL_URL } from "../../config";
 
 export const FindSpecailFn = async () => {
@@ -8,9 +8,6 @@ export const FindSpecailFn = async () => {
   return data.data;
 };
 export const FindMySpecailFn = async () => {
-  const token = await getAccessTokenCookies();
-  const data = await axios.get(`${API_SPECIAL_URL}/my`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const data = await authorizedAxios.get(`${API_SPECIAL_URL}/my`);
   return data.data;
 };

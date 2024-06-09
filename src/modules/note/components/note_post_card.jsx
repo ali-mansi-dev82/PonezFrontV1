@@ -1,7 +1,7 @@
 import { ImageOffIcon, Info, NotebookPenIcon, TrashIcon } from "lucide-react";
 import { Button, Dialog, DialogContent, IconButton } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { API_UPLOADED_IMAGES_URL } from "../../../config";
@@ -104,4 +104,4 @@ function MyNotePostCard({
     </>
   );
 }
-export default MyNotePostCard;
+export default memo(MyNotePostCard);

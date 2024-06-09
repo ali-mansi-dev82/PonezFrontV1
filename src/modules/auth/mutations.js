@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { getAccessTokenCookies } from "../../shared/util/accessTokenCookie";
+import authorizedAxios from "../../api/authrized_axios";
 import { API_AUTH_URL } from "../../config";
 
 export const SendOtpFn = async (data) => {
@@ -10,10 +10,5 @@ export const CheckOtpFn = async (data) => {
   return await axios.post(`${API_AUTH_URL}/check-otp/`, data);
 };
 export const LogoutFn = async (tokenParams = "") => {
-  const token = await getAccessTokenCookies();
-  return (
-    await axios.post(`${API_AUTH_URL}/logout/`, null, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-  ).data;
+  return (await authorizedAxios.post(`${API_AUTH_URL}/logout/`, null)).data;
 };
