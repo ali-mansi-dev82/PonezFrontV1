@@ -8,15 +8,17 @@ import {
   UserIcon,
 } from "lucide-react";
 import { useNavigate, NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import React from "react";
 
-import { useAuth } from "../../../context/AuthContext";
+import { log_out } from "../../../redux/actions/auth";
 
 const SidePanel = () => {
-  const { user, logout } = useAuth();
+  const { userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = async () => {
-    await logout();
+    await dispatch(log_out());
     navigate(`/s/`);
   };
   const items = [
@@ -51,7 +53,7 @@ const SidePanel = () => {
             <span className="text-base">کاربر پونز</span>
           </div>
           <span className="Fanum text-xs text-gray-400 px-[26px]">
-            {user?.mobile}
+            {userInfo?.mobile}
           </span>
         </li>
         <hr />
@@ -60,7 +62,9 @@ const SidePanel = () => {
             <NavLink
               to={value.link}
               className={({ isActive }) =>
-                `flex justify-between items-center ${isActive && "text-primary-40 font-bold"}`
+                `flex justify-between items-center ${
+                  isActive && "text-primary-40 font-bold"
+                }`
               }
             >
               <div className="flex flex-row items-center gap-2">

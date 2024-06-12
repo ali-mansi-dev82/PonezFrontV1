@@ -1,23 +1,26 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import { User } from "lucide-react";
 import React from "react";
 
-import { useAuth } from "../../../../../context/AuthContext";
+import { log_out } from "../../../../../redux/actions/auth";
 import useToggle from "../../../../../hooks/useToggle";
 
-const UserDropDown = ({ isAuth, mobile, loginFn }) => {
-  const { logout } = useAuth();
+const UserDropDown = ({ loginFn }) => {
   const [open, toggleOpen] = useToggle(false);
+  const { isAuthed, userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
   const handleClick = () => {
-    if (isAuth) {
+    if (isAuthed) {
       return toggleOpen();
     }
     loginFn();
   };
-
+  
   const handleLogout = () => {
-    logout();
+    dispatch(log_out());
   };
 
   const DropItemComponent = ({
@@ -68,10 +71,9 @@ const UserDropDown = ({ isAuth, mobile, loginFn }) => {
     { title: "بازدید های اخیر", link: `/my-panel/recent` },
   ];
 
-
   return (
     <div>
-      <div className="relative" >
+      <div className="relative">
         <Button
           size="small"
           className={`${open && `!bg-gray-100`}`}
@@ -81,7 +83,7 @@ const UserDropDown = ({ isAuth, mobile, loginFn }) => {
         >
           پنل من
         </Button>
-        {isAuth && open && (
+        {isAuthed && open && (
           <ul
             className="absolute bg-white border border-gray-300 rounded-md w-[170px] mt-1 overflow-hidden shadow"
             onBlur={toggleOpen}
@@ -90,7 +92,7 @@ const UserDropDown = ({ isAuth, mobile, loginFn }) => {
               className="border-b"
               title="کاربر پونز"
               link={`/my-panel/my-post`}
-              secondary={mobile}
+              secondary={userInfo?.mobile}
             />
             {authDropDownItems.map((value, index) => {
               return <DropItemComponent key={index} {...value} />;

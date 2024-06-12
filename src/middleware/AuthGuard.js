@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { CircularProgress } from "@mui/material";
+import { useSelector } from "react-redux";
 
 import MainContainer from "../shared/components/container";
 import AuthModal from "../modules/auth/components/modal";
-import { useAuth } from "../context/AuthContext";
 
 const AuthGuard = ({ component }) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthed } = useSelector((state) => state.auth);
   const [auth, setAuth] = useState("loading");
   useEffect(() => {
-    if (isAuthenticated === false) setAuth(false);
-    if (isAuthenticated === true) setAuth(true);
-  }, [isAuthenticated]);
+    if (isAuthed === false) setAuth(false);
+    if (isAuthed === true) setAuth(true);
+  }, [isAuthed]);
 
   return (
     <>

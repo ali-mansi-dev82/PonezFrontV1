@@ -9,12 +9,13 @@ import React, { useState, useEffect, useRef } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 
 import { setAccessTokenCookies } from "../../../../shared/util/accessTokenCookie";
 import TextInput from "../../../../shared/components/input/textInput";
 import { secontTommss } from "../../../../shared/util/functions";
-import { useAuth } from "../../../../context/AuthContext";
+import { log_in } from "../../../../redux/actions/auth";
 import { API_AUTH_URL } from "../../../../config";
 import { checkOtpSchema } from "./schemas";
 
@@ -22,8 +23,8 @@ const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
   const [loading, setLoading] = useState(false);
   const [second, setSeconds] = useState(0);
   const [errore, setErrore] = useState("");
-  const { login } = useAuth();
   const inputRef = useRef(null);
+  const dispatch = useDispatch();
 
   useEffect(() => inputRef.current?.focus(), []);
 
@@ -47,7 +48,7 @@ const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
     return () => {
       clearInterval(intervalId);
     };
-  }, []);
+  }, [expireCode, second]);
 
   const onSubmit = async (data) => {
     try {
@@ -62,7 +63,12 @@ const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
             setLoading(false);
             if (result?.data?.token) {
               setAccessTokenCookies(result?.data?.token);
-              login(result?.data?.token);
+              dispatch(
+                log_in({
+                  userToken: result?.data?.token,
+                  userInfo: result?.data?.user,
+                })
+              );
               authSuccess();
             }
           },

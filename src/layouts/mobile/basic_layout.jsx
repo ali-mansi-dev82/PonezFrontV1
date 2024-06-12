@@ -1,21 +1,18 @@
-// import { Settings2Icon, X } from "lucide-react";
 import React from "react";
 
 import ButtonNavigation from "../../modules/auth/components/button_navigation/button_navigaton";
 import Navbar from "../../modules/auth/components/navbar/navbar";
 import MainContainer from "../../shared/components/container";
-import { useAuth } from "../../context/AuthContext";
 
 const BasicLayoutMobile = ({ children, searchText, filter = [] }) => {
-  const { isAuthenticated, user } = useAuth();
   return (
     <>
-      <Navbar
-        userData={user}
-        isAuthenticated={isAuthenticated}
-        searchText={searchText}
-      />
-      <main className={`${filter?.length > 0 ? `mt-[122px]` : `mt-[72px]`} mb-[65px]`}>
+      <Navbar searchText={searchText} />
+      <main
+        className={`${
+          filter?.length > 0 ? `mt-[122px]` : `mt-[72px]`
+        } mb-[65px]`}
+      >
         {filter?.length > 0 && (
           <div className="fixed top-[72px] right-0 left-0 flex flex-row gap-2 border-b border-gray-300 px-3 py-2 bg-white z-40">
             {/* <span className="flex flex-row gap-2 items-center bg-primary-default text-white w-max h-max text-xs px-3 py-2 rounded-full">

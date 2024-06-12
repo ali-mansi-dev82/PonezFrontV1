@@ -27,7 +27,7 @@ const SpecialPost = () => {
         {specialPostQuery?.isPending ? (
           <div className="flex flex-row gap-4">
             {skeleton.map((value, index) => (
-              <PostCardSkeleton key={index} />
+              <PostCardSkeleton key={`${value}-${index}`} />
             ))}
           </div>
         ) : (

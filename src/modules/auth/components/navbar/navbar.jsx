@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { AppBar } from "@mui/material";
 import React from "react";
 
@@ -7,13 +8,12 @@ import NavbarDektop from "./desktop";
 import NavbarMobile from "./mobile";
 
 const Navbar = ({
-  userData,
-  isAuthenticated,
   navbar,
   bottomNavigation,
   searchText,
 }) => {
   const { isMobile } = useResponsive();
+  const { isAuthed, userInfo } = useSelector((state) => state.auth);
 
   return (
     <AppBar
@@ -29,8 +29,8 @@ const Navbar = ({
           />
         ) : (
           <NavbarDektop
-            isAuthenticated={isAuthenticated}
-            userData={userData}
+            isAuthenticated={isAuthed}
+            userData={userInfo}
             searchText={searchText}
           />
         )}
