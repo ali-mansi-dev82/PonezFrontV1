@@ -4,8 +4,8 @@ import { Button } from "@mui/material";
 import { User } from "lucide-react";
 import React from "react";
 
-import { log_out } from "../../../../../redux/actions/auth";
 import useToggle from "../../../../../hooks/useToggle";
+import { log_out } from "../../../../../features/auth/authSlice";
 
 const UserDropDown = ({ loginFn }) => {
   const [open, toggleOpen] = useToggle(false);
@@ -18,7 +18,7 @@ const UserDropDown = ({ loginFn }) => {
     }
     loginFn();
   };
-  
+
   const handleLogout = () => {
     dispatch(log_out());
   };

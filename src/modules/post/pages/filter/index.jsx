@@ -1,51 +1,53 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import React, { useEffect } from "react";
 
-import { FindChildrenCategorybySlugFn } from "../../../category/query";
 import { useCity } from "../../../../context/CityContext";
-import { FindPostFn } from "../../mutation";
 import FilterPostDesktop from "./desktop";
 import FilterPostMobile from "./mobile";
+import { useGetPostsQuery } from "../../../../services/postService";
+import { useGetCategorysQuery } from "../../../../services/categoryService";
 
 function NewPost({ isMobile }) {
   const { city } = useCity();
   const { slug } = useParams();
 
-  const categoryQuery = useMutation({
-    mutationFn: FindChildrenCategorybySlugFn.bind(this, slug ?? "root"),
-  });
-
   useEffect(() => window.scrollTo(0, 0), []);
 
+  const {
+    data: PostData,
+    isLoading: PostLoading,
+    refetch: PostRefetch,
+  } = useGetPostsQuery({ slug, city });
+
+  const {
+    data: CategoryData,
+    isLoading: CategoryLoading,
+    refetch: CategoryRefetch,
+  } = useGetCategorysQuery(slug);
+
   useEffect(() => {
     try {
-      categoryQuery.mutate();
+      CategoryRefetch();
     } catch (error) {
       console.error(error);
     }
-  }, [slug]);
-
-  const postsQuery = useQuery({
-    queryKey: ["findallposts"],
-    queryFn: FindPostFn.bind(this, slug, city),
-  });
+  }, [slug, CategoryRefetch]);
 
   useEffect(() => {
     try {
-      postsQuery.refetch();
+      PostRefetch();
     } catch (error) {
       console.error(error);
     }
-  }, [slug, city]);
+  }, [slug, city, PostRefetch]);
 
   const props = {
     city,
     slug,
-    data: postsQuery?.data,
-    isPending: postsQuery?.isPending,
-    categoryData: categoryQuery?.data,
-    categoryIsPending: categoryQuery?.isPending,
+    data: PostData,
+    isPending: PostLoading,
+    categoryData: CategoryData,
+    categoryIsPending: CategoryLoading,
   };
 
   return isMobile ? (

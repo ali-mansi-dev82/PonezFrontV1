@@ -11,7 +11,7 @@ import { useNavigate, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import React from "react";
 
-import { log_out } from "../../../redux/actions/auth";
+import { log_out } from "../../../features/auth/authSlice";
 
 const SidePanel = () => {
   const { userInfo } = useSelector((state) => state.auth);

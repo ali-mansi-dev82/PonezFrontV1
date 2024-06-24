@@ -1,19 +1,19 @@
 import { Button, DialogActions, DialogContent } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import { useDispatch } from "react-redux";
 
 import TextInput from "../../../../shared/components/input/textInput";
-import { API_AUTH_URL } from "../../../../config";
+import { send_otp } from "../../../../features/auth/action";
 import { sendOtpSchema } from "./schemas";
 
 const SendOTP = ({ setMobile, nextLevel, setExpireCode }) => {
   const [loading, setLoading] = useState(false);
   const [errore, setErrore] = useState("");
   const inputRef = useRef(null);
-
+  const dispatch = useDispatch();
+  
   useEffect(() => inputRef.current?.focus(), []);
 
   const {
@@ -28,40 +28,27 @@ const SendOTP = ({ setMobile, nextLevel, setExpireCode }) => {
     try {
       setLoading(true);
 
-      await SendMutation.mutateAsync(
-        {
+      const { payload } = await dispatch(
+        send_otp({
           mobile: "0" + data?.mobile,
-        },
-        {
-          onSuccess: async (result) => {
-            setLoading(false);
-            setMobile("0" + data?.mobile);
-            setExpireCode(result.data.expiresIn);
-            nextLevel();
-          },
-          onError: async (result) => {
-            if (
-              result &&
-              result?.response &&
-              result?.response?.data?.message &&
-              result?.response?.data?.message === " last code not expire"
-            ) {
-              setErrore("کد ارسال شده به دستگاه شما هنوز منقضی نشده است");
-            }
-            setLoading(false);
-          },
-        }
+        })
       );
+
+      if (payload?.statusCode && payload?.statusCode === 200) {
+        setLoading(false);
+        setMobile("0" + data?.mobile);
+        setExpireCode(payload?.expiresIn);
+        nextLevel();
+      } else {
+        setLoading(false);
+        if (payload === " last code not expire") {
+          setErrore("کد ارسال شده به دستگاه شما هنوز منقضی نشده است");
+        }
+      }
     } catch (err) {
       setLoading(false);
     }
   };
-
-  const SendMutation = useMutation({
-    mutationFn: async (data) => {
-      return await axios.post(`${API_AUTH_URL}/send-otp/`, data);
-    },
-  });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="h-full">
@@ -81,7 +68,7 @@ const SendOTP = ({ setMobile, nextLevel, setExpireCode }) => {
           placeholder="شماره موبایل"
           errorMessage={errors?.mobile?.message || errore || undefined}
           prefix={"۹۸+"}
-          label={'موبایل'}
+          label={"موبایل"}
           fullWidth
           autoFocus
         />

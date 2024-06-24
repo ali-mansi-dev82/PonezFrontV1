@@ -7,16 +7,14 @@ import {
 } from "@mui/material";
 import React, { useState, useEffect, useRef } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useMutation } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import axios from "axios";
+import { useForm } from "react-hook-form";
 
 import { setAccessTokenCookies } from "../../../../shared/util/accessTokenCookie";
 import TextInput from "../../../../shared/components/input/textInput";
 import { secontTommss } from "../../../../shared/util/functions";
-import { log_in } from "../../../../redux/actions/auth";
-import { API_AUTH_URL } from "../../../../config";
+import { check_otp } from "../../../../features/auth/action";
+import { log_in } from "../../../../features/auth/authSlice";
 import { checkOtpSchema } from "./schemas";
 
 const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
@@ -53,49 +51,34 @@ const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      await CheckMutation.mutateAsync(
-        {
+      const { payload } = await dispatch(
+        check_otp({
           mobile,
           code: data?.code,
-        },
-        {
-          onSuccess: async (result) => {
-            setLoading(false);
-            if (result?.data?.token) {
-              setAccessTokenCookies(result?.data?.token);
-              dispatch(
-                log_in({
-                  userToken: result?.data?.token,
-                  userInfo: result?.data?.user,
-                })
-              );
-              authSuccess();
-            }
-          },
-          onError: async (result) => {
-            setErrore(result?.message);
-            if (
-              result &&
-              result?.response &&
-              result?.response?.data?.message &&
-              result?.response?.data?.message === "code is  notCorrect"
-            ) {
-              setErrore("کد وارد شده اشتباه است");
-            }
-            setLoading(false);
-          },
-        }
+        })
       );
+      if (payload?.statusCode && payload?.statusCode === 200) {
+        setLoading(false);
+        if (payload?.token) {
+          setAccessTokenCookies(payload?.token);
+          dispatch(
+            log_in({
+              userToken: payload?.token,
+              userInfo: payload?.user,
+            })
+          );
+          authSuccess();
+        }
+      } else {
+        setLoading(false);
+        if (payload === "code is  notCorrect") {
+          setErrore("کد وارد شده اشتباه است");
+        }
+      }
     } catch (err) {
       console.error(err);
     }
   };
-
-  const CheckMutation = useMutation({
-    mutationFn: async (data) => {
-      return await axios.post(`${API_AUTH_URL}/check-otp/`, data);
-    },
-  });
 
   return (
     <>
