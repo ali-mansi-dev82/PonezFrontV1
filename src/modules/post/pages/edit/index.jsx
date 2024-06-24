@@ -3,10 +3,10 @@ import { useMutation } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 
 import { FindOptionbyCategoryIdFn } from "../../../option/query";
 import { API_UPLOADED_IMAGES_URL } from "../../../../config";
-import { useAuth } from "../../../../context/AuthContext";
 import { CreatePostSchema } from "../../schema";
 import { FindPostbySlugFn } from "../../query";
 import { UpdatePostFn } from "../../mutation";
@@ -17,7 +17,7 @@ const EditPost = ({ isMobile }) => {
   const { slug } = useParams();
   const [loading, setLoading] = useState(true);
   const [images, setImages] = useState([]);
-  const { user } = useAuth();
+  const { userInfo } = useSelector((state) => state.auth);
   const [open, setOpen] = useState(false);
 
   const optionQuery = useMutation({
@@ -54,14 +54,14 @@ const EditPost = ({ isMobile }) => {
         },
       });
     }
-  }, []);
+  }, [slug]);
 
   useEffect(() => {
     const postUserId = postInfoQuery?.data?.data?.user?._id;
-    if (user?._id && postUserId) {
-      setLoading(user?._id !== postUserId);
+    if (userInfo?._id && postUserId) {
+      setLoading(userInfo?._id !== postUserId);
     }
-  }, [user, postInfoQuery?.data]);
+  }, [userInfo, postInfoQuery?.data]);
 
   const onSuccessMutation = (data) => {
     setOpen(true);
@@ -131,7 +131,7 @@ const EditPost = ({ isMobile }) => {
   } = useForm({
     resolver: yupResolver(CreatePostSchema),
   });
-  
+
   const props = {
     loading: loading,
     onSubmit: handleSubmit(onSubmit),

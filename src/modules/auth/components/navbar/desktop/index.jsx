@@ -11,7 +11,7 @@ import Categories from "./categories";
 import AuthModal from "../../modal";
 import Search from "./search";
 
-const NavbarDektop = ({ isAuthenticated, userData }) => {
+const NavbarDektop = () => {
   const [showAuthModal, toggleShowAuthModal] = useToggle(false);
   const [isCityOpen, toggleIsCityOpen] = useToggle(false);
   const [isSearchOpen, toggleIsSearchOpen] = useToggle(false);
@@ -33,11 +33,7 @@ const NavbarDektop = ({ isAuthenticated, userData }) => {
         />
       </div>
       <div className="flex items-center gap-10 w-max">
-        <UserDropDown
-          isAuth={isAuthenticated}
-          mobile={userData?.mobile}
-          loginFn={toggleShowAuthModal}
-        />
+        <UserDropDown loginFn={toggleShowAuthModal} />
         <Link to={`/new`}>
           <Button startIcon={<Plus size={20} />} variant="contained">
             ثبت آگهی
@@ -46,7 +42,6 @@ const NavbarDektop = ({ isAuthenticated, userData }) => {
         {showAuthModal && (
           <AuthModal open={showAuthModal} onClose={toggleShowAuthModal} />
         )}
-
         {isCityOpen && (
           <SelectCity onClose={toggleIsCityOpen} isMobile={false} />
         )}

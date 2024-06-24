@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { X } from "lucide-react";
 
 import { useResponsive } from "../../../../context/ResponsiveContext";
-import { useAuth } from "../../../../context/AuthContext";
 import CheckOTP from "./checkOTP";
 import SendOTP from "./sendOTP";
 
@@ -12,13 +11,9 @@ const AuthModal = ({ open, onClose }) => {
   const [mobile, setMobile] = useState("");
   const [expireCode, setExpireCode] = useState(0);
   const [isSendOtpLevel, setIsSendOtpLevel] = useState(true);
-  const { login } = useAuth();
   const { isMobile } = useResponsive();
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    login();
-  };
   const handleClose = () => {
     if (onClose) return onClose();
     navigate(`/s/`);
@@ -55,7 +50,6 @@ const AuthModal = ({ open, onClose }) => {
           mobile={mobile}
           expireCode={expireCode}
           authSuccess={() => {
-            handleLogin();
             if (onClose) return onClose();
           }}
         />

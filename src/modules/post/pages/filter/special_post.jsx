@@ -1,5 +1,4 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useQuery } from "@tanstack/react-query";
 import { Pagination } from "swiper/modules";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -12,26 +11,23 @@ import "swiper/css";
 
 import SpecialPostCard from "../../../special/components/special_post_card";
 import PostCardSkeleton from "../../components/post_card_skeleton";
-import { FindSpecailFn } from "../../../special/query";
+import { useGetSpecialsPostsQuery } from "../../../../services/specialPostService";
 
 const SpecialPost = () => {
-  const specialPostQuery = useQuery({
-    queryKey: ["special_post"],
-    queryFn: FindSpecailFn,
-  });
+  const { data, isLoading } = useGetSpecialsPostsQuery();
   const skeleton = "0".repeat(12).split("");
   return (
     <div className="flex flex-col gap-4 overflow-hidden">
       <h6>جایگاه ویژه</h6>
       <div className="slider-container z-10">
-        {specialPostQuery?.isPending ? (
+        {isLoading ? (
           <div className="flex flex-row gap-4">
             {skeleton.map((value, index) => (
-              <PostCardSkeleton key={index} />
+              <PostCardSkeleton key={`${value}-${index}`} />
             ))}
           </div>
         ) : (
-          specialPostQuery?.data?.length > 0 && (
+          data?.length > 0 && (
             <Swiper
               slidesPerView={4}
               breakpoints={{
@@ -52,7 +48,7 @@ const SpecialPost = () => {
               modules={[Pagination]}
               className="mySwiper"
             >
-              {specialPostQuery?.data?.map((value, index) => (
+              {data?.map((value, index) => (
                 <SwiperSlide>
                   <SpecialPostCard key={index} {...value} />
                 </SwiperSlide>

@@ -2,13 +2,13 @@ import { IconButton, Tooltip } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { BookmarkIcon } from "lucide-react";
+import { useSelector } from "react-redux";
 
-import { useAuth } from "../../../context/AuthContext";
 import { SavePostBookmark } from "../mutation";
 import { CheckPostisBookmark } from "../query";
 
 const PostBookmark = ({ postId }) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthed } = useSelector((state) => state.auth);
   const [bookmark, setBookmark] = useState(false);
 
   const checkbookmarkPostMutation = useMutation({
@@ -30,15 +30,15 @@ const PostBookmark = ({ postId }) => {
     setBookmark("loading");
   };
   useEffect(() => {
-    if (postId && isAuthenticated) {
+    if (postId && isAuthed) {
       checkbookmarkPostMutation.mutateAsync(postId, {
         onSuccess: (data) => {
           setBookmark(data);
         },
       });
     }
-  }, [postId, isAuthenticated]);
-  
+  }, [postId, isAuthed]);
+
   return (
     <Tooltip title={bookmark ? `نشان شد` : `نشان کردن`} arrow>
       <IconButton

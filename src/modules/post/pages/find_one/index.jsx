@@ -1,35 +1,37 @@
-import { useMutation } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
 import { FindPostbySlugFn } from "../../query";
 import PostDesktop from "./desktop";
 import PostMobile from "./mobile";
 
-const Index = ({isMobile}) => {
+const Index = ({ isMobile }) => {
   const { slug } = useParams();
   const [loading, setLoading] = useState(true);
+  const [data, setData] = useState();
 
-  const postInfoQuery = useMutation({
-    mutationKey: ["post_info"],
-    mutationFn: FindPostbySlugFn.bind(this, slug),
+  const postInfoQuery = useQuery({
+    queryKey: ["post_info"],
+    queryFn: FindPostbySlugFn.bind(this, slug),
   });
 
   useEffect(() => {
-    if (slug) {
-      postInfoQuery.mutateAsync(null, {
-        onSuccess: () => {
-          setLoading(false);
-          window.scrollTo(0, 0);
-        },
-      });
+    if (postInfoQuery?.data) {
+      setData(postInfoQuery?.data);
+      setLoading(false);
+      window.scrollTo(0, 0);
     }
-  }, []);
+  }, [postInfoQuery?.data]);
+
+  useEffect(() => {
+    setLoading(true);
+  }, [slug]);
 
   return isMobile ? (
-    <PostMobile data={postInfoQuery?.data} loading={loading} />
+    <PostMobile data={data} loading={loading} />
   ) : (
-    <PostDesktop data={postInfoQuery?.data} loading={loading} />
+    <PostDesktop data={data} loading={loading} />
   );
 };
 export default Index;

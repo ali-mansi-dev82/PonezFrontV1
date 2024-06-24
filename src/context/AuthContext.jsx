@@ -1,69 +1,33 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
-import { useMutation } from "@tanstack/react-query";
+import React, { createContext, useContext, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-import {
-  removeAccessTokenCookies,
-  getAccessTokenCookies,
-} from "../shared/util/accessTokenCookie";
-import { LogoutFn } from "../modules/auth/mutations";
-import { UserInfoFn } from "../modules/user/query";
+import { log_in, fetch_data, log_out } from "../features/auth/authSlice";
+import { useGetUserDetailsQuery } from "../services/authService";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState();
-  const [user, setUser] = useState(false);
+  const dispatch = useDispatch();
 
-  const userInfoQuery = useMutation({
-    mutationKey: ["userInfo"],
-    mutationFn: UserInfoFn,
-  });
-
-  const logoutMutation = useMutation({
-    mutationKey: ["logout"],
-    mutationFn: LogoutFn,
-  });
+  const { data } = useGetUserDetailsQuery();
 
   useEffect(() => {
-    initialStatus();
-  }, []);
+    dispatch(fetch_data());
 
-  const initialStatus = async () => {
-    try {
-      const token = await getAccessTokenCookies();
-      if (token === undefined || token === null) setIsAuthenticated(false);
-      else userInfoQuery.mutateAsync(token);
-    } catch (error) {
-      console.error(error);
+    if (data?.statusCode === 201) {
+      dispatch(
+        log_in({
+          userInfo: data?.user,
+          userToken: data?.user?.accessToken,
+        })
+      );
     }
-  };
-
-  useEffect(() => {
-    if (userInfoQuery?.data?.statusCode === 201) {
-      setIsAuthenticated(true);
-      setUser(userInfoQuery?.data?.user);
+    if (data?.statusCode === 401) {
+      dispatch(log_out());
     }
-    if (userInfoQuery?.data?.statusCode === 401) {
-      setIsAuthenticated(false);
-    }
-  }, [userInfoQuery?.data]);
+  }, [data, dispatch]);
 
-  const login = (token = "") => {
-    userInfoQuery.mutateAsync(token);
-  };
-
-  const logout = () => {
-    removeAccessTokenCookies();
-    setIsAuthenticated(false);
-    setUser({});
-    logoutMutation.mutate();
-  };
-
-  return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout, user }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext);

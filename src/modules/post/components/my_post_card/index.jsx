@@ -6,9 +6,9 @@ import {
   TrashIcon,
   StarIcon,
 } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import { Alert, Button } from "@mui/material";
 import { RWebShare } from "react-web-share";
-import { Link } from "react-router-dom";
 import React, { memo } from "react";
 
 import { tomanCurrencyFormat } from "../../../../shared/util/numberFormat";
@@ -30,6 +30,11 @@ function MyPostCard({
   isDelete = false,
   special,
 }) {
+  const navigate = useNavigate();
+  const navigateEditHandle = (e) => {
+    e.preventDefault();
+    navigate(`/my-panel/my-post/edit/${slug}`);
+  };
   const [deleteModelOpen, toggleDeleteModelOpen] = useToggle(false);
   const [promoteModelOpen, togglePromoteModelOpen] = useToggle(false);
 
@@ -100,13 +105,11 @@ function MyPostCard({
                 </Button>
               </RWebShare>
               <Button
-                onClick={handleEdit}
+                onClick={navigateEditHandle}
                 variant="outlined"
                 size="small"
                 className="!w-full"
                 startIcon={<PenLineIcon className="!stroke-[1px]" size={16} />}
-                type="link"
-                href={`/my-panel/my-post/edit/${slug}`}
               >
                 ویرایش
               </Button>
