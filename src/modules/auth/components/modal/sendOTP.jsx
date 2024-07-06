@@ -1,19 +1,23 @@
-import { Button, DialogActions, DialogContent } from "@mui/material";
+import {
+  Button,
+  DialogActions,
+  DialogContent,
+  StepConnector,
+} from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 
 import TextInput from "../../../../shared/components/input/textInput";
 import { send_otp } from "../../../../features/auth/action";
 import { sendOtpSchema } from "./schemas";
+import { bindActionCreators } from "redux";
 
-const SendOTP = ({ setMobile, nextLevel, setExpireCode }) => {
+const SendOTP = ({ setMobile, nextLevel, setExpireCode, send_otp }) => {
   const [loading, setLoading] = useState(false);
   const [errore, setErrore] = useState("");
   const inputRef = useRef(null);
-  const dispatch = useDispatch();
-  
+
   useEffect(() => inputRef.current?.focus(), []);
 
   const {
@@ -28,11 +32,9 @@ const SendOTP = ({ setMobile, nextLevel, setExpireCode }) => {
     try {
       setLoading(true);
 
-      const { payload } = await dispatch(
-        send_otp({
-          mobile: "0" + data?.mobile,
-        })
-      );
+      const { payload } = await send_otp({
+        mobile: "0" + data?.mobile,
+      });
 
       if (payload?.statusCode && payload?.statusCode === 200) {
         setLoading(false);
@@ -93,4 +95,9 @@ const SendOTP = ({ setMobile, nextLevel, setExpireCode }) => {
     </form>
   );
 };
-export default SendOTP;
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ send_otp }, dispatch);
+
+export default StepConnector(null, mapDispatchToProps)(SendOTP);
+// export default SendOTP;
