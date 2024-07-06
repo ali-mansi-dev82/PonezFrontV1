@@ -1,20 +1,17 @@
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { AppBar } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useResponsive } from "../../../../context/ResponsiveContext";
 import MainContainer from "../../../../shared/components/container";
 import NavbarDektop from "./desktop";
 import NavbarMobile from "./mobile";
 
-const Navbar = ({
-  navbar,
-  bottomNavigation,
-  searchText,
-}) => {
+const Navbar = ({ navbar, bottomNavigation, searchText, auth }) => {
   const { isMobile } = useResponsive();
-  const { isAuthed, userInfo } = useSelector((state) => state.auth);
-
+  useEffect(() => {
+    console.log(auth);
+  }, [auth]);
   return (
     <AppBar
       className="!bg-white !shadow-none border-b border-gray-300 lg:h-[65px] justify-center"
@@ -29,8 +26,8 @@ const Navbar = ({
           />
         ) : (
           <NavbarDektop
-            isAuthenticated={isAuthed}
-            userData={userInfo}
+            isAuthenticated={auth?.isAuthed}
+            userData={auth?.authuserInfo}
             searchText={searchText}
           />
         )}
@@ -38,4 +35,8 @@ const Navbar = ({
     </AppBar>
   );
 };
-export default Navbar;
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+export default connect(mapStateToProps, null)(Navbar);

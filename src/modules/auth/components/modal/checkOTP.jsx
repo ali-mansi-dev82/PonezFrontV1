@@ -7,7 +7,6 @@ import {
 } from "@mui/material";
 import React, { useState, useEffect, useRef } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 
 import { setAccessTokenCookies } from "../../../../shared/util/accessTokenCookie";
@@ -16,13 +15,14 @@ import { secontTommss } from "../../../../shared/util/functions";
 import { check_otp } from "../../../../features/auth/action";
 import { log_in } from "../../../../features/auth/authSlice";
 import { checkOtpSchema } from "./schemas";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
-const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
+const CheckOTP = ({ mobile, expireCode, authSuccess, check_otp, log_in }) => {
   const [loading, setLoading] = useState(false);
   const [second, setSeconds] = useState(0);
   const [errore, setErrore] = useState("");
   const inputRef = useRef(null);
-  const dispatch = useDispatch();
 
   useEffect(() => inputRef.current?.focus(), []);
 
@@ -51,22 +51,18 @@ const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      const { payload } = await dispatch(
-        check_otp({
-          mobile,
-          code: data?.code,
-        })
-      );
+      const { payload } = await check_otp({
+        mobile,
+        code: data?.code,
+      });
       if (payload?.statusCode && payload?.statusCode === 200) {
         setLoading(false);
         if (payload?.token) {
           setAccessTokenCookies(payload?.token);
-          dispatch(
-            log_in({
-              userToken: payload?.token,
-              userInfo: payload?.user,
-            })
-          );
+          log_in({
+            userToken: payload?.token,
+            userInfo: payload?.user,
+          });
           authSuccess();
         }
       } else {
@@ -127,4 +123,7 @@ const CheckOTP = ({ mobile, expireCode, authSuccess }) => {
     </>
   );
 };
-export default CheckOTP;
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ check_otp, log_in }, dispatch);
+
+export default connect(null, mapDispatchToProps)(CheckOTP);
