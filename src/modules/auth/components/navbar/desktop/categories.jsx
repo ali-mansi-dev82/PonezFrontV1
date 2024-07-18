@@ -7,8 +7,7 @@ import { CategoryIconsXs } from "../../../../category/category_icons";
 import Button from "../../../../../shared/components/button";
 import Spinner from "../../../../../shared/components/spiner";
 
-const Categories = () => {
-  const [open, setOpen] = useState(false);
+const Categories = ({ isCategoryOpen, toggle_category }) => {
   const [category, setCategory] = useState();
 
   const categoryQuery = useQuery({
@@ -26,18 +25,21 @@ const Categories = () => {
         <Button
           size="small"
           variant="textonly"
-          className={open && `!bg-gray-100`}
+          className={isCategoryOpen && `!bg-gray-100`}
           rightIcon={
-            <ChevronDownIcon className={open && `rotate-180`} size={"12px"} />
+            <ChevronDownIcon
+              className={isCategoryOpen && `rotate-180`}
+              size={"12px"}
+            />
           }
-          onClick={setOpen.bind(this, true)}
+          onClick={toggle_category}
         >
           دسته ها
         </Button>
-        {open && (
+        {isCategoryOpen && (
           <>
             <div
-              onClick={setOpen.bind(this, false)}
+              onClick={toggle_category}
               className="fixed top-[64px] left-0 right-0 bottom-0 bg-black bg-opacity-25 z-0"
             ></div>
             <div className="absolute top-[130%] flex gap-4 right-0 bg-white z-30 w-[50vw] rounded-md p-6 drop-shadow-modal">
@@ -48,7 +50,7 @@ const Categories = () => {
                       <Link
                         key={index}
                         onMouseEnter={setCategory.bind(this, value)}
-                        onClick={setOpen.bind(this, false)}
+                        onClick={toggle_category}
                         to={`/s/${value.slug}`}
                         className={`flex flex-row justify-between items-center gap-2 text-gray-400  px-2 py-2 rounded-lg ${
                           category?._id === value._id
@@ -72,7 +74,7 @@ const Categories = () => {
                           <Link
                             key={index}
                             to={`/s/${value.slug}`}
-                            onClick={setOpen.bind(this, false)}
+                            onClick={toggle_category}
                             className={`flex flex-row items-center gap-2 text-gray-800`}
                           >
                             <span className="text-sm">{value.name}</span>
@@ -84,7 +86,7 @@ const Categories = () => {
                                   <Link
                                     key={index}
                                     to={`/s/${value.slug}`}
-                                    onClick={setOpen.bind(this, false)}
+                                    onClick={toggle_category}
                                     className={`flex flex-row items-center gap-2 text-gray-400 hover:text-primary-default`}
                                   >
                                     <span className="text-xs">

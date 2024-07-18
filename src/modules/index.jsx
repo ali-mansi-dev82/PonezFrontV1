@@ -6,6 +6,7 @@ import ChooseCityPage from "../modules/city/pages/choose_city";
 import MainContainer from "../shared/components/container";
 import Spinner from "../shared/components/spiner";
 import { useCity } from "../context/CityContext";
+import { API_AUTH_URL } from "../config";
 
 const Home = ({ isMobile }) => {
   const { city, setCity } = useCity();
@@ -13,6 +14,7 @@ const Home = ({ isMobile }) => {
   const navigate = useNavigate();
 
   const init = async () => {
+    console.log(API_AUTH_URL, process.env.REACT_APP_API_URL);
     const cookie = await getCityCookie();
     if (!cookie) return setLoading(false);
     setCity(cookie);

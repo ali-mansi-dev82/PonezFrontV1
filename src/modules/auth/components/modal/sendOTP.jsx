@@ -2,16 +2,16 @@ import {
   Button,
   DialogActions,
   DialogContent,
-  StepConnector,
 } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 import TextInput from "../../../../shared/components/input/textInput";
 import { send_otp } from "../../../../features/auth/action";
 import { sendOtpSchema } from "./schemas";
-import { bindActionCreators } from "redux";
 
 const SendOTP = ({ setMobile, nextLevel, setExpireCode, send_otp }) => {
   const [loading, setLoading] = useState(false);
@@ -99,5 +99,4 @@ const SendOTP = ({ setMobile, nextLevel, setExpireCode, send_otp }) => {
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({ send_otp }, dispatch);
 
-export default StepConnector(null, mapDispatchToProps)(SendOTP);
-// export default SendOTP;
+export default connect(null, mapDispatchToProps)(SendOTP);

@@ -5,15 +5,18 @@ import { User } from "lucide-react";
 import React from "react";
 import { bindActionCreators } from "redux";
 
-import useToggle from "../../../../../hooks/useToggle";
 import { log_out } from "../../../../../features/auth/authSlice";
 
-const UserDropDown = ({ loginFn, auth, log_out }) => {
-  const [open, toggleOpen] = useToggle(false);
-
+const UserDropDown = ({
+  loginFn,
+  toggle_drop_down,
+  isDropOpen,
+  auth,
+  log_out,
+}) => {
   const handleClick = () => {
     if (auth?.isAuthed) {
-      return toggleOpen();
+      return toggle_drop_down();
     }
     loginFn();
   };
@@ -75,17 +78,17 @@ const UserDropDown = ({ loginFn, auth, log_out }) => {
       <div className="relative">
         <Button
           size="small"
-          className={`${open && `!bg-gray-100`}`}
+          className={`${isDropOpen && `!bg-gray-100`}`}
           variant="textonly"
           startIcon={<User size={16} />}
           onClick={handleClick}
         >
           پنل من
         </Button>
-        {auth?.isAuthed && open && (
+        {auth?.isAuthed && isDropOpen && (
           <ul
             className="absolute bg-white border border-gray-300 rounded-md w-[170px] mt-1 overflow-hidden shadow"
-            onBlur={toggleOpen}
+            onBlur={toggle_drop_down}
           >
             <DropItemComponent
               className="border-b"
@@ -107,9 +110,12 @@ const UserDropDown = ({ loginFn, auth, log_out }) => {
     </div>
   );
 };
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
+const mapStateToProps = ({ auth }, ownProps) => {
+  console.log(ownProps);
+  return {
+    auth,
+  };
+};
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({ log_out }, dispatch);
 
