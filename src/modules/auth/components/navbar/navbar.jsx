@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { AppBar } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 
 import { useResponsive } from "../../../../context/ResponsiveContext";
 import MainContainer from "../../../../shared/components/container";
@@ -9,9 +9,6 @@ import NavbarMobile from "./mobile";
 
 const Navbar = ({ navbar, bottomNavigation, searchText, auth }) => {
   const { isMobile } = useResponsive();
-  useEffect(() => {
-    console.log(auth);
-  }, [auth]);
   return (
     <AppBar
       className="!bg-white !shadow-none border-b border-gray-300 lg:h-[65px] justify-center"
