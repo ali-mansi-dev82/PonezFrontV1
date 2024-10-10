@@ -1,6 +1,6 @@
 import React from "react";
 
-import { tomanCurrencyFormat } from "../../../../shared/util/numberFormat";
+import { tomanCurrencyFormat } from "../../../../shared/util/numberFormats";
 
 const PostOptions = ({ options, amount }) => {
   return (

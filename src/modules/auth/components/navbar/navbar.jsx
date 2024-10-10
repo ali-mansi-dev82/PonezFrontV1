@@ -32,7 +32,6 @@ const Navbar = ({ navbar, bottomNavigation, searchText, auth }) => {
     </AppBar>
   );
 };
-
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });

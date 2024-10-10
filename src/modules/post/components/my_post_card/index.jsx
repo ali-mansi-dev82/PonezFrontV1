@@ -11,7 +11,7 @@ import { Alert, Button } from "@mui/material";
 import { RWebShare } from "react-web-share";
 import React, { memo } from "react";
 
-import { tomanCurrencyFormat } from "../../../../shared/util/numberFormat";
+import { tomanCurrencyFormat } from "../../../../shared/util/numberFormats";
 import { dateFormate } from "../../../../shared/util/dateFormat";
 import { API_UPLOADED_IMAGES_URL } from "../../../../config";
 import useToggle from "../../../../hooks/useToggle";
@@ -55,7 +55,7 @@ function MyPostCard({
             </h1>
             <div className="flex flex-col gap-1">
               <div className="text-gray-400 text-xs py-1">
-                {amount && amount > 0 ? tomanCurrencyFormat(amount) : "توافقی"}
+                {amount && amount > 0 ? `${tomanCurrencyFormat(amount)} تومان` : "توافقی"}
               </div>
               <span className="text-gray-400 text-xs Fanum">
                 {dateFormate(createdAt)} در {district}

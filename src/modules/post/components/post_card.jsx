@@ -2,7 +2,7 @@ import { ImageOffIcon, ImagesIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import React, { memo } from "react";
 
-import { tomanCurrencyFormat } from "../../../shared/util/numberFormat";
+import { tomanCurrencyFormat } from "../../../shared/util/numberFormats";
 import { dateFormate } from "../../../shared/util/dateFormat";
 import { API_UPLOADED_IMAGES_URL } from "../../../config";
 
@@ -18,7 +18,7 @@ function PostCard({ title, images, district, slug, amount, updatedAt }) {
         </h1>
         <div className="flex flex-col">
           <div className="text-gray-400 text-xs py-1">
-            {amount && amount > 0 ? tomanCurrencyFormat(amount) : "توافقی"}
+            {amount && amount > 0 ? `${tomanCurrencyFormat(amount)} تومان` : "توافقی"}
           </div>
           <div className="text-gray-400 text-xs ">
             <span className="Fanum">{dateFormate(updatedAt)}</span> در{" "}

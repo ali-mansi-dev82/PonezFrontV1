@@ -2,7 +2,7 @@ import { ImageOffIcon, ImagesIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import React from "react";
 
-import { tomanCurrencyFormat } from "../../../shared/util/numberFormat";
+import { tomanCurrencyFormat } from "../../../shared/util/numberFormats";
 import { API_UPLOADED_IMAGES_URL } from "../../../config";
 
 const SpecialPostCard = ({ post }) => {

@@ -9,7 +9,7 @@ import { Mail, Phone, Share2Icon } from "lucide-react";
 import { RWebShare } from "react-web-share";
 import React, { useState } from "react";
 
-import { tomanCurrencyFormat } from "../../../../../shared/util/numberFormat";
+import { tomanCurrencyFormat } from "../../../../../shared/util/numberFormats";
 import SingleLayoutMobile from "../../../../../layouts/mobile/single_layout";
 import PostBookmark from "../../../../bookmark/components/post_bookmark";
 import { dateFormate } from "../../../../../shared/util/dateFormat";

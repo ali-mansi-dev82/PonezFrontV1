@@ -4,8 +4,8 @@ export const setCookies = (name, value, expires) => {
   return Cookies.set(name, value, { expires });
 };
 export const getCookies = async (name) => {
-  return await Cookies.get(name);
+  return Cookies.get(name);
 };
 export const removeCookies = async (name) => {
-  return await Cookies.remove(name);
+  return Cookies.remove(name);
 };
